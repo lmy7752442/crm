@@ -16,7 +16,8 @@
 //});
 //控制器 @ 方法
 
-Route::get('/','index@index');
+Route::get('/','Index@index');
+Route::get('welcome','Index@welcome');
 //管理员展示
 Route::get('admin_list','Index@admin_list');
 //删除

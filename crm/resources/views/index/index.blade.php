@@ -124,12 +124,27 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
+                    <cite>客户管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="order_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
                     <cite>分类管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="crm/cate.html">
+                        <a _href="cate.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>多级分类</cite>
                         </a>
@@ -144,7 +159,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="crm/city.html">
+                        <a _href="city.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>三级地区联动</cite>
                         </a>
@@ -269,7 +284,7 @@
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='crm/welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
           </div>
         </div>
