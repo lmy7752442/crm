@@ -56,7 +56,7 @@ class UserController extends Controller
 
     //类型展示
     public function ctype(){
-        $data = DB::table('ctype')->get();
+        $data = DB::table('ctype')->paginate(3);
         return view('user.ctype_list')->with('data',$data);
     }
     //类型添加
@@ -110,10 +110,100 @@ class UserController extends Controller
     }
     //等级展示
     public function clevel_list(){
-        $data = DB::table('clevel')->get();
+        $data = DB::table('clevel')->paginate(3);
         return view('user.clevel_list')->with('data',$data);
     }
+    //添加等级
     public function clevel_add(){
         return view('user.clevel_add');
     }
+    public function clevel_add_do(){
+        $clevel = input::get('clevel');
+        $res = DB::table('clevel')->insert(['clevel_name'=>$clevel]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //修改等级
+    public function clevel_update(){
+        $id = input::get('id');
+        $arr = [
+            'clevel_id'=>$id
+        ];
+        $data = DB::table('clevel')->where($arr)->first();
+        return view('user.clevel_update')->with('data',$data);
+    }
+    public function clevel_update_do(){
+        $id = input::get('id');
+        $clevel = input::get('clevel');
+        $res = DB::table('clevel')->where(['clevel_id'=>$id])->update(['clevel_name'=>$clevel]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //类型删除
+    public function clevel_del(){
+        $id = input::get('id');
+        $arr = [
+            'clevel_id'=>$id
+        ];
+        $res = DB::table('clevel')->where($arr)->delete();
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //客户来源展示
+    public function csource_list(){
+        $data = DB::table('csource')->paginate(3);
+        return view('user.csource_list')->with('data',$data);
+    }
+    //客户来源添加
+    public function csource_add(){
+        return view('user.csource_add');
+    }
+    public function csource_add_do(){
+       $csource = input::get('csource');
+        $res = DB::table('csource')->insert(['csource_name'=>$csource]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //来源修改
+    public function csource_update(){
+        $id = input::get('id');
+        $data = DB::table('csource')->where(['csource_id'=>$id])->first();
+        return view('user.csource_update')->with('data',$data);
+    }
+    public function csource_update_do(){
+        $id = input::get('id');
+        $csource = input::get('csource');
+        $res = DB::table('csource')->where(['csource_id'=>$id])->update(['csource_name'=>$csource]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //来源删除
+    public function csource_del(){
+        $id = input::get('id');
+        $arr = [
+            'csource_id'=>$id
+        ];
+        $res = DB::table('csource')->where($arr)->delete();
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+
 }

@@ -36,7 +36,7 @@
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加等级','/clevel_add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加来源','csource_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
@@ -45,7 +45,7 @@
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>等级</th>
+            <th>来源</th>
             <th >操作</th>
         </tr>
         </thead>
@@ -55,12 +55,12 @@
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
                 </td>
-                <td>{{$v->clevel_name}}</td>
+                <td>{{$v->csource_name}}</td>
                 <td class="td-manage">
-                    <a title="查看"  onclick="x_admin_show('编辑','clevel_update?id={{$v->clevel_id}}')" href="javascript:;">
+                    <a title="查看"  onclick="x_admin_show('编辑','csource_update?id={{$v->csource_id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe63c;</i>
                     </a>
-                    <a title="删除" onclick="member_del(this,'{{$v->clevel_id}}')" href="javascript:;">
+                    <a title="删除" onclick="member_del(this,'{{$v->csource_id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>
                     </a>
                 </td>
@@ -69,7 +69,7 @@
         </tbody>
     </table>
     <div class="page">
-     {{$data->links()}}
+        {{$data->links()}}
     </div>
 
 </div>
@@ -115,7 +115,7 @@
     /*用户-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
-            $.get('clevel_del',
+            $.get('csource_del',
                 {
                     id:id
                 },function(data){
