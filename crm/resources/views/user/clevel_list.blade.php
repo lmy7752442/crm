@@ -50,7 +50,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($data as  $v)
+        @foreach($data as  $k=>$v)
             <tr>
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
