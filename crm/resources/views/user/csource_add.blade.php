@@ -63,7 +63,7 @@
         form.on('submit(add)', function(data){
             var csource = $('#csource').val();
 
-            $.get('/csource_add_do',
+            $.get('csource_add_do',
                 {
                     csource:csource
                 },function(data){
