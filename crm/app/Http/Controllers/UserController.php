@@ -126,4 +126,23 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //修改等级
+    public function clevel_update(){
+        $id = input::get('id');
+        $arr = [
+            'clevel_id'=>$id
+        ];
+        $data = DB::table('clevel')->where($arr)->first();
+        return view('user.clevel_update')->with('data',$data);
+    }
+    public function clevel_update_do(){
+        $id = input::get('id');
+        $clevel = input::get('clevel');
+        $res = DB::table('clevel')->where(['clevel_id'=>$id])->update(['clevel_name'=>$clevel]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
 }
