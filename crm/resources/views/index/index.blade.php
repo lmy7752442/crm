@@ -110,7 +110,7 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="user_list">
+                        <a _href="clevel_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>客户等级管理</cite>
                         </a>
