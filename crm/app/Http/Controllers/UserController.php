@@ -57,4 +57,8 @@ class UserController extends Controller
     public function ctype(){
         return view('user.ctype_list');
     }
+    //等级添加
+    public function ctype_add(){
+        return view('user.ctype_add');
+    }
 }

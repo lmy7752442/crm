@@ -41,4 +41,5 @@ Route::get('user_add_do','UserController@user_add_do');
 Route::get('ctype_list','UserController@ctype');
 //等级添加
 Route::get('ctype_add','UserController@ctype_add');
+Route::get('ctype_add_do','UserController@ctype_add_do');
 
