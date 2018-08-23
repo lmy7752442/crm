@@ -42,4 +42,6 @@ Route::get('ctype_list','UserController@ctype');
 //等级添加
 Route::get('ctype_add','UserController@ctype_add');
 Route::get('ctype_add_do','UserController@ctype_add_do');
+//等级删除
+Route::get('ctype_del','UserController@ctype_del');
 

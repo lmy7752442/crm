@@ -50,20 +50,22 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($data as  $v)
         <tr>
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>1级</td>
+            <td>{{$v->ctype_name}}</td>
             <td class="td-manage">
                 <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>
                 </a>
-                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                <a title="删除" onclick="member_del(this,'{{$v->ctype_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
+            @endforeach
         </tbody>
     </table>
     <div class="page">
@@ -72,7 +74,7 @@
             <a class="num" href="">1</a>
             <span class="current">2</span>
             <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
+            <a class="num" href="">9</a>
             <a class="next" href="">&gt;&gt;</a>
         </div>
     </div>
@@ -120,9 +122,20 @@
     /*用户-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
+            $.get('ctype_del',
+                {
+                    id:id
+                },function(data){
+                    if(data==1){
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!',{icon:1,time:1000});
+                    }else{
+                        $(obj).parents("tr").remove();
+                        layer.msg('删除失败!',{icon:1,time:1000});
+                    }
+                })
             //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
+
         });
     }
 

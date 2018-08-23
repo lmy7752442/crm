@@ -55,10 +55,37 @@ class UserController extends Controller
 
     //等级展示
     public function ctype(){
-        return view('user.ctype_list');
+        $data = DB::table('ctype')->get();
+        return view('user.ctype_list')->with('data',$data);
     }
     //等级添加
     public function ctype_add(){
+
         return view('user.ctype_add');
+    }
+    public function ctype_add_do(){
+        $ctype = input::get('ctype');
+        $arr=[
+            'ctype_name'=>$ctype
+        ];
+        $res = DB::table('ctype')->insert($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //等级删除
+    public function ctype_del(){
+        $id = input::get('id');
+        $arr = [
+            'ctype_id'=>$id
+        ];
+        $res = DB::table('ctype')->where($arr)->delete();
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
     }
 }
