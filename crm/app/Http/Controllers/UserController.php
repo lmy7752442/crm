@@ -113,7 +113,17 @@ class UserController extends Controller
         $data = DB::table('clevel')->get();
         return view('user.clevel_list')->with('data',$data);
     }
+    //添加等级
     public function clevel_add(){
         return view('user.clevel_add');
+    }
+    public function clevel_add_do(){
+        $clevel = input::get('clevel');
+        $res = DB::table('clevel')->insert(['clevel_name'=>$clevel]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
     }
 }
