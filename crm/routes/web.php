@@ -24,6 +24,8 @@ Route::get('admin_list','Index@admin_list');
 Route::get('admin_del','Index@admin_del');
 //跟单添加
 Route::get('documentary_add','DocumentaryController@documentary_add');
+//执行跟单添加
+Route::get('documentary_add_do','DocumentaryController@documentary_add_do');
 //跟单列表
 Route::get('documentary_list','DocumentaryController@documentary_list');
 //订单列表
