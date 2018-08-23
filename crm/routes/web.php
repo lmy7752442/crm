@@ -39,4 +39,6 @@ Route::get('user_add','UserController@user_add');
 Route::get('user_add_do','UserController@user_add_do');
 //客户等级列表
 Route::get('ctype_list','UserController@ctype');
+//等级添加
+Route::get('ctype_add','UserController@ctype_add');
 
