@@ -57,7 +57,7 @@
             </td>
             <td>{{$v->ctype_name}}</td>
             <td class="td-manage">
-                <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+                <a title="查看"  onclick="x_admin_show('编辑','ctype_update')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>
                 </a>
                 <a title="删除" onclick="member_del(this,'{{$v->ctype_id}}')" href="javascript:;">

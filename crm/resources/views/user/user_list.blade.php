@@ -56,6 +56,7 @@
             <th>省</th>
             <th>市</th>
             <th>县</th>
+            <th>添加时间</th>
             <th >操作</th>
         </tr>
         </thead>
@@ -75,6 +76,7 @@
             <td>北京</td>
             <td>北京</td>
             <td>昌平</td>
+            <td></td>
             <td class="td-manage">
                 <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>

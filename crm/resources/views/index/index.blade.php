@@ -106,13 +106,13 @@
                     <li>
                         <a _href="ctype_list">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>客户等级管理</cite>
+                            <cite>客户类型管理</cite>
                         </a>
                     </li >
                     <li>
                         <a _href="user_list">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>客户类型管理</cite>
+                            <cite>客户等级管理</cite>
                         </a>
                     </li >
                     <li>

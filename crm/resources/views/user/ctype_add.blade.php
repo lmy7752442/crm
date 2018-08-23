@@ -25,7 +25,7 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>等级
+                <span class="x-red">*</span>客户类型
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="ctype" name="c_name" required="" lay-verify="required"
@@ -174,8 +174,6 @@
                 });
             return false;
         });
-
-
     });
 </script>
 

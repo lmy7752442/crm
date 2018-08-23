@@ -43,7 +43,8 @@ class UserController extends Controller
             'c_notes'=>$c_notes,
             'c_province'=>$province,
             'c_city'=>$city,
-            'c_area'=>$area
+            'c_area'=>$area,
+            'ctime'=>time()
         ];
         $res = DB::table('customer')->insert($arr);
         if($res){
@@ -53,12 +54,12 @@ class UserController extends Controller
         }
     }
 
-    //等级展示
+    //类型展示
     public function ctype(){
         $data = DB::table('ctype')->get();
         return view('user.ctype_list')->with('data',$data);
     }
-    //等级添加
+    //类型添加
     public function ctype_add(){
 
         return view('user.ctype_add');
@@ -75,7 +76,7 @@ class UserController extends Controller
             echo 2;
         }
     }
-    //等级删除
+    //类型删除
     public function ctype_del(){
         $id = input::get('id');
         $arr = [
@@ -88,4 +89,5 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //修改
 }
