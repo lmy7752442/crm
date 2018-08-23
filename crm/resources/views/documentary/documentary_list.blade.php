@@ -60,23 +60,26 @@
             <th>录入时间</th>
             <th>管理</th>
         </thead>
-        <tbody>
+        <tbody id = 'data'>
+        @foreach($documentary_data as $v)
         <tr>
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>1</td>
-            <td>admin</td>
-            <td>18925139194</td>
-            <td>113664000@qq.com</td>
-            <td>超级管理员</td>
-            <td>2017-01-01 11:11:42</td>
-            <td class="td-status">
-                <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-            <td class="td-manage">
-                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                    <i class="layui-icon">&#xe601;</i>
-                </a>
+            <td>{{$v->c_id}}</td>
+            <td>{{$v->dtype_id}}</td>
+            <td>{{$v->dprogress_id}}</td>
+            <td>{{$v->d_nexttime}}</td>
+            <td>{{$v->d_detailed}}</td>
+            <td>{{$v->admin_id}}</td>
+            <td>{{$v->d_time}}</td>
+            {{--<td class="td-status">--}}
+                {{--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
+            {{--<td class="td-manage">--}}
+                {{--<a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">--}}
+                    {{--<i class="layui-icon">&#xe601;</i>--}}
+                {{--</a>--}}
+            <td>
                 <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -85,24 +88,18 @@
                 </a>
             </td>
         </tr>
+        @endforeach
         </tbody>
     </table>
+    <input type="hidden" id="count" value="{{$count}}">
     <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
+        {{ $documentary_data->links() }}
     </div>
 
 </div>
 <script>
     layui.use('laydate', function(){
         var laydate = layui.laydate;
-
         //执行一个laydate实例
         laydate.render({
             elem: '#start' //指定元素
