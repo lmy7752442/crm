@@ -6953,11 +6953,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/index/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="84" column="50" selection-start-line="84" selection-start-column="34" selection-end-line="84" selection-end-column="50" />
+            <state relative-caret-position="328">
+              <caret line="95" column="21" lean-forward="true" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -6998,11 +6998,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DocumentaryController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DocumentaryController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DocumentaryController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="414">
-              <caret line="121" column="8" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
+              <caret line="121" column="58" lean-forward="true" selection-start-line="121" selection-start-column="58" selection-end-line="121" selection-end-column="58" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
               </folding>
@@ -7061,7 +7061,6 @@
         <option value="$PROJECT_DIR$/config/database.php" />
         <option value="$PROJECT_DIR$/public/crm/js/xadmin.js" />
         <option value="$PROJECT_DIR$/resources/views/documentary/documentary_list_page.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/index/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/documentary/documentary_add.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/documentary/documentary_list_where.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/documentary/documentary_list.blade.php" />
@@ -7069,6 +7068,7 @@
         <option value="$PROJECT_DIR$/resources/views/documentary/dtype_list.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DocumentaryController.php" />
+        <option value="$PROJECT_DIR$/resources/views/index/index.blade.php" />
       </list>
     </option>
   </component>
@@ -7161,7 +7161,7 @@
       <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1300" />
@@ -7290,12 +7290,12 @@
       <workItem from="1534853989585" duration="218000" />
       <workItem from="1534854328274" duration="5912000" />
       <workItem from="1534918205387" duration="34391000" />
-      <workItem from="1535006771377" duration="15438000" />
+      <workItem from="1535006771377" duration="15760000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60721000" />
+    <option name="totallyTimeSpent" value="61043000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -7529,13 +7529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/index/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="84" column="50" selection-start-line="84" selection-start-column="34" selection-end-line="84" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/crm/js/xadmin.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -7578,6 +7571,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DocumentaryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="121" column="58" lean-forward="true" selection-start-line="121" selection-start-column="58" selection-end-line="121" selection-end-column="58" />
+          <folding>
+            <element signature="e#40#68#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
@@ -7585,13 +7588,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DocumentaryController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/index/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="121" column="8" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="328">
+          <caret line="95" column="21" lean-forward="true" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
         </state>
       </provider>
     </entry>
