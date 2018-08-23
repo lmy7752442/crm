@@ -217,41 +217,5 @@
     });
 </script>
 
-{{--<script>--}}
-    {{--$('#button').on('click',function(){--}}
-        {{--var c_name = $('#username').val();--}}
-        {{--var c_phone = $('#phone').val();--}}
-        {{--var Job_id = $('#Job_id').val();--}}
-        {{--var ctype = $('#ctype').val();--}}
-        {{--var clevel_id = $('#clevel_id').val();--}}
-        {{--var csource_id = $('#csource_id').val();--}}
-        {{--var c_other_connect = $('#c_other_connect').val();--}}
-        {{--var c_notes = $('#c_notes').val();--}}
-        {{--var province = $('#province').val();--}}
-        {{--var city = $('#city').val();--}}
-        {{--var area = $('#area').val();--}}
-        {{--// alert(c_name+'|'+c_phone+'|'+Job_id+'|'+ctype+'|'+clevel_id+'|'+csource_id+'|'+c_other_connect+'|'+c_notes+'|'+province+'|'+city+'|'+area);--}}
-        {{--$.get('/user_add_do',--}}
-            {{--{--}}
-                {{--c_name:c_name,--}}
-                {{--c_phone:c_phone,--}}
-                {{--Job_id:Job_id,--}}
-                {{--ctype:ctype,--}}
-                {{--clevel_id:clevel_id,--}}
-                {{--csource_id:csource_id,--}}
-                {{--c_other_connect:c_other_connect,--}}
-                {{--c_notes:c_notes,--}}
-                {{--province:province,--}}
-                {{--city:city,--}}
-                {{--area:area--}}
-            {{--},function(data){--}}
-            {{--if(data=''){--}}
-                {{--location.href='user_add';--}}
-            {{--}else{--}}
-                {{--location.href='user_list';--}}
-            {{--}--}}
-            {{--});--}}
-    {{--})--}}
-{{--</script>--}}
 </body>
 </html>
