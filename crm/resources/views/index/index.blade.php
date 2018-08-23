@@ -87,6 +87,12 @@
                             <cite>跟单列表</cite>
                         </a>
                     </li >
+                    <li>
+                        <a _href="documentary_dtype_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>跟单类型列表</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
             <li>

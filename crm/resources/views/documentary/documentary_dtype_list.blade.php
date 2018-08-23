@@ -36,84 +36,89 @@
         <form class="layui-form layui-col-md12 x-so">
             <input class="layui-input" placeholder="开始日" name="start" id="start">
             <input class="layui-input" placeholder="截止日" name="end" id="end">
-            <input type="text" name="username"  placeholder="请输入客户名" autocomplete="off" class="layui-input">
-            <button class="layui-btn"  lay-submit="" lay-filter="sreach" id="sreach"><i class="layui-icon">&#xe615;</i></button>
+            <div class="layui-input-inline">
+                <select name="contrller">
+                    <option>支付状态</option>
+                    <option>已支付</option>
+                    <option>未支付</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="contrller">
+                    <option>支付方式</option>
+                    <option>支付宝</option>
+                    <option>微信</option>
+                    <option>货到付款</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="contrller">
+                    <option value="">订单状态</option>
+                    <option value="0">待确认</option>
+                    <option value="1">已确认</option>
+                    <option value="2">已收货</option>
+                    <option value="3">已取消</option>
+                    <option value="4">已完成</option>
+                    <option value="5">已作废</option>
+                </select>
+            </div>
+            <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
     </div>
-    <script>
-        $('#sreach').click(function(){
-            var start_time = $('#start').val();
-            var end_time = $('#end').val();
-            var username = $('#username').val();
-            $.get('documentary_list',{
-                start_time:start_time,
-                end_time:end_time,
-                username:username
-            },function(data){
-                $('#data').html(data)
-            })
-        })
-    </script>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加客户','documentary_add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
-        <thead id="aaa">
+        <thead>
         <tr>
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>客户名称</th>
+            <th>编号</th>
             <th>跟单类型</th>
-            <th>跟单进度</th>
-            <th>下次联系</th>
-            <th>详细内容</th>
-            <th>业务员</th>
-            <th>录入时间</th>
-            <th>管理</th>
+            <th>时间</th>
+            <th >操作</th>
+        </tr>
         </thead>
-        <tbody id = 'data'>
-        @foreach($documentary_data as $v)
+        <tbody>
         <tr>
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>{{$v->c_id}}</td>
-            <td>{{$v->dtype_id}}</td>
-            <td>{{$v->dprogress_id}}</td>
-            <td>{{$v->d_nexttime}}</td>
-            <td>{{$v->d_detailed}}</td>
-            <td>{{$v->admin_id}}</td>
-            <td>{{$v->d_time}}</td>
-            {{--<td class="td-status">--}}
-                {{--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
-            {{--<td class="td-manage">--}}
-                {{--<a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">--}}
-                    {{--<i class="layui-icon">&#xe601;</i>--}}
-                {{--</a>--}}
-            <td>
-                <a title="编辑"  onclick="x_admin_show('编辑','documentary_save?id={{$v->documentary_id}}')" href="javascript:;">
-                    <i class="layui-icon">&#xe642;</i>
+            <td>2017009171822298053</td>
+            <td>老王:18925139194</td>
+            <td>7829.10</td>
+
+            <td class="td-manage">
+                <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+                    <i class="layui-icon">&#xe63c;</i>
                 </a>
-                <a title="删除" onclick="member_del(this,'{{$v->documentary_id}}')"  href="javascript:;">
+                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
-        @endforeach
         </tbody>
     </table>
-    <input type="hidden" id="count" value="{{$count}}">
     <div class="page">
-        {{ $documentary_data->links() }}
+        <div>
+            <a class="prev" href="">&lt;&lt;</a>
+            <a class="num" href="">1</a>
+            <span class="current">2</span>
+            <a class="num" href="">3</a>
+            <a class="num" href="">489</a>
+            <a class="next" href="">&gt;&gt;</a>
+        </div>
     </div>
 
 </div>
 <script>
     layui.use('laydate', function(){
         var laydate = layui.laydate;
+
         //执行一个laydate实例
         laydate.render({
             elem: '#start' //指定元素
@@ -152,16 +157,9 @@
     /*用户-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
-            var documentary_id = id;
-            $.get('documentary_del',{
-                documentary_id:documentary_id
-            },function(data){
-               if(data == 1){
-                   //发异步删除数据
-                   $(obj).parents("tr").remove();
-                   layer.msg('已删除!',{icon:1,time:1000});
-               }
-            })
+            //发异步删除数据
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!',{icon:1,time:1000});
         });
     }
 

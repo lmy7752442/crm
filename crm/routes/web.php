@@ -26,8 +26,16 @@ Route::get('admin_del','Index@admin_del');
 Route::get('documentary_add','DocumentaryController@documentary_add');
 //执行跟单添加
 Route::get('documentary_add_do','DocumentaryController@documentary_add_do');
+//跟单删除
+Route::get('documentary_del','DocumentaryController@documentary_del');
+//跟单修改
+Route::get('documentary_save','DocumentaryController@documentary_save');
+//执行跟单修改
+Route::get('documentary_save_do','DocumentaryController@documentary_save_do');
 //跟单列表
 Route::get('documentary_list','DocumentaryController@documentary_list');
+//跟单类型列表
+Route::get('documentary_dtype_list','DocumentaryController@documentary_dtype_list');
 //订单列表
 Route::get('order_list','OrderController@order_list');
 //角色列表
