@@ -145,4 +145,17 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //类型删除
+    public function clevel_del(){
+        $id = input::get('id');
+        $arr = [
+            'clevel_id'=>$id
+        ];
+        $res = DB::table('clevel')->where($arr)->delete();
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
 }

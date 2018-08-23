@@ -57,3 +57,7 @@ Route::get('clevel_add_do','UserController@clevel_add_do');
 //修改等级
 Route::get('clevel_update','UserController@clevel_update');
 Route::get('clevel_update_do','UserController@clevel_update_do');
+//删除等级
+Route::get('clevel_del','UserController@clevel_del');
+
+
