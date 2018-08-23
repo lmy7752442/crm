@@ -13,7 +13,10 @@ class UserController extends Controller
         return view('user.user_list');
     }
     public function user_add(){
-        return view('user.user_add');
+        $ctype = DB::table('ctype')->get();
+        $clevel = DB::table('clevel')->get();
+        $csource = DB::table('csource')->get();
+        return view('user.user_add')->with('ctype',$ctype)->with('clevel',$clevel)->with('csource',$csource);
     }
     public function user_add_do(){
 
