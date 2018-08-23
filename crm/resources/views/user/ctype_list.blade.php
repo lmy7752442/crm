@@ -45,17 +45,8 @@
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>客户名称</th>
+            <th>等级</th>
             <th>手机号</th>
-            <th>工作</th>
-            <th>客户类型</th>
-            <th>客户等级</th>
-            <th>客户来源</th>
-            <th>其他联系方式</th>
-            <th>备注</th>
-            <th>省</th>
-            <th>市</th>
-            <th>县</th>
             <th >操作</th>
         </tr>
         </thead>
@@ -64,17 +55,8 @@
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>张三</td>
-            <td>18925139194</td>
-            <td>经理</td>
-            <td>走访</td>
             <td>1级</td>
-            <td>走访</td>
-            <td>1434244465@qq.com</td>
-            <td>老年人</td>
-            <td>北京</td>
-            <td>北京</td>
-            <td>昌平</td>
+            <td>18925139194</td>
             <td class="td-manage">
                 <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>

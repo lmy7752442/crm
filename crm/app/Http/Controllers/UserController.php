@@ -52,4 +52,9 @@ class UserController extends Controller
             echo 2;
         }
     }
+
+    //等级展示
+    public function ctype(){
+        return view('user.ctype_list');
+    }
 }
