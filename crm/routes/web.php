@@ -53,3 +53,4 @@ Route::get('ctype_update_do','UserController@ctype_update_do');
 Route::get('clevel_list','UserController@clevel_list');
 //等级添加
 Route::get('clevel_add','UserController@clevel_add');
+Route::get('clevel_add_do','UserController@clevel_add_do');
