@@ -56,7 +56,7 @@ class UserController extends Controller
 
     //类型展示
     public function ctype(){
-        $data = DB::table('ctype')->get();
+        $data = DB::table('ctype')->paginate(3);
         return view('user.ctype_list')->with('data',$data);
     }
     //类型添加
@@ -110,7 +110,7 @@ class UserController extends Controller
     }
     //等级展示
     public function clevel_list(){
-        $data = DB::table('clevel')->get();
+        $data = DB::table('clevel')->paginate(3);
         return view('user.clevel_list')->with('data',$data);
     }
     //添加等级
