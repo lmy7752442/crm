@@ -37,11 +37,12 @@ Route::get('user_list','UserController@user_list');
 //添加客户
 Route::get('user_add','UserController@user_add');
 Route::get('user_add_do','UserController@user_add_do');
-//客户等级列表
+//客户类型列表
 Route::get('ctype_list','UserController@ctype');
-//等级添加
+//类型添加
 Route::get('ctype_add','UserController@ctype_add');
 Route::get('ctype_add_do','UserController@ctype_add_do');
-//等级删除
+//类型删除
 Route::get('ctype_del','UserController@ctype_del');
-
+//修改类型
+Route::get('ctype_update','UserController@ctype_update');

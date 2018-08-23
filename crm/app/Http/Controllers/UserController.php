@@ -89,5 +89,13 @@ class UserController extends Controller
             echo 2;
         }
     }
-    //修改
+    //修改类型
+    public function ctype_update(){
+        $id = input::get('id');
+        $arr = [
+            'ctype_id'=>$id
+        ];
+        $data = DB::table('ctype')->where($arr)->first();
+        return view('user.ctype_update')->with('data',$data);
+    }
 }

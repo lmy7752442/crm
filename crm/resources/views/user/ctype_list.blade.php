@@ -45,7 +45,7 @@
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>等级</th>
+            <th>类型</th>
             <th >操作</th>
         </tr>
         </thead>
@@ -57,7 +57,7 @@
             </td>
             <td>{{$v->ctype_name}}</td>
             <td class="td-manage">
-                <a title="查看"  onclick="x_admin_show('编辑','ctype_update')" href="javascript:;">
+                <a title="查看"  onclick="x_admin_show('编辑','ctype_update?id={{$v->ctype_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>
                 </a>
                 <a title="删除" onclick="member_del(this,'{{$v->ctype_id}}')" href="javascript:;">
