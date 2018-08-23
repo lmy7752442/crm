@@ -108,4 +108,12 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //等级展示
+    public function clevel_list(){
+        $data = DB::table('clevel')->get();
+        return view('user.clevel_list')->with('data',$data);
+    }
+    public function clevel_add(){
+        return view('user.clevel_add');
+    }
 }
