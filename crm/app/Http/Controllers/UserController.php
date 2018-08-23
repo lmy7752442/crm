@@ -163,4 +163,47 @@ class UserController extends Controller
         $data = DB::table('csource')->paginate(3);
         return view('user.csource_list')->with('data',$data);
     }
+    //客户来源添加
+    public function csource_add(){
+        return view('user.csource_add');
+    }
+    public function csource_add_do(){
+       $csource = input::get('csource');
+        $res = DB::table('csource')->insert(['csource_name'=>$csource]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //来源修改
+    public function csource_update(){
+        $id = input::get('id');
+        $data = DB::table('csource')->where(['csource_id'=>$id])->first();
+        return view('user.csource_update')->with('data',$data);
+    }
+    public function csource_update_do(){
+        $id = input::get('id');
+        $csource = input::get('csource');
+        $res = DB::table('csource')->where(['csource_id'=>$id])->update(['csource_name'=>$csource]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //来源删除
+    public function csource_del(){
+        $id = input::get('id');
+        $arr = [
+            'csource_id'=>$id
+        ];
+        $res = DB::table('csource')->where($arr)->delete();
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+
 }
