@@ -46,3 +46,4 @@ Route::get('ctype_add_do','UserController@ctype_add_do');
 Route::get('ctype_del','UserController@ctype_del');
 //修改类型
 Route::get('ctype_update','UserController@ctype_update');
+Route::get('ctype_update_do','UserController@ctype_update_do');

@@ -28,11 +28,12 @@
                 <span class="x-red">*</span>客户类型
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="ctype" name="c_name" required="" lay-verify="required" value="{{$data->ctype_id}}"
-                       autocomplete="off" class="layui-input">{{$data->ctype_name}}
+                <input type="hidden" id="hi" value="{{$data->ctype_id}}">
+                <input type="text" id="ctype" name="c_name" required="" lay-verify="required" value="{{$data->ctype_name}}"
+                       autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为您唯一的登入名
+                <span class="x-red">*</span>
             </div>
         </div>
         <div class="layui-form-item">
@@ -62,14 +63,16 @@
         // //监听提交
         form.on('submit(add)', function(data){
             var ctype = $('#ctype').val();
+            var id = $('#hi').val();
 
-            $.get('/ctype_add_do',
+            $.get('/ctype_update_do',
                 {
-                    ctype:ctype
+                    ctype:ctype,
+                    id:id
                 },function(data){
                     if(data==1){
                         //发异步，把数据提交给php
-                        layer.alert("增加成功", {icon: 6},function () {
+                        layer.alert("修改成功", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
@@ -77,7 +80,7 @@
                         });
                     }else{
                         //发异步，把数据提交给php
-                        layer.alert("增加失败", {icon: 6},function () {
+                        layer.alert("修改失败", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame

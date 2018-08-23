@@ -98,4 +98,14 @@ class UserController extends Controller
         $data = DB::table('ctype')->where($arr)->first();
         return view('user.ctype_update')->with('data',$data);
     }
+    public function ctype_update_do(){
+        $id = input::get('id');
+        $ctype = input::get('ctype');
+        $res = DB::table('ctype')->where(['ctype_id'=>$id])->update(['ctype_name'=>$ctype]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
 }
