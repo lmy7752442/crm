@@ -62,63 +62,16 @@
                     <li>
                         <a _href="/admin_list">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员列表</cite>
+                            <cite>会员列表</cite>
                             
                         </a>
                     </li >
                     <li>
                         <a _href="admin_del">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员删除</cite>
-                            
+                            <cite>会员删除</cite>
                         </a>
                     </li>
-                    {{--<li>--}}
-                        {{--<a href="javascript:;">--}}
-                            {{--<i class="iconfont">&#xe70b;</i>--}}
-                            {{--<cite>会员管理</cite>--}}
-                            {{--<i class="iconfont nav_right">&#xe697;</i>--}}
-                        {{--</a>--}}
-                        {{--<ul class="sub-menu">--}}
-                            {{--<li>--}}
-                                {{--<a _href="admin_list">--}}
-                                    {{--<i class="iconfont">&#xe6a7;</i>--}}
-                                    {{--<cite>会员列表</cite>--}}
-                                    {{----}}
-                                {{--</a>--}}
-                            {{--</li >--}}
-                            {{--<li>--}}
-                                {{--<a _href="crm/member-del.html">--}}
-                                    {{--<i class="iconfont">&#xe6a7;</i>--}}
-                                    {{--<cite>会员删除</cite>--}}
-                                    {{----}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a _href="xx.html">--}}
-                                    {{--<i class="iconfont">&#xe6a7;</i>--}}
-                                    {{--<cite>等级管理</cite>--}}
-                                    {{----}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{----}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>跟单管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="documentary_list">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>跟单列表</cite>
-                        </a>
-                    </li >
                 </ul>
             </li>
             <li>
@@ -136,6 +89,7 @@
                     </li >
                 </ul>
             </li>
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
@@ -144,9 +98,27 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="order_list">
+                        <a _href="user_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>客户列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="ctype_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户类型管理</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="clevel_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户等级管理</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="clevel_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户来源管理</cite>
                         </a>
                     </li >
                 </ul>
