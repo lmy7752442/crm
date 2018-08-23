@@ -158,4 +158,9 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //客户来源展示
+    public function csource_list(){
+        $data = DB::table('csource')->paginate(3);
+        return view('user.csource_list')->with('data',$data);
+    }
 }

@@ -59,5 +59,15 @@ Route::get('clevel_update','UserController@clevel_update');
 Route::get('clevel_update_do','UserController@clevel_update_do');
 //删除等级
 Route::get('clevel_del','UserController@clevel_del');
+//展示来源
+Route::get('csource_list','UserController@csource_list');
+//来源添加
+Route::get('csource_add','UserController@csource_add');
+Route::get('csource_add_do','UserController@csource_add_do');
+//修改来源
+Route::get('csource_update','UserController@csource_update');
+Route::get('csource_update_do','UserController@csource_update_do');
+//删除来源
+Route::get('csource_del','UserController@csource_del');
 
 
