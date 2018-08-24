@@ -20,6 +20,8 @@ class DocumentaryController extends Controller
             $end_time = strtotime($end_time);
             $where[] = ['d_time','<',$end_time];
         }
+
+        $documentary_data = DB::table('documentary') -> where($where) -> orderBy('time','desc') -> paginate(10);
         if(!empty($username)){
             $user_data = DB::table('customer')->where('c_name','like',"%$username%")->get();
             $str = '';
@@ -28,8 +30,8 @@ class DocumentaryController extends Controller
             }
             $str = rtrim($str,',');
             $str_arr = explode(',',$str);
+            $documentary_data = DB::table('documentary') -> where($where) ->whereIn('c_id',$str_arr) -> orderBy('time','desc') -> paginate(10);
         }
-        $documentary_data = DB::table('documentary')-> where($where) -> paginate(10);
         $count = DB::table('documentary')->count();
         foreach ($documentary_data as $v){
             $user_data = DB::table('customer')->where('c_id',$v->c_id)->first();
@@ -75,7 +77,7 @@ class DocumentaryController extends Controller
                 'warn'=>$warn
             ]);
         if($res>0){
-            $data = DB::table('documentary')->where('documentary_id',$res)->first();
+            $data = DB::table('documentary')->where('documentary_id',$res)->orderBy('time','desc')->first();
             $arr = [
                 'data' => $data,
                 'status'=>1

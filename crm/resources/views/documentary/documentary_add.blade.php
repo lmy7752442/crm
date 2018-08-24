@@ -149,6 +149,11 @@
                         var index = parent.layer.getFrameIndex(window.name);
                         //关闭当前frame
                         parent.layer.close(index);
+                        // parent.$('.layui-table').append(str);//表格结尾追加
+                        //  parent.$('.layui-table tr:eq(0)').before(str); //首行前追加
+                        // parent.$('.layui-table tr:eq(0)').after(str); //首行后追加
+                        parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
+                        //parent.$('.layui-table tr:eq(1)').remoable tr:eq(1)').before(strve(); //删除指定行
                     });
                 }else{
                     layer.alert("增加失败", {icon: 6},function () {

@@ -28,7 +28,7 @@
                 跟单类型
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="dtype" name="email" required="" class="layui-input">
+                <input type="text" id="dtype" name="email" required="" value="{{$data->dtype_name}}" class="layui-input">
             </div>
         </div>
 
