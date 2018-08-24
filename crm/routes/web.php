@@ -126,11 +126,20 @@ Route::get('documentary_dprogress_save_do','DocumentaryController@documentary_dp
 //订单列表
 Route::get('order_list','OrderController@order_list');
 
+
+
+###########User 控制器###########
+
 //客户管理列表
 Route::get('user_list','UserController@user_list');
 //添加客户
 Route::get('user_add','UserController@user_add');
 Route::get('user_add_do','UserController@user_add_do');
+//删除客户
+Route::get('user_del','UserController@user_del');
+//修改客户
+Route::get('user_update','UserController@user_update');
+Route::get('user_update_do','UserController@user_update_do');
 //客户类型列表
 Route::get('ctype_list','UserController@ctype');
 //类型添加
@@ -161,6 +170,15 @@ Route::get('csource_update','UserController@csource_update');
 Route::get('csource_update_do','UserController@csource_update_do');
 //删除来源
 Route::get('csource_del','UserController@csource_del');
+//合同类型展示
+Route::get('contype_list','UserController@contype_list');
+//合同类型添加
+Route::get('contype_add','UserController@contype_add');
+Route::get('contype_add_do','UserController@contype_add_do');
+//合同类型删除
+Route::get('contype_del','UserController@contype_del');
+//合同展示
+Route::get('contract_list','UserController@contract_list');
 
 
 

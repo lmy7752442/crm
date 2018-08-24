@@ -25,10 +25,10 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>客户类型
+                <span class="x-red">*</span>合同类型
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="ctype" name="c_name" required="" lay-verify="required"
+                <input type="text" id="contype" name="c_name" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -62,11 +62,11 @@
             ,layer = layui.layer;
         // //监听提交
         form.on('submit(add)', function(data){
-            var ctype = $('#ctype').val();
+            var contype = $('#contype').val();
 
-            $.get('/ctype_add_do',
+            $.get('/contype_add_do',
                 {
-                    ctype:ctype
+                    contype:contype
                 },function(data){
                     if(data==1){
                         //发异步，把数据提交给php
