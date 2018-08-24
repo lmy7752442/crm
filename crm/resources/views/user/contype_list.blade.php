@@ -36,7 +36,7 @@
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加类型','/contype_add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加类型','contype_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
@@ -112,7 +112,7 @@
         });
     }
 
-    /*用户-删除*/
+    /*合同类型-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
             $.get('contype_del',

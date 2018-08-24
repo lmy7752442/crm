@@ -284,7 +284,7 @@ class UserController extends Controller
     }
     //合同类型列表
     public function contype_list(){
-        $data = DB::table('contype')->where(['status'=>1])->get();
+        $data = DB::table('contype')->where(['status'=>1])->paginate(3);
         return view('user.contype_list')->with('data',$data);
     }
     //合同添加
@@ -298,6 +298,16 @@ class UserController extends Controller
             'status'=>1
         ];
         $res = DB::table('contype')->insert($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //合同删除
+    public function contype_del(){
+        $id = input::get('id');
+        $res = DB::table('contype')->where(['contype_id'=>$id])->update(['status'=>3]);
         if($res){
             echo 1;
         }else{
