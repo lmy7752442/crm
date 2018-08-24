@@ -14,13 +14,7 @@ class Index extends Controller
         return view('index.welcome');
     }
 
-    //管理员列表
-    public function admin_list(){
-        return view('admin.admin_list');
-    }
-    //删除
-    public function admin_del(){
-        return view('admin.admin_del');
-    }
+
+
 
 }
