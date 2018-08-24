@@ -8,8 +8,8 @@ use DB;
 class DocumentaryController extends Controller
 {
     public function documentary_list(Request $request){
-        $start_time = $request->get('start');
-        $end_time = $request->get('end');
+        $start_time = $request->get('start_time');
+        $end_time = $request->get('end_time');
         $username = $request->get('username');
         $where = [];
         if(!empty($start_time)){
@@ -19,6 +19,15 @@ class DocumentaryController extends Controller
         if(!empty($end_time)){
             $end_time = strtotime($end_time);
             $where[] = ['d_time','<',$end_time];
+        }
+        if(!empty($username)){
+            $user_data = DB::table('customer')->where('c_name','like',"%$username%")->get();
+            $str = '';
+            foreach($user_data as $v){
+                $str .= $v->c_id.',';
+            }
+            $str = rtrim($str,',');
+            $str_arr = explode(',',$str);
         }
         $documentary_data = DB::table('documentary')-> where($where) -> paginate(10);
         $count = DB::table('documentary')->count();
@@ -119,6 +128,29 @@ class DocumentaryController extends Controller
         }
     }
     public function documentary_dtype_list(){
-        return view('documentary.documentary_dtype_list');
+        $data = DB::table('dtype')->paginate(10);
+        return view('documentary.documentary_dtype_list',['data'=>$data]);
+    }
+    public function documentary_dtype_add(){
+        return view('documentary.documentary_dtype_add');
+    }
+    public function documentary_dtype_add_do(Request $request){
+        $dtype = $request ->get('dtype');
+        $res = DB::table('dtype')->insert(['dtype_name'=>$dtype,'time'=>time()]);
+        if($res > 0){
+            return 1;
+        }
+    }
+    public function documentary_dtype_del(Request $request){
+        $dtype_id = $request ->get('id');
+        $res = DB::table('dtype')->where('dtype_id',$dtype_id)->delete();
+        if($res > 0){
+            return 1;
+        }
+    }
+    public function documentary_dtype_save(Request $request){
+        $dtype_id = $request ->get('id');
+        $data = DB::table('dtype')->where('dtype_id',$dtype_id)->first();
+        return view('documentary.documentary_dtype_save',['data'=>$data]);
     }
 }

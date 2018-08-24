@@ -33,12 +33,12 @@
 </div>
 <div class="x-body">
     <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
+        <div  class="layui-form layui-col-md12 x-so">
             <input class="layui-input" placeholder="开始日" name="start" id="start">
             <input class="layui-input" placeholder="截止日" name="end" id="end">
-            <input type="text" name="username"  placeholder="请输入客户名" autocomplete="off" class="layui-input">
+            <input type="text" id="username" name="username"  placeholder="请输入客户名" autocomplete="off" class="layui-input">
             <button class="layui-btn"  lay-submit="" lay-filter="sreach" id="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
+        </div>
     </div>
     <script>
         $('#sreach').click(function(){
