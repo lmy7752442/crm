@@ -53,22 +53,25 @@
                 <div class="layui-input-inline">
                     <select name="ctype_id" id="ctype">
                         <option>客户类型</option>
-                        <option value="1">QQ</option>
-                        <option value="2 ">微信</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="clevel_id" id="clevel_id">
-                        <option>客户来源</option>
-                        <option value="1">走访</option>
-                        <option value="2">电话</option>
+                       @foreach($ctype as $v)
+                        <option value="{{$v->ctype_id}} ">{{$v->ctype_name}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="layui-input-inline">
                     <select name="csource_id" id="csource_id">
+                        <option>客户来源</option>
+                        @foreach($csource as $val)
+                        <option value="{{$val->csource_id}}">{{$val->csource_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="clevel_id" id="clevel_id">
                         <option>客户等级</option>
-                        <option value="1">1级</option>
-                        <option value="2">2级</option>
+                        @foreach($clevel as $value)
+                        <option value="{{$value->clevel_id}}">{{$value->clevel_name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

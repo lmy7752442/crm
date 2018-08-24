@@ -47,7 +47,6 @@
             </th>
             <th>客户名称</th>
             <th>手机号</th>
-            <th>工作</th>
             <th>客户类型</th>
             <th>客户等级</th>
             <th>客户来源</th>
@@ -61,31 +60,32 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($data as $v)
         <tr>
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>张三</td>
-            <td>18925139194</td>
-            <td>经理</td>
-            <td>走访</td>
-            <td>1级</td>
-            <td>走访</td>
-            <td>1434244465@qq.com</td>
-            <td>老年人</td>
-            <td>北京</td>
-            <td>北京</td>
-            <td>昌平</td>
-            <td></td>
+            <td>{{$v->c_name}}</td>
+            <td>{{$v->c_phone}}</td>
+            <td>{{$v->ctype_id}}</td>
+            <td>{{$v->clevel_id}}</td>
+            <td>{{$v->csource_id}}</td>
+            <td>{{$v->c_other_connect}}</td>
+            <td>{{$v->c_notes}}</td>
+            <td>{{$v->c_province}}</td>
+            <td>{{$v->c_city}}</td>
+            <td>{{$v->c_area}}</td>
+            <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
             <td class="td-manage">
                 <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>
                 </a>
-                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                <a title="删除" onclick="member_del(this,'{{$v->c_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
+         @endforeach
         </tbody>
     </table>
     <div class="page">

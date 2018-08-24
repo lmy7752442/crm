@@ -10,10 +10,24 @@ class UserController extends Controller
 {
     //客户展示
     public  function user_list(){
-        return view('user.user_list');
+        $data = DB::table('customer')->paginate(3);
+
+        foreach($data as $k=>$v){
+            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id])->first();
+            $v->ctype_id = $ctype->ctype_name;
+            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id])->first();
+            $v->clevel_id = $clevel->clevel_name;
+            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id])->first();
+            $v->csource_id = $csource->csource_name;
+        }
+
+        return view('user.user_list',['data'=>$data]);
     }
     public function user_add(){
-        return view('user.user_add');
+        $ctype = DB::table('ctype')->get();
+        $clevel = DB::table('clevel')->get();
+        $csource = DB::table('csource')->get();
+        return view('user.user_add')->with('ctype',$ctype)->with('clevel',$clevel)->with('csource',$csource);
     }
     public function user_add_do(){
 
