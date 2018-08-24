@@ -202,6 +202,7 @@
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
                             parent.layer.close(index);
+                            parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
                         });
                     }else{
                         //发异步，把数据提交给php

@@ -142,7 +142,7 @@
 
         layui.code();
 
-        $('#x-city').xcity('广东','广州市','东山区');
+        $('#x-city').xcity('{{$data->c_province}}','{{$data->c_city}}','{{$data->c_area}}');
 
     });
 </script>

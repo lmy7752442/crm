@@ -143,6 +143,7 @@
                     if(data==1){
                         $(obj).parents("tr").remove();
                         layer.msg('已删除!',{icon:1,time:1000});
+                        parent.$('.layui-table tr:eq(1)').before(strve()); //删除指定行
                     }else{
                         $(obj).parents("tr").remove();
                         layer.msg('删除失败!',{icon:1,time:1000});
