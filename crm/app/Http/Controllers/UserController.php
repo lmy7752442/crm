@@ -282,5 +282,26 @@ class UserController extends Controller
             echo 2;
         }
     }
-
+    //合同类型列表
+    public function contype_list(){
+        $data = DB::table('contype')->where(['status'=>1])->get();
+        return view('user.contype_list')->with('data',$data);
+    }
+    //合同添加
+    public function contype_add(){
+        return view('user.contype_add');
+    }
+    public function contype_add_do(){
+        $contype = input::get('contype');
+        $arr = [
+            'contype_name'=>$contype,
+            'status'=>1
+        ];
+        $res = DB::table('contype')->insert($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
 }

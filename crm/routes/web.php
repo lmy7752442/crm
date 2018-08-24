@@ -154,7 +154,9 @@ Route::get('csource_update_do','UserController@csource_update_do');
 Route::get('csource_del','UserController@csource_del');
 //合同类型展示
 Route::get('contype_list','UserController@contype_list');
-
+//合同类型添加
+Route::get('contype_add','UserController@contype_add');
+Route::get('contype_add_do','UserController@contype_add_do');
 //合同展示
 Route::get('contract_list','UserController@contract_list');
 
