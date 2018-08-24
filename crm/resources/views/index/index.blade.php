@@ -180,19 +180,25 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="role_list">
+                        <a _href="/role_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="power_list">
+                        <a _href="/department_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>部门管理</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限分类</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="crm/admin-rule.html">
+                        <a _href="/power_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限管理</cite>
                         </a>
