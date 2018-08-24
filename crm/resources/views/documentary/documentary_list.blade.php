@@ -45,13 +45,15 @@
             var start_time = $('#start').val();
             var end_time = $('#end').val();
             var username = $('#username').val();
-            $.get('documentary_list',{
-                start_time:start_time,
-                end_time:end_time,
-                username:username
-            },function(data){
-                $('#data').html(data)
-            })
+            if(start_time!='' || end_time!='' || username!=''){
+                $.get('documentary_list',{
+                    start_time:start_time,
+                    end_time:end_time,
+                    username:username
+                },function(data){
+                    $('#zong').html(data)
+                })
+            }
         })
     </script>
     <xblock>
@@ -59,12 +61,14 @@
         <button class="layui-btn" onclick="x_admin_show('添加客户','documentary_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
+    <div id="zong">
     <table class="layui-table">
         <thead id="aaa">
         <tr>
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
+            <th>编号</th>
             <th>客户名称</th>
             <th>跟单类型</th>
             <th>跟单进度</th>
@@ -75,11 +79,13 @@
             <th>管理</th>
         </thead>
         <tbody id = 'data'>
+        <?php $num=0;?>
         @foreach($documentary_data as $v)
         <tr>
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
+            <td><?php echo $num=$num+1;?></td>
             <td>{{$v->c_id}}</td>
             <td>{{$v->dtype_id}}</td>
             <td>{{$v->dprogress_id}}</td>
@@ -94,7 +100,7 @@
                     {{--<i class="layui-icon">&#xe601;</i>--}}
                 {{--</a>--}}
             <td>
-                <a title="编辑"  onclick="x_admin_show('编辑','documentary_save?id={{$v->documentary_id}}')" href="javascript:;">
+                <a title="编辑"  onclick="x_admin_show('编辑','documentary_save?id={{$v->documentary_id}}&num=<?php echo $num;?>')" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
                 <a title="删除" onclick="member_del(this,'{{$v->documentary_id}}')"  href="javascript:;">
@@ -105,11 +111,10 @@
         @endforeach
         </tbody>
     </table>
-    <input type="hidden" id="count" value="{{$count}}">
     <div class="page">
         {{ $documentary_data->links() }}
     </div>
-
+    </div>
 </div>
 <script>
     layui.use('laydate', function(){
@@ -164,7 +169,6 @@
             })
         });
     }
-
 
 
     function delAll (argument) {

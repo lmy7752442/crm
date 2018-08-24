@@ -28,11 +28,12 @@
                 <span class="x-red">*</span>登录名
             </label>
             <div class="layui-input-inline">
+                <input type="hidden" id="hi" value="{{$data->c_id}}">
                 <input type="text" id="username" name="c_name" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+                       autocomplete="off" class="layui-input" value="{{$data->c_name}}">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为您唯一的登入名
+                <span class="x-red">*</span>
             </div>
         </div>
         <div class="layui-form-item">
@@ -41,10 +42,10 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="phone" name="c_phone" required="" lay-verify="phone"
-                       autocomplete="off" class="layui-input">
+                       autocomplete="off" class="layui-input" value="{{$data->c_phone}}">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为您唯一的登入名
+                <span class="x-red">*</span>
             </div>
         </div>
         <div class="layui-form-item">
@@ -53,8 +54,8 @@
                 <div class="layui-input-inline">
                     <select name="ctype_id" id="ctype">
                         <option>客户类型</option>
-                       @foreach($ctype as $v)
-                        <option value="{{$v->ctype_id}} ">{{$v->ctype_name}}</option>
+                        @foreach($ctype as $v)
+                            <option value="{{$v->ctype_id}}" <?php if($data->ctype_id == $v->ctype_id){ echo 'selected'; }?> >{{$v->ctype_name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -62,7 +63,7 @@
                     <select name="csource_id" id="csource_id">
                         <option>客户来源</option>
                         @foreach($csource as $val)
-                        <option value="{{$val->csource_id}}">{{$val->csource_name}}</option>
+                            <option value="{{$val->csource_id}}" <?php if($data->csource_id == $val->csource_id){ echo 'selected'; }?>>{{$val->csource_name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -70,7 +71,7 @@
                     <select name="clevel_id" id="clevel_id">
                         <option>客户等级</option>
                         @foreach($clevel as $value)
-                        <option value="{{$value->clevel_id}}">{{$value->clevel_name}}</option>
+                            <option value="{{$value->clevel_id}}" <?php if($data->clevel_id == $value->clevel_id){ echo 'selected'; }?>>{{$value->clevel_name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -79,11 +80,11 @@
 
         <div class="layui-form-item">
             <label for="L_pass" class="layui-form-label">
-               其他联系方式
+                其他联系方式
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="c_other_connect" name="content" required="" lay-verify="pass"
-                       autocomplete="off" class="layui-input">
+                       autocomplete="off" class="layui-input" value="{{$data->c_other_connect}}">
             </div>
             <div class="layui-form-mid layui-word-aux">
             </div>
@@ -94,34 +95,34 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="c_notes" name="c_notes" required="" lay-verify="repass"
-                       autocomplete="off" class="layui-input">
+                       autocomplete="off" class="layui-input" value="{{$data->c_notes}}">
             </div>
         </div>
 
-<div class="x-body">
-    <div class="layui-row">
-        {{--<form class="layui-form layui-col-md12  layui-form-pane">--}}
-            <div class="layui-form-item" id="x-city">
-                <label class="layui-form-label">城市联动</label>
-                <div class="layui-input-inline">
-                    <select name="province" lay-filter="province"id="province">
-                        <option value="">请选择省</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="city" lay-filter="city"id="city">
-                        <option value="">请选择市</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="area" lay-filter="area"id="area">
-                        <option value="">请选择县/区</option>
-                    </select>
+        <div class="x-body">
+            <div class="layui-row">
+                {{--<form class="layui-form layui-col-md12  layui-form-pane">--}}
+                <div class="layui-form-item" id="x-city">
+                    <label class="layui-form-label">城市联动</label>
+                    <div class="layui-input-inline">
+                        <select name="province" lay-filter="province"id="province">
+                            <option value="">请选择省</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="city" lay-filter="city"id="city">
+                            <option value="">请选择市</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="area" lay-filter="area"id="area">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-    </div>
 
-</div>
+        </div>
 
 
 
@@ -129,7 +130,7 @@
             <label for="L_repass" class="layui-form-label">
             </label>
             <button  class="layui-btn" lay-filter="add" lay-submit="" id="button">
-                增加
+                修改
             </button>
         </div>
     </form>
@@ -141,7 +142,7 @@
 
         layui.code();
 
-        $('#x-city').xcity('广东','广州市','东山区');
+        $('#x-city').xcity('{{$data->c_province}}','{{$data->c_city}}','{{$data->c_area}}');
 
     });
 </script>
@@ -171,6 +172,7 @@
 
         // //监听提交
         form.on('submit(add)', function(data){
+            var id = $('#hi').val();
             var c_name = $('#username').val();
             var c_phone = $('#phone').val();
             var ctype = $('#ctype').val();
@@ -181,9 +183,9 @@
             var province = $('#province').val();
             var city = $('#city').val();
             var area = $('#area').val();
-            // alert(c_name+'|'+c_phone+'|'+Job_id+'|'+ctype+'|'+clevel_id+'|'+csource_id+'|'+c_other_connect+'|'+c_notes+'|'+province+'|'+city+'|'+area);
-            $.get('/user_add_do',
+            $.get('/user_update_do',
                 {
+                    id:id,
                     c_name:c_name,
                     c_phone:c_phone,
                     ctype:ctype,
@@ -197,18 +199,15 @@
                 },function(data){
                     if(data==1){
                         //发异步，把数据提交给php
-                        layer.alert("增加成功", {icon: 6},function () {
+                        layer.alert("修改成功", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
                             parent.layer.close(index);
-
-
-                              parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
                         });
                     }else{
                         //发异步，把数据提交给php
-                        layer.alert("增加失败", {icon: 6},function () {
+                        layer.alert("修改失败", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
@@ -218,8 +217,6 @@
                 });
             return false;
         });
-
-
     });
 </script>
 

@@ -86,18 +86,17 @@ Route::get('/','Index@index');
 Route::get('welcome','Index@welcome');
 
 
-//订单列表
-Route::get('order_list','OrderController@order_list');
+########## Documentary控制器 ##########
 
 //跟单添加
 Route::get('documentary_add','DocumentaryController@documentary_add');
-//执行跟单添加
+//跟单添加执行
 Route::get('documentary_add_do','DocumentaryController@documentary_add_do');
 //跟单删除
 Route::get('documentary_del','DocumentaryController@documentary_del');
 //跟单修改
 Route::get('documentary_save','DocumentaryController@documentary_save');
-//执行跟单修改
+//跟单修改执行
 Route::get('documentary_save_do','DocumentaryController@documentary_save_do');
 //跟单列表
 Route::get('documentary_list','DocumentaryController@documentary_list');
@@ -105,19 +104,45 @@ Route::get('documentary_list','DocumentaryController@documentary_list');
 Route::get('documentary_dtype_list','DocumentaryController@documentary_dtype_list');
 //跟单类型添加
 Route::get('documentary_dtype_add','DocumentaryController@documentary_dtype_add');
-//执行跟单类型添加
+//跟单类型添加执行
 Route::get('documentary_dtype_add_do','DocumentaryController@documentary_dtype_add_do');
 //跟单类型删除
 Route::get('documentary_dtype_del','DocumentaryController@documentary_dtype_del');
 //跟单类型修改
 Route::get('documentary_dtype_save','DocumentaryController@documentary_dtype_save');
+//跟单类型修改执行
+Route::get('documentary_dtype_save_do','DocumentaryController@documentary_dtype_save_do');
+//跟单进度列表
+Route::get('documentary_dprogress_list','DocumentaryController@documentary_dprogress_list');
+//跟单进度添加
+Route::get('documentary_dprogress_add','DocumentaryController@documentary_dprogress_add');
+//跟单进度添加执行
+Route::get('documentary_dprogress_add_do','DocumentaryController@documentary_dprogress_add_do');
+//跟单进度删除
+Route::get('documentary_dprogress_del','DocumentaryController@documentary_dprogress_del');
+//跟单进度修改
+Route::get('documentary_dprogress_save','DocumentaryController@documentary_dprogress_save');
+//跟单进度修改执行
+Route::get('documentary_dprogress_save_do','DocumentaryController@documentary_dprogress_save_do');
+
+########## Order控制器 ##########
 //订单列表
 Route::get('order_list','OrderController@order_list');
+
+
+
+###########User 控制器###########
+
 //客户管理列表
 Route::get('user_list','UserController@user_list');
 //添加客户
 Route::get('user_add','UserController@user_add');
 Route::get('user_add_do','UserController@user_add_do');
+//删除客户
+Route::get('user_del','UserController@user_del');
+//修改客户
+Route::get('user_update','UserController@user_update');
+Route::get('user_update_do','UserController@user_update_do');
 //客户类型列表
 Route::get('ctype_list','UserController@ctype');
 //类型添加
@@ -148,6 +173,15 @@ Route::get('csource_update','UserController@csource_update');
 Route::get('csource_update_do','UserController@csource_update_do');
 //删除来源
 Route::get('csource_del','UserController@csource_del');
+//合同类型展示
+Route::get('contype_list','UserController@contype_list');
+//合同类型添加
+Route::get('contype_add','UserController@contype_add');
+Route::get('contype_add_do','UserController@contype_add_do');
+//合同类型删除
+Route::get('contype_del','UserController@contype_del');
+//合同展示
+Route::get('contract_list','UserController@contract_list');
 
 
 

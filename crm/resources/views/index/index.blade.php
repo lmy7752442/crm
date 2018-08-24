@@ -93,6 +93,12 @@
                             <cite>跟单类型列表</cite>
                         </a>
                     </li >
+                    <li>
+                        <a _href="documentary_dprogress_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>跟单进度列表</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -155,6 +161,27 @@
                         <a _href="cate.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>多级分类</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>合同管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="contype_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>合同类型</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="contract_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>合同展示</cite>
                         </a>
                     </li >
                 </ul>
