@@ -142,7 +142,7 @@
                 next_time:next_time,
                 warn:warn
             },function(data){
-                console.log(data.status);
+                console.log(data);
                 if(data.status == 1){
                     layer.alert("增加成功", {icon: 6},function () {
                         // 获得frame索引
@@ -152,7 +152,7 @@
                         // parent.$('.layui-table').append(str);//表格结尾追加
                         //  parent.$('.layui-table tr:eq(0)').before(str); //首行前追加
                         // parent.$('.layui-table tr:eq(0)').after(str); //首行后追加
-                        parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
+                        parent.$('.layui-table tbody').html(data.data); //
                         //parent.$('.layui-table tr:eq(1)').remoable tr:eq(1)').before(strve(); //删除指定行
                     });
                 }else{
