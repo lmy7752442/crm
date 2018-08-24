@@ -26,23 +26,23 @@
         <a href="/">首页</a>
         <a href="">演示</a>
         <a>
-          <cite>导航元素</cite></a>
+            <cite>导航元素</cite></a>
       </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    {{--<div class="layui-row">--}}
+    <div class="layui-row">
         {{--<form class="layui-form layui-col-md12 x-so">--}}
             {{--<input class="layui-input" placeholder="开始日" name="start" id="start">--}}
             {{--<input class="layui-input" placeholder="截止日" name="end" id="end">--}}
-            {{--<input type="text" name="r_name"  placeholder="请输入用户名" autocomplete="off" class="layui-input">--}}
+            {{--<input type="text" name="d_name"  placeholder="请输入部门" autocomplete="off" class="layui-input">--}}
             {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>--}}
         {{--</form>--}}
-    {{--</div>--}}
+    </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','/role_add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加部门','/department_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：{{$count}} 条</span>
     </xblock>
     <table class="layui-table">
@@ -51,35 +51,33 @@
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>角色ID</th>
-            <th>角色名称</th>
-            <th>权限名称</th>
+            <th>部门编号</th>
+            <th>部门名称</th>
+            <th>部门添加时间</th>
             <th>操作</th>
         </thead>
         <tbody>
-            @foreach($new as $v)
-                <tr>
-                    <td>
-                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                    </td>
-                    <td>{{$v->role_id}}</td>
-                    <td>{{$v->r_name}}</td>
-                    <td>{{$v->p_name}}</td>
-                    {{--<td class="td-status">--}}
-                        {{--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
-                    <td class="td-manage">
-                        <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                            <i class="layui-icon">&#xe601;</i>
-                        </a>
-                        <a title="编辑"  onclick="x_admin_show('编辑','/role_update?role_id={{$v->role_id}}')" href="javascript:;">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" onclick="member_del(this,'{{$v->role_id}}')" href="javascript:;">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
+        @foreach($new as $v)
+            <tr>
+                <td>
+                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                </td>
+                <td>{{$v->department_id}}</td>
+                <td>{{$v->d_name}}</td>
+                <td>{{$v->d_time}}</td>
+                <td class="td-manage">
+                    <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                        <i class="layui-icon">&#xe601;</i>
+                    </a>
+                    <a title="编辑"  onclick="x_admin_show('编辑','/department_update?department_id={{$v->department_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+                    <a title="删除" onclick="member_del(this,'{{$v->department_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
     <!-- 分页 -->
@@ -103,31 +101,31 @@
         });
     });
 
-    /*用户-停用*/
-//    function member_stop(obj,id){
-//        layer.confirm('确认要停用吗？',function(index){
-//
-//            if($(obj).attr('title')=='启用'){
-//
-//                //发异步把用户状态进行更改
-//                $(obj).attr('title','停用')
-//                $(obj).find('i').html('&#xe62f;');
-//
-//                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-//                layer.msg('已停用!',{icon: 5,time:1000});
-//
-//            }else{
-//                $(obj).attr('title','启用')
-//                $(obj).find('i').html('&#xe601;');
-//
-//                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-//                layer.msg('已启用!',{icon: 5,time:1000});
-//            }
-//
-//        });
-//    }
+    /*部门-停用*/
+    //    function member_stop(obj,id){
+    //        layer.confirm('确认要停用吗？',function(index){
+    //
+    //            if($(obj).attr('title')=='启用'){
+    //
+    //                //发异步把用户状态进行更改
+    //                $(obj).attr('title','停用')
+    //                $(obj).find('i').html('&#xe62f;');
+    //
+    //                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+    //                layer.msg('已停用!',{icon: 5,time:1000});
+    //
+    //            }else{
+    //                $(obj).attr('title','启用')
+    //                $(obj).find('i').html('&#xe601;');
+    //
+    //                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+    //                layer.msg('已启用!',{icon: 5,time:1000});
+    //            }
+    //
+    //        });
+    //    }
 
-    /*用户-删除*/
+    /*部门-删除*/
     function member_del(obj,id){
         console.log(obj);
         console.log(id);
@@ -137,30 +135,31 @@
 //            layer.msg('已删除!',{icon:1,time:1000});
             $.ajax({
                 method:'get',
-                url:"/role_del",
-                data:{role_id:id},
+                url:"/department_del",
+                data:{department_id:id},
                 success:function(res){
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('角色删除成功');
-                        window.location.href="/role_list";
+                        layer.alert('部门删除成功');
+                        window.location.href="/department_list";
                     }else if(res == 2) {
-                        layer.alert('角色删除失败');
-                        window.location.href = "/role_list";
+                        layer.alert('部门删除失败');
+                        window.location.href = "/department_list";
                     }
                 }
             });
             return false;
+
         });
     }
 
 
-
+    /* 批删 */
     function delAll (argument) {
 
         var data = tableCheck.getData();
-
+//        console.log(data);
         layer.confirm('确认要删除吗？'+data,function(index){
             //捉到所有被选中的，发异步进行删除
             layer.msg('删除成功', {icon: 1});

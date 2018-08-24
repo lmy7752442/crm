@@ -68,7 +68,7 @@
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加类型','documentary_dtype_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
@@ -84,34 +84,29 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($data as $v)
         <tr>
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>2017009171822298053</td>
-            <td>老王:18925139194</td>
-            <td>7829.10</td>
+            <td>{{$v->dtype_id}}</td>
+            <td>{{$v->dtype_name}}</td>
+            <td><?php echo date('Y-m-d H:i:s',$v->time);?></td>
 
             <td class="td-manage">
-                <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+                <a title="查看"  onclick="x_admin_show('编辑','documentary_dtype_save?id={{$v->dtype_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>
                 </a>
-                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                <a title="删除" onclick="member_del(this,'{{$v->dtype_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
+        @endforeach
         </tbody>
     </table>
     <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
+       {{$data->links()}}
     </div>
 
 </div>
@@ -157,13 +152,18 @@
     /*用户-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
+            var dtype_id = id;
+            $.get('documentary_dtype_del',{
+                id:dtype_id
+            },function(data){
+                if(data == 1){
+                    //发异步删除数据
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                }
+            })
         });
     }
-
-
 
     function delAll (argument) {
 
