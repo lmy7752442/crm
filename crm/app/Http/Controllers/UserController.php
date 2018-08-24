@@ -23,6 +23,7 @@ class UserController extends Controller
 
         return view('user.user_list',['data'=>$data]);
     }
+    //客户添加
     public function user_add(){
         $ctype = DB::table('ctype')->get();
         $clevel = DB::table('clevel')->get();
@@ -61,6 +62,63 @@ class UserController extends Controller
             'ctime'=>time()
         ];
         $res = DB::table('customer')->insert($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //客户删除
+    public function user_del(){
+        $id = input::get('id');
+        $res = DB::table('customer')->where(['c_id'=>$id])->delete();
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //修改客户
+    public function user_update(){
+        $id = input::get('id');
+        $data = DB::table('customer')->where(['c_id'=>$id])->first();
+        $ctype = DB::table('ctype')->get();
+        $clevel = DB::table('clevel')->get();
+        $csource = DB::table('csource')->get();
+        return view('user.user_update')->with('data',$data)->with('ctype',$ctype)->with('clevel',$clevel)->with('csource',$csource);
+    }
+    public function user_update_do(){
+        $id = input::get('id');
+        $c_name = input::get('c_name');
+        $c_phone = input::get('c_phone');
+        //客户类型
+        $ctype = input::get('ctype');
+        //客户等级
+        $clevel_id = input::get('clevel_id');
+        //客户来源
+        $csource_id = input::get('csource_id');
+        //其他联系方式
+        $c_other_connect = input::get('c_other_connect');
+        //备注
+        $c_notes = input::get('c_notes');
+        $province = input::get('province');
+        $city = input::get('city');
+        $area = input::get('area');
+
+        $arr = [
+            'c_name'=>$c_name,
+            'c_phone'=>$c_phone,
+            'ctype_id'=>$ctype,
+            'clevel_id'=>$clevel_id,
+            'csource_id'=>$csource_id,
+            'c_other_connect'=>$c_other_connect,
+            'c_notes'=>$c_notes,
+            'c_province'=>$province,
+            'c_city'=>$city,
+            'c_area'=>$area,
+            'ctime'=>time()
+        ];
+        $res = DB::table('customer')->where(['c_id'=>$id])->update($arr);
         if($res){
             echo 1;
         }else{

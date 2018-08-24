@@ -47,6 +47,11 @@ Route::get('user_list','UserController@user_list');
 //添加客户
 Route::get('user_add','UserController@user_add');
 Route::get('user_add_do','UserController@user_add_do');
+//删除客户
+Route::get('user_del','UserController@user_del');
+//修改客户
+Route::get('user_update','UserController@user_update');
+Route::get('user_update_do','UserController@user_update_do');
 //客户类型列表
 Route::get('ctype_list','UserController@ctype');
 //类型添加

@@ -77,7 +77,7 @@
             <td>{{$v->c_area}}</td>
             <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
             <td class="td-manage">
-                <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+                <a title="查看"  onclick="x_admin_show('编辑','user_update?id={{$v->c_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>
                 </a>
                 <a title="删除" onclick="member_del(this,'{{$v->c_id}}')" href="javascript:;">
@@ -89,14 +89,7 @@
         </tbody>
     </table>
     <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
+       {{$data->links()}}
     </div>
 
 </div>
@@ -143,8 +136,19 @@
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
             //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
+            $.get('user_del',
+                {
+                    id:id
+                },function(data){
+                    if(data==1){
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!',{icon:1,time:1000});
+                    }else{
+                        $(obj).parents("tr").remove();
+                        layer.msg('删除失败!',{icon:1,time:1000});
+                    }
+                })
+
         });
     }
 
