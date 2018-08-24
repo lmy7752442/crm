@@ -36,7 +36,7 @@
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','/user_add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加来源','csource_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
@@ -45,58 +45,31 @@
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>客户名称</th>
-            <th>手机号</th>
-            <th>客户类型</th>
-            <th>客户等级</th>
-            <th>客户来源</th>
-            <th>其他联系方式</th>
-            <th>备注</th>
-            <th>省</th>
-            <th>市</th>
-            <th>县</th>
-            <th>添加时间</th>
+            <th>来源</th>
             <th >操作</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($data as $v)
-        <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>{{$v->c_name}}</td>
-            <td>{{$v->c_phone}}</td>
-            <td>{{$v->ctype_id}}</td>
-            <td>{{$v->clevel_id}}</td>
-            <td>{{$v->csource_id}}</td>
-            <td>{{$v->c_other_connect}}</td>
-            <td>{{$v->c_notes}}</td>
-            <td>{{$v->c_province}}</td>
-            <td>{{$v->c_city}}</td>
-            <td>{{$v->c_area}}</td>
-            <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
-            <td class="td-manage">
-                <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                    <i class="layui-icon">&#xe63c;</i>
-                </a>
-                <a title="删除" onclick="member_del(this,'{{$v->c_id}}')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-         @endforeach
+        @foreach($data as  $k=>$v)
+            <tr>
+                <td>
+                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                </td>
+                <td>{{$v->csource_name}}</td>
+                <td class="td-manage">
+                    <a title="查看"  onclick="x_admin_show('编辑','csource_update?id={{$v->csource_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe63c;</i>
+                    </a>
+                    <a title="删除" onclick="member_del(this,'{{$v->csource_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
     <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
+        {{$data->links()}}
     </div>
 
 </div>
@@ -142,9 +115,20 @@
     /*用户-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
+            $.get('csource_del',
+                {
+                    id:id
+                },function(data){
+                    if(data==1){
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!',{icon:1,time:1000});
+                    }else{
+                        $(obj).parents("tr").remove();
+                        layer.msg('删除失败!',{icon:1,time:1000});
+                    }
+                })
             //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
+
         });
     }
 
