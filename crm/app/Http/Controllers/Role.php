@@ -16,7 +16,10 @@ class Role extends BaseController
         //查询权限数据
         $data = DB::table('power')->get();
 //        print_r($data);exit;
-        return view("Role.role_add")->with('data',$data);
+        //查询管理员数据
+        $admin = DB::table('admin')->get();
+//        print_r($admin);exit;
+        return view("Role.role_add")->with('data',$data)->with('admin',$admin);
     }
 
     /** 执行添加 */
@@ -25,6 +28,7 @@ class Role extends BaseController
 //        print_r($data);exit;
         $insert_data = [
             'r_name' => $data['r_name'],
+            'a_id' => $data['a_id'],
             'power_id' => $data['power_id']
         ];
         $res = DB::table('role')->insert($insert_data);
@@ -38,7 +42,7 @@ class Role extends BaseController
 
     /** 角色展示 */
     public function role_list(){
-        $res = DB::table('role')->leftJoin('power', 'role.power_id', '=', 'power.power_id')->paginate(5);
+        $res = DB::table('role')->join('power', 'role.power_id', '=', 'power.power_id')->join('admin', 'role.a_id', '=', 'admin.a_id')->where(['r_status'=>1])->paginate(5);
 //        print_r($res);exit;
         //查询总共条数
         $count = DB::table('role')->count();
@@ -50,12 +54,15 @@ class Role extends BaseController
     public function role_update(){
         $role_id = $_GET['role_id'];
 //        print_r($role_id);exit;
-        $res = DB::table('role')->where(['role_id'=>$role_id])->leftJoin('power', 'role.power_id', '=', 'power.power_id')->first();
+        $res = DB::table('role')->where(['role_id'=>$role_id])->join('power', 'role.power_id', '=', 'power.power_id')->join('admin', 'role.a_id', '=', 'admin.a_id')->first();
 //        print_r($res);exit;
         //查询权限表数据
         $power = DB::table('power')->get();
 //        print_r($power);exit;
-        return view('role.role_update')->with('res',$res)->with('power',$power);
+        //查询管理员数据
+        $admin = DB::table('admin')->get();
+//        print_r($admin);exit;
+        return view('role.role_update')->with('res',$res)->with('power',$power)->with('admin',$admin);
     }
 
     /** 执行修改 */
@@ -64,6 +71,7 @@ class Role extends BaseController
 //        print_r($data);exit;
         $update_data = [
             'r_name' => $data['r_name'],
+            'a_id' => $data['a_id'],
             'power_id' => $data['power_id']
         ];
         $res = DB::table('role')->where(['role_id'=>$data['role_id']])->update($update_data);
@@ -79,12 +87,22 @@ class Role extends BaseController
     public function role_del(){
         $role_id = $_GET;
 //        print_r($role_id);exit;
-        $res = DB::table('role')->where(['role_id'=>$role_id])->delete();
-//        print_r($res);exit;
-        if($res){
-            return 1;
+        $update_data = [
+            'r_status' => 2
+        ];
+        //根据角色id查询有没有相关数据
+        $data = DB::table('role')->where(['role_id'=>$role_id])->join('power', 'role.power_id', '=', 'power.power_id')->join('admin', 'role.a_id', '=', 'admin.a_id')->first();
+//       print_r($data);exit;
+        if($data){
+            return 3;
         }else{
-            return 2;
+            $res = DB::table('role')->where(['role_id'=>$role_id])->update($update_data);
+//        print_r($res);exit;
+            if($res){
+                return 1;
+            }else{
+                return 2;
+            }
         }
     }
 }

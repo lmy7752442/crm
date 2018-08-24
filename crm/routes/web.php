@@ -36,6 +36,7 @@ Route::get('/admin_update_do','Admin@admin_update_do');
 //管理员删除
 Route::get('/admin_del','Admin@admin_del');
 
+
 ########## Department控制器 ##########
 //部门添加
 Route::get('/department_add','Department@department_add');
@@ -50,6 +51,7 @@ Route::get('/department_update_do','Department@department_update_do');
 //部门删除
 Route::get('/department_del','Department@department_del');
 
+
 ########## Role控制器 ##########
 //角色添加
 Route::get('/role_add','Role@role_add');
@@ -63,6 +65,7 @@ Route::get('/role_update','Role@role_update');
 Route::get('/role_update_do','Role@role_update_do');
 //角色删除
 Route::get('/role_del','Role@role_del');
+
 
 ########## Power控制器 ##########
 //权限添加
