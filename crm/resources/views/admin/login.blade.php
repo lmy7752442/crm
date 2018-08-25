@@ -21,19 +21,20 @@
 <div class="login layui-anim layui-anim-up">
     <div class="message">x-admin2.0-管理登录</div>
     <div id="darkbannerwrap"></div>
+    <div class="layui-form">
+        {{--<form method="post" class="layui-form layui-form-pane" action="">--}}
+            <input name="a_account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <hr class="hr15">
+            <input name="a_pwd" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <hr class="hr15">
+            {{--<input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">--}}
+            <button class="layui-btn" lay-submit="" lay-filter="login">登录</button>
+            <hr class="hr20" >
+            {{--<div class="layui-form-item">--}}
 
-    <form method="post" class="layui-form layui-form-pane" action="">
-        <input name="a_account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
-        <hr class="hr15">
-        <input name="a_pwd" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
-        <hr class="hr15">
-        <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
-        <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
-        <hr class="hr20" >
-        {{--<div class="layui-form-item">--}}
-
-        {{--</div>--}}
-    </form>
+            {{--</div>--}}
+        {{--</form>--}}
+    </div>
 </div>
 
 <script>
@@ -43,25 +44,25 @@
                 ,layer = layui.layer;
 
         form.on('submit(login)', function(data){
-            layer.alert(111);
-            console.log(data);
-//            $.ajax({
-//                method:'get',
-//                url:"/role_add_do",
-//                data:data.field,
-//                success:function(res){
-//                    console.log(res);
+//            layer.alert(111);
+//            console.log(data);
+            $.ajax({
+                method:'get',
+                url:"/login_do",
+                data:data.field,
+                success:function(res){
+                    console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
-//                    if(res == 1) {
-//                        layer.alert('角色添加成功');
-//                        window.location.href="/role_list";
-//                    }else{
-//                        layer.alert('角色添加失败');
-//                        window.location.href="/role_add";
-//                    }
-//                }
-//            });
-//            return false;
+                    if(res == 1) {
+                        layer.alert('登录成功');
+                        window.location.href="/";
+                    }else{
+                        layer.alert('登录失败');
+                        window.location.href="/login";
+                    }
+                }
+            });
+            return false;
         });
     });
 

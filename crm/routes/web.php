@@ -16,13 +16,16 @@
 //});
 //控制器 @ 方法
 
-########## Admin控制器 ##########
+########## Login控制器 ##########
 //显示登录页面
-Route::get('/login','Admin@login');
+Route::get('/login','Login@login');
 //执行登录
-Route::post('/login_do','Admin@login_do');
+Route::get('/login_do','Login@login_do');
 //退出
-Route::get('/login_out','Admin@login_out');
+Route::get('/login_out','Login@login_out');
+
+
+########## Admin控制器 ##########
 //管理员添加
 Route::get('/admin_add','Admin@admin_add');
 //管理员执行添加

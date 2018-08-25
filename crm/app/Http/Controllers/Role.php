@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use DB;
 
-class Role extends BaseController
+class Role extends Common
 {
     /** 显示角色添加页面 */
     public function role_add(){

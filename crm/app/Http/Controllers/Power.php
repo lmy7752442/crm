@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use DB;
 
-class Power extends BaseController
+class Power extends Common
 {
     /** 权限添加 */
     public function power_add(){

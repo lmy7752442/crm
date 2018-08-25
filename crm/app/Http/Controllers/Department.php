@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class Department extends BaseController{
+class Department extends Common
+{
     /** 部门添加 */
     public function department_add(){
         //查询管理员数据
