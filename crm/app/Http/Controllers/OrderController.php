@@ -10,7 +10,23 @@ class OrderController extends Controller
     //订单列表
     public function order_list(){
         $order_data = DB::table('order')->where('status',1)->get();
-        return view('order.order_list');
+        return view('order.order_list',['order_data'=>$order_data]);
+    }
+    public function order_add(){
+        $user_data = DB::table('customer')->where('status',1)->get();
+        return view('order.order_add',['user_data'=>$user_data]);
+    }
+    public function order_user(Request $request){
+        $uid = $request -> get('uid');
+        $user_data = DB::table('customer')->where('status',1)->where('c_id',$uid)->first();
+        $a_id = session()->get('a_id');
+        $admin_data = DB::table('admin')->where('a_id',$a_id)->first();
+        $admin_name= $admin_data->a_account;
+        $arr = [
+            'user'=>$user_data,
+            'admin'=>$admin_name
+        ];
+        return json_encode($arr);
     }
     //订单列表
     public function order_mode_list(){

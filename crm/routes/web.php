@@ -125,6 +125,10 @@ Route::get('documentary_dprogress_save_do','DocumentaryController@documentary_dp
 ########## Order控制器 ##########
 //订单列表
 Route::get('order_list','OrderController@order_list');
+//查询用户信息
+Route::get('order_user','OrderController@order_user');
+//订单添加
+Route::get('order_add','OrderController@order_add');
 //订单方式列表
 Route::get('order_mode_list','OrderController@order_mode_list');
 //订单方式添加
