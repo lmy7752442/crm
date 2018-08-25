@@ -49,6 +49,18 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>备用手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="other_phone" name="c_phone" required="" lay-verify="phone"
+                       autocomplete="off" class="layui-input" value="{{$data->other_phone}}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label"><span class="x-red">*</span>客户</label>
             <div class="layui-input-block">
                 <div class="layui-input-inline">
@@ -124,6 +136,17 @@
 
         </div>
         <div class="layui-form-item">
+            <label for="L_pass" class="layui-form-label">
+                详细地址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="address" name="content" required="" lay-verify="pass"
+                       autocomplete="off" class="layui-input" value="{{$data->address}}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
             </label>
             <button  class="layui-btn" lay-filter="add" lay-submit="" id="button">
@@ -180,6 +203,8 @@
             var province = $('#province').val();
             var city = $('#city').val();
             var area = $('#area').val();
+            var other_phone = $('#other_phone').val();
+            var address = $('#address').val();
             $.get('/user_update_do',
                 {
                     id:id,
@@ -192,7 +217,9 @@
                     c_notes:c_notes,
                     province:province,
                     city:city,
-                    area:area
+                    area:area,
+                    other_phone:other_phone,
+                    address:address
                 },function(data){
                     if(data==1){
                         //发异步，把数据提交给php

@@ -47,10 +47,13 @@ class UserController extends Controller
         $province = input::get('province');
         $city = input::get('city');
         $area = input::get('area');
+        $other_phone = input::get('other_phone');
+        $address = input::get('address');
 
         $arr = [
             'c_name'=>$c_name,
             'c_phone'=>$c_phone,
+            'other_phone'=>$other_phone,
             'ctype_id'=>$ctype,
             'clevel_id'=>$clevel_id,
             'csource_id'=>$csource_id,
@@ -59,6 +62,7 @@ class UserController extends Controller
             'c_province'=>$province,
             'c_city'=>$city,
             'c_area'=>$area,
+            'address'=>$address,
             'ctime'=>time(),
             'status'=>1
         ];
@@ -105,6 +109,8 @@ class UserController extends Controller
         $province = input::get('province');
         $city = input::get('city');
         $area = input::get('area');
+        $address = input::get('address');
+        $other_phone = input::get('other_phone');
 
         $arr = [
             'c_name'=>$c_name,
@@ -117,6 +123,8 @@ class UserController extends Controller
             'c_province'=>$province,
             'c_city'=>$city,
             'c_area'=>$area,
+            'address'=>$address,
+            'other_phone'=>$other_phone,
             'ctime'=>time()
         ];
         $res = DB::table('customer')->where(['c_id'=>$id])->update($arr);
@@ -324,6 +332,66 @@ class UserController extends Controller
         $id = input::get('id');
         $contype = input::get('contype');
         $res = DB::table('contype')->where(['contype_id'=>$id])->update(['contype_name'=>$contype]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //产品展示
+    public function product_list(){
+        $data = DB::table('product')->where(['status'=>1])->paginate(3);
+        return view('product.product_list')->with('data',$data);
+    }
+    //产品添加
+    public function product_add(){
+        return view('product.product_add');
+    }
+    public function product_add_do(){
+        $p_name = input::get('p_name');
+        $p_unit = input::get('p_unit');
+        $p_price = input::get('p_price');
+        $arr = [
+            'p_name'=>$p_name,
+            'p_unit'=>$p_unit,
+            'p_price'=>$p_price,
+            'ctime'=>time(),
+            'status'=>1
+        ];
+        $res = DB::table('product')->insert($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //产品删除
+    public function product_del(){
+        $id = input::get('id');
+        $res = DB::table('product')->where(['product_id'=>$id])->update(['status'=>3]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //产品修改
+    public function product_update(){
+        $id = input::get('id');
+        $data = DB::table('product')->where(['product_id'=>$id])->first();
+        return view('product.product_update')->with('data',$data);
+    }
+    public function product_update_do(){
+        $id = input::get('id');
+        $p_name = input::get('p_name');
+        $p_unit = input::get('p_unit');
+        $p_price = input::get('p_price');
+        $arr = [
+            'p_name'=>$p_name,
+            'p_unit'=>$p_unit,
+            'p_price'=>$p_price
+        ];
+        $res = DB::table('product')->where(['product_id'=>$id])->update($arr);
         if($res){
             echo 1;
         }else{
