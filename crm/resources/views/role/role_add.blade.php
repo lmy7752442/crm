@@ -33,9 +33,23 @@
                        autocomplete="off" class="layui-input">
             </div>
         </div>
+        <!-- 管理员 -->
+        <div class="layui-form-item">
+            <label for="a_id" class="layui-form-label">
+                <span class="x-red">*</span>管理员
+            </label>
+            <div class="layui-input-inline">
+                <select name="a_id">
+                    <option value="">请选择</option>
+                    @foreach($admin as $v)
+                        <option value="{{$v->a_id}}">{{$v->a_account}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <!-- 权限名称 -->
         <div class="layui-form-item">
-            <label for="r_name" class="layui-form-label">
+            <label for="power_id" class="layui-form-label">
                 <span class="x-red">*</span>权限名称
             </label>
             <div class="layui-input-inline">

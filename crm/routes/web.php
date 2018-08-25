@@ -16,13 +16,16 @@
 //});
 //控制器 @ 方法
 
-########## Admin控制器 ##########
+########## Login控制器 ##########
 //显示登录页面
-Route::get('/login','Admin@login');
+Route::get('/login','Login@login');
 //执行登录
-Route::post('/login_do','Admin@login_do');
+Route::get('/login_do','Login@login_do');
 //退出
-Route::get('/login_out','Admin@login_out');
+Route::get('/login_out','Login@login_out');
+
+
+########## Admin控制器 ##########
 //管理员添加
 Route::get('/admin_add','Admin@admin_add');
 //管理员执行添加
@@ -35,6 +38,7 @@ Route::get('/admin_update','Admin@admin_update');
 Route::get('/admin_update_do','Admin@admin_update_do');
 //管理员删除
 Route::get('/admin_del','Admin@admin_del');
+
 
 ########## Department控制器 ##########
 //部门添加
@@ -50,6 +54,7 @@ Route::get('/department_update_do','Department@department_update_do');
 //部门删除
 Route::get('/department_del','Department@department_del');
 
+
 ########## Role控制器 ##########
 //角色添加
 Route::get('/role_add','Role@role_add');
@@ -63,6 +68,7 @@ Route::get('/role_update','Role@role_update');
 Route::get('/role_update_do','Role@role_update_do');
 //角色删除
 Route::get('/role_del','Role@role_del');
+
 
 ########## Power控制器 ##########
 //权限添加
@@ -125,6 +131,10 @@ Route::get('documentary_dprogress_save_do','DocumentaryController@documentary_dp
 ########## Order控制器 ##########
 //订单列表
 Route::get('order_list','OrderController@order_list');
+//查询用户信息
+Route::get('order_user','OrderController@order_user');
+//订单添加
+Route::get('order_add','OrderController@order_add');
 //订单方式列表
 Route::get('order_mode_list','OrderController@order_mode_list');
 //订单方式添加

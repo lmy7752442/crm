@@ -53,6 +53,7 @@
             </th>
             <th>角色ID</th>
             <th>角色名称</th>
+            <th>管理员账号</th>
             <th>权限名称</th>
             <th>操作</th>
         </thead>
@@ -64,6 +65,7 @@
                     </td>
                     <td>{{$v->role_id}}</td>
                     <td>{{$v->r_name}}</td>
+                    <td>{{$v->a_account}}</td>
                     <td>{{$v->p_name}}</td>
                     {{--<td class="td-status">--}}
                         {{--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
@@ -147,6 +149,9 @@
                         window.location.href="/role_list";
                     }else if(res == 2) {
                         layer.alert('角色删除失败');
+                        window.location.href = "/role_list";
+                    }else{
+                        layer.alert('还有不同部门的员工正拥有此角色，暂时不能删除');
                         window.location.href = "/role_list";
                     }
                 }
