@@ -201,7 +201,7 @@ Route::get('product_update_do','UserController@product_update_do');
 //产品删除
 Route::get('product_del','UserController@product_del');
 //合同展示
-Route::get('contract_list','UserController@contract_list');
+Route::get('contract_list','ContractController@contract_list');
 
 
 

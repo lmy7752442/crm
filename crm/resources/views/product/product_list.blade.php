@@ -36,7 +36,7 @@
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','/user_add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','/product_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
@@ -45,55 +45,37 @@
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>客户名称</th>
-            <th>手机号</th>
-            <th>备用手机号</th>
-            <th>客户类型</th>
-            <th>客户等级</th>
-            <th>客户来源</th>
-            <th>其他联系方式</th>
-            <th>备注</th>
-            <th>省</th>
-            <th>市</th>
-            <th>县</th>
-            <td>详细地址</td>
+            <th>产品名称</th>
+            <th>价格</th>
+            <th>单位</th>
             <th>添加时间</th>
             <th >操作</th>
         </tr>
         </thead>
         <tbody>
         @foreach($data as $v)
-        <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>{{$v->c_name}}</td>
-            <td>{{$v->c_phone}}</td>
-            <td>{{$v->other_phone}}</td>
-            <td>{{$v->ctype_id}}</td>
-            <td>{{$v->clevel_id}}</td>
-            <td>{{$v->csource_id}}</td>
-            <td>{{$v->c_other_connect}}</td>
-            <td>{{$v->c_notes}}</td>
-            <td>{{$v->c_province}}</td>
-            <td>{{$v->c_city}}</td>
-            <td>{{$v->c_area}}</td>
-            <td>{{$v->address}}</td>
-            <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
-            <td class="td-manage">
-                <a title="查看"  onclick="x_admin_show('编辑','user_update?id={{$v->c_id}}')" href="javascript:;">
-                    <i class="layui-icon">&#xe63c;</i>
-                </a>
-                <a title="删除" onclick="member_del(this,'{{$v->c_id}}')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-         @endforeach
+            <tr>
+                <td>
+                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                </td>
+                <td>{{$v->p_name}}</td>
+                <td>{{$v->p_unit}}</td>
+                <td>{{$v->p_price}}</td>
+                <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
+                <td class="td-manage">
+                    <a title="查看"  onclick="x_admin_show('编辑','product_update?id={{$v->product_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe63c;</i>
+                    </a>
+                    <a title="删除" onclick="member_del(this,'{{$v->product_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
     <div class="page">
-       {{$data->links()}}
+        {{$data->links()}}
     </div>
 
 </div>
@@ -140,7 +122,7 @@
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
             //发异步删除数据
-            $.get('user_del',
+            $.get('product_del',
                 {
                     id:id
                 },function(data){
