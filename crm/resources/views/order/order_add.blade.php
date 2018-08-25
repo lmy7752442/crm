@@ -28,7 +28,7 @@
                 <span class="x-red">*</span>订单编号
             </label>
             <div class="layui-input-inline" style="width: 150px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="o_number" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label" >
@@ -54,7 +54,7 @@
                 <span class="x-red">*</span>备用手机号
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="other_phone" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -63,25 +63,25 @@
                 <span class="x-red">*</span>地址
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <select name="province" lay-filter="province">
-                    <option value="">请选择省</option>
+                <select  name="province" lay-filter="province">
+                    <option value="" id="sheng">请选择省</option>
                 </select>
             </div>
             <div class="layui-input-inline" style="width: 100px">
                 <select name="city" lay-filter="city">
-                    <option value="">请选择市</option>
+                    <option value="" id="shi">请选择市</option>
                 </select>
             </div>
             <div class="layui-input-inline" style="width: 100px">
                 <select name="area" lay-filter="area">
-                    <option value="">请选择县/区</option>
+                    <option value="" id="xian">请选择县/区</option>
                 </select>
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>详细地址
             </label>
             <div class="layui-input-inline" style="width: 300px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="address" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -89,9 +89,9 @@
         <label for="username" class="layui-form-label">
             <span class="x-red">*</span>产品
         </label>
-        <div class="layui-input-inline">
-            <input type="checkbox" name="" title="化肥" lay-skin="primary" checked>
-            <input type="checkbox" name="" title="农药" lay-skin="primary">
+        <div class="layui-input-inline" id="product">
+            <input type="checkbox" name="" lay-filter="product" title="化肥" value="1" lay-skin="primary" checked>
+            <input type="checkbox" name="" lay-filter="product" title="农药" value="2" lay-skin="primary">
         </div>
         </div>
         <div class="layui-form-item">
@@ -106,21 +106,21 @@
                 <span class="x-red">*</span>代收
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="instead_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>订单金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="order_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>优惠金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="discounts_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -130,28 +130,28 @@
                 <span class="x-red">*</span>优惠方式
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="discounts_type" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>实收金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="get_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>打款金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="put_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>打款方式
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="order_mode" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -161,14 +161,14 @@
                 <span class="x-red">*</span>交货方式
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="delivery_type" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>运费
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="" name="next_time" required="" lay-verify="required"
+                <input type="text" id="send_type" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -196,8 +196,13 @@
                 var info = JSON.parse(data);
                 $('#c_phone').val(info.user.c_phone);
                 $('#admin').val(info.admin);
+                $('#other_phone').val(info.user.other_phone);
+                $('#address').val(info.user.address);
+                $('#x-city').xcity(info.user.c_province,info.user.c_city,info.user.c_area);
             })
         });
+
+
     });
 
 </script>
@@ -233,19 +238,34 @@
         //监听提交
         form.on('submit(add)', function(data){
            // console.log(data);
-            var user = $('#user').val();
-            var dtype = $('#dtype').val();
-            var dprogress = $('#dprogress').val();
-            var content = $('#content').val();
-            var next_time = $('#next_time').val();
-            var warn = $('#warn').val();
-            $.get('documentary_add_do',{
-                user:user,
-                dtype:dtype,
-                dprogress:dprogress,
-                content:content,
-                next_time:next_time,
-                warn:warn
+            var o_number = $('#o_number').val();
+            var username = $('#username').val();
+            var instead_money = $('#instead_money').val();
+            var order_money = $('#order_money').val();
+            var discounts_money = $('#discounts_money').val();
+            var discounts_type = $('#discounts_type').val();
+            var get_money = $('#get_money').val();
+            var put_money = $('#put_money').val();
+            var order_mode = $('#order_mode').val();
+            var delivery_type = $('#delivery_type   ').val();
+            var send_type = $('#send_type').val();
+           // console.log(o_number+username+instead_money+order_money+discounts_money+discounts_type+get_money+put_money+order_mode+delivery_type+send_type);
+            var product_id = '';
+            $.each($('input:checkbox:checked'),function(){
+                product_id = $(this).val()+','+product_id;
+            });
+            $.get('order_add_do',{
+                o_number:o_number,
+                username:username,
+                instead_money:instead_money,
+                order_money:order_money,
+                discounts_money:discounts_money,
+                discounts_type:discounts_type,
+                get_money:get_money,
+                put_money:put_money,
+                order_mode:order_mode,
+                delivery_type:delivery_type,
+                send_type:send_type
             },function(data){
                 console.log(data);
                 if(data.status == 1){

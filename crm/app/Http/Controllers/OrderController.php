@@ -16,6 +16,9 @@ class OrderController extends Controller
         $user_data = DB::table('customer')->where('status',1)->get();
         return view('order.order_add',['user_data'=>$user_data]);
     }
+    public function order_add_do(){
+
+    }
     public function order_user(Request $request){
         $uid = $request -> get('uid');
         $user_data = DB::table('customer')->where('status',1)->where('c_id',$uid)->first();
