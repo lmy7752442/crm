@@ -23,13 +23,13 @@
 <body>
 <div class="x-body layui-anim layui-anim-up">
     <form class="layui-form">
-        <input type="hidden" id="dtype_id" value="{{$data->dtype_id}}">
+        <input type="hidden" id="dprogress_id" value="{{$data->dprogress_id}}">
         <div class="layui-form-item">
             <label for="L_email" class="layui-form-label">
                 跟单类型
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="dtype" name="email" required="" value="{{$data->dtype_name}}" class="layui-input">
+                <input type="text" id="dprogress" name="email" required="" value="{{$data->dprogress_name}}" class="layui-input">
             </div>
         </div>
 
@@ -64,11 +64,11 @@
 
         //监听提交
         form.on('submit(add)', function(data){
-            var dtype = $('#dtype').val();
-            var dtype_id = $('#dtype_id').val();
-            $.get('documentary_dtype_save_do',{
-                dtype:dtype,
-                dtype_id:dtype_id
+            var dprogress = $('#dprogress').val();
+            var dprogress_id = $('#dprogress_id').val();
+            $.get('documentary_dprogress_save_do',{
+                dprogress:dprogress,
+                dprogress_id:dprogress_id
             },function(data){
                 if(data == 1){
                     //发异步，把数据提交给php

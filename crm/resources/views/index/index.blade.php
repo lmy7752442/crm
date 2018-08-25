@@ -93,6 +93,12 @@
                             <cite>跟单类型列表</cite>
                         </a>
                     </li >
+                    <li>
+                        <a _href="documentary_dprogress_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>跟单进度列表</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -106,6 +112,12 @@
                         <a _href="order_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订单列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="order_mode_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单方式列表</cite>
                         </a>
                     </li >
                 </ul>

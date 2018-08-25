@@ -24,6 +24,7 @@
 <div class="x-body">
     <form class="layui-form">
         <input type="hidden" id="documentary_id" value="{{$documentary_data->documentary_id}}">
+        <input type="hidden" id="num" value="{{$num}}">
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>客户姓名
@@ -136,6 +137,7 @@
             var content = $('#content').val();
             var next_time = $('#next_time').val();
             var warn = $('#warn').val();
+            var num = $('#num').val();
             $.get('documentary_save_do',{
                 user:user,
                 dtype:dtype,
@@ -143,15 +145,22 @@
                 content:content,
                 next_time:next_time,
                 warn:warn,
-                id:id
+                id:id,
+                num:num
             },function(data){
-                console.log(data.status);
+                console.log(data);
                 if(data.status == 1){
                     layer.alert("修改成功", {icon: 6},function () {
                         // 获得frame索引
                         var index = parent.layer.getFrameIndex(window.name);
                         //关闭当前frame
                         parent.layer.close(index);
+                        window.parent.location.reload();
+                        //parent.$("table tr").eq(data.num).remove();
+                        //parent.$('.layui-table tr:eq('+data.num+1+').remoable tr:eq('+data.num+1+')');
+                        //parent.$('.layui-table tr:eq('+parseInt(data.num)-1+')').after(data.data)
+                       // parent.$("table tr").eq(data.num).html(data.data);
+                        //parent.$('.layui-table tr:eq(1)').remoable tr:eq(1)').before(strve();
                     });
                 }else{
                     layer.alert("修改失败", {icon: 6},function () {
