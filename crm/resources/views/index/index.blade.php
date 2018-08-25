@@ -35,17 +35,42 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">{{$data}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
               <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-              <dd><a href="./login.html">退出</a></dd>
+              <dd><a href="javascript:;" id="out">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
         </ul>
         
     </div>
+    <script>
+        layui.use(['layer'], function(){
+            $ = layui.jquery;
+            var layer = layui.layer;
+
+            $("#out").click(function(){
+                $.ajax({
+                    url:"/login_out",
+                    success:function(res){
+                        console.log(res);
+//                    layer.msg(res.msg,{icon:res.code});
+                        if(res == 1) {
+                            layer.alert('退出成功');
+                            window.location.href="/login";
+                        }else if(res == 2){
+                            layer.alert('退出失败');
+                            window.location.href="/";
+                        }
+                    }
+                });
+                return false;
+            })
+
+        });
+    </script>
     <!-- 顶部结束 -->
     <!-- 中部开始 -->
      <!-- 左侧菜单开始 -->
@@ -118,6 +143,21 @@
                         <a _href="order_mode_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订单方式列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>产品管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="product_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>产品列表</cite>
                         </a>
                     </li >
                 </ul>

@@ -10,43 +10,8 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class Admin extends BaseController
+class Admin extends Common
 {
-    /** 显示登录页面 */
-    public function login(){
-        return view("admin.login");
-    }
-
-    /** 执行登录 */
-    public function login_do(Request $request){
-        $data = $_POST;
-//        print_r($data);exit;
-        $find_data = [
-            'a_account' => $data['a_account'],
-            'a_pwd' => $data['a_pwd']
-        ];
-//        print_r($find_data);exit;
-        $res = DB::table('admin')->where($find_data)->first();
-//        print_r($res);exit;
-        $old = json_encode($res,true);
-        $new = json_decode($old,true);
-//        print_r($new);exit;
-        if($new){
-            # 将 a_id a_account 存入到session中
-            $request->session()->put(['a_id'=>$new['a_id'],'a_account'=>$new['a_account']]);
-            echo "登录成功";
-            header("refresh:2;url=/");
-        }else{
-            echo "登录失败";
-            header("refresh:2;url=/login");
-        }
-    }
-
-    /** 退出 */
-    public function login_out(){
-
-    }
-
     /** 管理员添加 */
     public function admin_add(){
         return view('admin.admin_add');
@@ -82,7 +47,7 @@ class Admin extends BaseController
 
     /** 管理员展示列表 */
     public function admin_list(Request $request){
-        $res = DB::table('admin')->paginate(5);
+        $res = DB::table('admin')->where(['a_status'=>1])->paginate(5);
 //        print_r($res);exit;
         //查询总共条数
         $count = DB::table('admin')->count();
@@ -127,7 +92,10 @@ class Admin extends BaseController
     public function admin_del(){
         $a_id = $_GET;
 //        print_r($a_id);exit;
-        $res = DB::table('admin')->where(['a_id'=>$a_id])->delete();
+        $update_data = [
+            'a_status' => 2
+        ];
+        $res = DB::table('admin')->where(['a_id'=>$a_id])->update($update_data);
 //        print_r($res);exit;
         if($res){
             return 1;

@@ -34,6 +34,34 @@
                        autocomplete="off" class="layui-input">
             </div>
         </div>
+        <!-- 管理员 -->
+        <div class="layui-form-item">
+            <label for="a_id" class="layui-form-label">
+                <span class="x-red">*</span>管理员
+            </label>
+            <div class="layui-input-inline">
+                <select name="a_id">
+                    <option value="">请选择</option>
+                    @foreach($admin as $v)
+                        <option value="{{$v->a_id}}">{{$v->a_account}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <!-- 角色名称 -->
+        <div class="layui-form-item">
+            <label for="role_id" class="layui-form-label">
+                <span class="x-red">*</span>角色名称
+            </label>
+            <div class="layui-input-inline">
+                <select name="role_id">
+                    <option value="">请选择</option>
+                    @foreach($role as $v)
+                        <option value="{{$v->role_id}}">{{$v->r_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <!-- 增加 -->
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
@@ -107,9 +135,6 @@
         });
 
     });
-
-
-
 </script>
 <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");

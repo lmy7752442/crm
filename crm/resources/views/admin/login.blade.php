@@ -21,36 +21,50 @@
 <div class="login layui-anim layui-anim-up">
     <div class="message">x-admin2.0-管理登录</div>
     <div id="darkbannerwrap"></div>
+    <div class="layui-form">
+        {{--<form method="post" class="layui-form layui-form-pane" action="">--}}
+            <input name="a_account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <hr class="hr15">
+            <input name="a_pwd" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <hr class="hr15">
+            {{--<input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">--}}
+            <button class="layui-btn" lay-submit="" lay-filter="login">登录</button>
+            <hr class="hr20" >
+            {{--<div class="layui-form-item">--}}
 
-    <form method="post" class="layui-form" action="/login_do">
-        @csrf
-        <input name="a_account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
-        <hr class="hr15">
-        <input name="a_pwd" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
-        <hr class="hr15">
-        <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
-        <hr class="hr20" >
-    </form>
+            {{--</div>--}}
+        {{--</form>--}}
+    </div>
 </div>
 
 <script>
-    $(function  () {
-        layui.use('form', function(){
-            var form = layui.form;
-            // layer.msg('玩命卖萌中', function(){
-            //   //关闭后的操作
-            //   });
-            //监听提交
-//            form.on('submit(login)', function(data){
-//                // alert(888)
-//                layer.msg(JSON.stringify(data.field),function(){
-//                    location.href='index.html'
-//                });
-//                return false;
-//            });
-        });
-    })
+    layui.use(['form','layer'], function(){
+        $ = layui.jquery;
+        var form = layui.form
+                ,layer = layui.layer;
 
+        form.on('submit(login)', function(data){
+//            layer.alert(111);
+//            console.log(data);
+            $.ajax({
+                method:'get',
+                url:"/login_do",
+                data:data.field,
+                success:function(res){
+                    console.log(res);
+//                    layer.msg(res.msg,{icon:res.code});
+                    if(res == 1) {
+                        layer.alert('登录成功');
+                        window.location.href="/";
+                    }else{
+                        layer.alert('登录失败');
+                        window.location.href="/login";
+                    }
+                }
+            });
+            return false;
+        });
+    });
 
 </script>
 

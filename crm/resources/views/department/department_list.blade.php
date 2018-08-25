@@ -54,6 +54,8 @@
             <th>部门编号</th>
             <th>部门名称</th>
             <th>部门添加时间</th>
+            <th>管理员账号</th>
+            <th>角色名称</th>
             <th>操作</th>
         </thead>
         <tbody>
@@ -65,6 +67,8 @@
                 <td>{{$v->department_id}}</td>
                 <td>{{$v->d_name}}</td>
                 <td>{{$v->d_time}}</td>
+                <td>{{$v->a_account}}</td>
+                <td>{{$v->r_name}}</td>
                 <td class="td-manage">
                     <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
                         <i class="layui-icon">&#xe601;</i>
@@ -145,6 +149,9 @@
                         window.location.href="/department_list";
                     }else if(res == 2) {
                         layer.alert('部门删除失败');
+                        window.location.href = "/department_list";
+                    }else{
+                        layer.alert('还有不同角色的员工在此部门下，暂时不能删除');
                         window.location.href = "/department_list";
                     }
                 }
