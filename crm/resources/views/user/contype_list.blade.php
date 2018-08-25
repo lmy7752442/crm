@@ -57,7 +57,7 @@
                 </td>
                 <td>{{$v->contype_name}}</td>
                 <td class="td-manage">
-                    <a title="查看"  onclick="x_admin_show('编辑','ctype_update?id={{$v->contype_id}}')" href="javascript:;">
+                    <a title="查看"  onclick="x_admin_show('编辑','contype_update?id={{$v->contype_id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe63c;</i>
                     </a>
                     <a title="删除" onclick="member_del(this,'{{$v->contype_id}}')" href="javascript:;">

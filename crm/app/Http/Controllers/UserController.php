@@ -314,4 +314,24 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //合同类型修改
+    public function contype_update(){
+        $id = input::get('id');
+        $data = DB::table('contype')->where(['contype_id'=>$id,'status'=>1])->first();
+        return view('user.contype_update')->with('data',$data);
+    }
+    public function contype_update_do(){
+        $id = input::get('id');
+        $contype = input::get('contype');
+        $res = DB::table('contype')->where(['contype_id'=>$id])->update(['contype_name'=>$contype]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
 }
+
+
+
+
