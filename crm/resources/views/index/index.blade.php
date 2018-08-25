@@ -139,6 +139,27 @@
                             <cite>订单列表</cite>
                         </a>
                     </li >
+                    <li>
+                        <a _href="order_mode_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单方式列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>产品管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="product_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>产品列表</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
 

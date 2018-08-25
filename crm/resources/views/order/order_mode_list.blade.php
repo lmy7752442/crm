@@ -33,10 +33,42 @@
 </div>
 <div class="x-body">
     <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+            <input class="layui-input" placeholder="开始日" name="start" id="start">
+            <input class="layui-input" placeholder="截止日" name="end" id="end">
+            <div class="layui-input-inline">
+                <select name="contrller">
+                    <option>支付状态</option>
+                    <option>已支付</option>
+                    <option>未支付</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="contrller">
+                    <option>支付方式</option>
+                    <option>支付宝</option>
+                    <option>微信</option>
+                    <option>货到付款</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="contrller">
+                    <option value="">订单状态</option>
+                    <option value="0">待确认</option>
+                    <option value="1">已确认</option>
+                    <option value="2">已收货</option>
+                    <option value="3">已取消</option>
+                    <option value="4">已完成</option>
+                    <option value="5">已作废</option>
+                </select>
+            </div>
+            <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加类型','contype_add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加类型','order_mode_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
@@ -45,31 +77,35 @@
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>类型</th>
+            <th>编号</th>
+            <th>订单支付方式</th>
+            <th>时间</th>
             <th >操作</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($data as  $v)
-            <tr>
-                <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                </td>
-                <td>{{$v->contype_name}}</td>
-                <td class="td-manage">
-                    <a title="查看"  onclick="x_admin_show('编辑','contype_update?id={{$v->contype_id}}')" href="javascript:;">
-                        <i class="layui-icon">&#xe63c;</i>
-                    </a>
-                    <a title="删除" onclick="member_del(this,'{{$v->contype_id}}')" href="javascript:;">
-                        <i class="layui-icon">&#xe640;</i>
-                    </a>
-                </td>
-            </tr>
+        @foreach($data as $v)
+        <tr>
+            <td>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>{{$v->ordermode_id}}</td>
+            <td>{{$v->ordermode_name}}</td>
+            <td><?php echo date('Y-m-d H:i:s',$v->time);?></td>
+            <td class="td-manage">
+                <a title="查看"  onclick="x_admin_show('编辑','order_mode_save?id={{$v->ordermode_id}}')" href="javascript:;">
+                    <i class="layui-icon">&#xe63c;</i>
+                </a>
+                <a title="删除" onclick="member_del(this,'{{$v->ordermode_id}}')" href="javascript:;">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
         @endforeach
         </tbody>
     </table>
     <div class="page">
-        {{$data->links()}}
+       {{$data->links()}}
     </div>
 
 </div>
@@ -112,27 +148,21 @@
         });
     }
 
-    /*合同类型-删除*/
+    /*用户-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
-            $.get('contype_del',
-                {
-                    id:id
-                },function(data){
-                    if(data==1){
-                        $(obj).parents("tr").remove();
-                        layer.msg('已删除!',{icon:1,time:1000});
-                    }else{
-                        $(obj).parents("tr").remove();
-                        layer.msg('删除失败!',{icon:1,time:1000});
-                    }
-                })
-            //发异步删除数据
-
+            var dtype_id = id;
+            $.get('order_mode_del',{
+                id:dtype_id
+            },function(data){
+                if(data == 1){
+                    //发异步删除数据
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                }
+            })
         });
     }
-
-
 
     function delAll (argument) {
 
@@ -151,7 +181,6 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();</script>
-
 </body>
 
 </html>

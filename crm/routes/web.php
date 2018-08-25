@@ -131,8 +131,18 @@ Route::get('documentary_dprogress_save_do','DocumentaryController@documentary_dp
 ########## Order控制器 ##########
 //订单列表
 Route::get('order_list','OrderController@order_list');
-
-
+//订单方式列表
+Route::get('order_mode_list','OrderController@order_mode_list');
+//订单方式添加
+Route::get('order_mode_add','OrderController@order_mode_add');
+//订单方式添加执行
+Route::get('order_mode_add_do','OrderController@order_mode_add_do');
+//订单方式修改
+Route::get('order_mode_save','OrderController@order_mode_save');
+//订单方式修改执行
+Route::get('order_mode_save_do','OrderController@order_mode_save_do');
+//订单方式删除
+Route::get('order_mode_del','OrderController@order_mode_del');
 
 ###########User 控制器###########
 
@@ -183,6 +193,19 @@ Route::get('contype_add','UserController@contype_add');
 Route::get('contype_add_do','UserController@contype_add_do');
 //合同类型删除
 Route::get('contype_del','UserController@contype_del');
+//修改合同类型
+Route::get('contype_update','UserController@contype_update');
+Route::get('contype_update_do','UserController@contype_update_do');
+//产品展示
+Route::get('product_list','UserController@product_list');
+//产品添加
+Route::get('product_add','UserController@product_add');
+Route::get('product_add_do','UserController@product_add_do');
+//产品修改
+Route::get('product_update','UserController@product_update');
+Route::get('product_update_do','UserController@product_update_do');
+//产品删除
+Route::get('product_del','UserController@product_del');
 //合同展示
 Route::get('contract_list','UserController@contract_list');
 

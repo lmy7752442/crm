@@ -155,6 +155,7 @@
                         var index = parent.layer.getFrameIndex(window.name);
                         //关闭当前frame
                         parent.layer.close(index);
+                        window.parent.location.reload();
                         //parent.$("table tr").eq(data.num).remove();
                         //parent.$('.layui-table tr:eq('+data.num+1+').remoable tr:eq('+data.num+1+')');
                         //parent.$('.layui-table tr:eq('+parseInt(data.num)-1+')').after(data.data)
