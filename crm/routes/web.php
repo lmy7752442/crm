@@ -190,6 +190,16 @@ Route::get('contype_del','UserController@contype_del');
 //修改合同类型
 Route::get('contype_update','UserController@contype_update');
 Route::get('contype_update_do','UserController@contype_update_do');
+//产品展示
+Route::get('product_list','UserController@product_list');
+//产品添加
+Route::get('product_add','UserController@product_add');
+Route::get('product_add_do','UserController@product_add_do');
+//产品修改
+Route::get('product_update','UserController@product_update');
+Route::get('product_update_do','UserController@product_update_do');
+//产品删除
+Route::get('product_del','UserController@product_del');
 //合同展示
 Route::get('contract_list','UserController@contract_list');
 
