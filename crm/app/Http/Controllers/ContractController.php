@@ -3,16 +3,91 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use DB;
 
 class ContractController extends Controller
 {
     //合同展示
     public function contract_list(){
         $data = DB::table('contract')->where(['status'=>1])->paginate(3);
+        foreach($data as $k=>$v){
+            $customer = DB::table('customer')->where(['c_id'=>$v->customer_id,'status'=>1])->first();
+            $v->customer_id = $customer->c_name;
+            $contype = DB::table('contype')->where(['contype_id'=>$v->contype_id,'status'=>1])->first();
+            $v->contype_id = $contype->contype_name;
+        }
         return view('contract.contract_list')->with('data',$data);
     }
     //合同添加
     public function contract_add(){
-        return view('contract.contract_add');
+        $data = DB::table('customer')->where(['status'=>1])->get();
+        $arr = DB::table('contype')->where(['status'=>1])->get();
+        return view('contract.contract_add')->with('data',$data)->with('arr',$arr);
+    }
+    public function contract_add_do(){
+        $customer_id = input::get('customer_id');
+        $contype_id = input::get('contype_id');
+        $c_deposit = input::get('c_deposit');
+        $c_rebate = input::get('c_rebate');
+        $c_ctime = input::get('c_ctime');
+        $c_utime = input::get('c_utime');
+        $arr = [
+            'customer_id'=>$customer_id,
+            'contype_id'=>$contype_id,
+            'c_deposit'=>$c_deposit,
+            'c_rebate'=>$c_rebate,
+            'c_ctime'=>$c_ctime,
+            'c_utime'=>$c_utime,
+            'ctime'=>time(),
+            'status'=>1
+        ];
+        $res = DB::table('contract')->insert($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //合同删除
+    public function contract_del(){
+        $id = input::get('id');
+        $res = DB::table('contract')->where(['contract_id'=>$id])->update(['status'=>3]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //合同修改
+    public function contract_update(){
+        $id = input::get('id');
+        $data = DB::table('contract')->where(['contract_id'=>$id])->first();
+        $contype = DB::table('contype')->where(['status'=>1])->get();
+        $customer = DB::table('customer')->where(['status'=>1])->get();
+        return view('contract.contract_update')->with('data',$data)->with('contype',$contype)->with('customer',$customer);
+    }
+    public function contract_update_do(){
+        $customer_id = input::get('customer_id');
+        $contype_id = input::get('contype_id');
+        $c_deposit = input::get('c_deposit');
+        $c_rebate = input::get('c_rebate');
+        $c_ctime = input::get('c_ctime');
+        $c_utime = input::get('c_utime');
+        $arr = [
+            'customer_id'=>$customer_id,
+            'contype_id'=>$contype_id,
+            'c_deposit'=>$c_deposit,
+            'c_rebate'=>$c_rebate,
+            'c_ctime'=>$c_ctime,
+            'c_utime'=>$c_utime,
+            'ctime'=>time(),
+        ];
+        $res = DB::table('contract')->update($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
     }
 }

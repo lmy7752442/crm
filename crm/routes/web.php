@@ -212,6 +212,14 @@ Route::get('product_update_do','UserController@product_update_do');
 Route::get('product_del','UserController@product_del');
 //合同展示
 Route::get('contract_list','ContractController@contract_list');
+//合同添加
+Route::get('contract_add','ContractController@contract_add');
+Route::get('contract_add_do','ContractController@contract_add_do');
+//合同删除
+Route::get('contract_del','ContractController@contract_del');
+//合同修改
+Route::get('contract_update','ContractController@contract_update');
+Route::get('contract_update_do','ContractController@contract_update_do');
 
 
 
