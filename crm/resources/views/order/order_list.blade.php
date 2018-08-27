@@ -113,12 +113,12 @@
             <td>其他方式</td>
             <td>申通物流</td>
             <td>{{$v->send_type}}</td>
-            <td>{{$v->time}}</td>
+            <td><?php echo date('Y-m-d H:i:s',$v->time)?></td>
             <td class="td-manage">
-                <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+                <a title="查看"  onclick="x_admin_show('编辑','order_save?id={{$v->order_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>
                 </a>
-                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                <a title="删除" onclick="member_del(this,'{{$v->order_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
@@ -127,14 +127,7 @@
         </tbody>
     </table>
     <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
+        {{$order_data->links()}}
     </div>
 
 </div>
@@ -180,9 +173,15 @@
     /*用户-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
+            $.get('order_del',{
+                id:id
+            },function(data){
+                if(data == 1){
+                    //发异步删除数据
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                }
+            })
         });
     }
 
