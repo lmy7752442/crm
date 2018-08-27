@@ -29,7 +29,7 @@
             </label>
             <div class="layui-input-inline" style="width: 150px">
                 <input type="text" id="o_number" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+                       autocomplete="off" value="{{$order_number}}" class="layui-input">
             </div>
             <label for="username" class="layui-form-label" >
                 <span class="x-red">*</span>客户姓名
@@ -265,29 +265,35 @@
                 put_money:put_money,
                 order_mode:order_mode,
                 delivery_type:delivery_type,
-                send_type:send_type
+                send_type:send_type,
+                product_id:product_id
             },function(data){
                 console.log(data);
-                if(data.status == 1){
-                    layer.alert("增加成功", {icon: 6},function () {
-                        // 获得frame索引
-                        var index = parent.layer.getFrameIndex(window.name);
-                        //关闭当前frame
-                        parent.layer.close(index);
-                        // parent.$('.layui-table').append(str);//表格结尾追加
-                        //  parent.$('.layui-table tr:eq(0)').before(str); //首行前追加
-                        // parent.$('.layui-table tr:eq(0)').after(str); //首行后追加
-                        parent.$('.layui-table tbody').html(data.data); //
-                        //parent.$('.layui-table tr:eq(1)').remoable tr:eq(1)').before(strve(); //删除指定行
-                    });
-                }else{
-                    layer.alert("增加失败", {icon: 6},function () {
-                        // 获得frame索引
-                        var index = parent.layer.getFrameIndex(window.name);
-                        //关闭当前frame
-                        parent.layer.close(index);
-                    });
+                if(data == 1){
+                    alert('添加成功')
+                }else if(data == 2){
+                    alert('请勿重复提交')
                 }
+                // if(data.status == 1){
+                //     layer.alert("增加成功", {icon: 6},function () {
+                //         // 获得frame索引
+                //         var index = parent.layer.getFrameIndex(window.name);
+                //         //关闭当前frame
+                //         parent.layer.close(index);
+                //         // parent.$('.layui-table').append(str);//表格结尾追加
+                //         //  parent.$('.layui-table tr:eq(0)').before(str); //首行前追加
+                //         // parent.$('.layui-table tr:eq(0)').after(str); //首行后追加
+                //         parent.$('.layui-table tbody').html(data.data); //
+                //         //parent.$('.layui-table tr:eq(1)').remoable tr:eq(1)').before(strve(); //删除指定行
+                //     });
+                // }else{
+                //     layer.alert("增加失败", {icon: 6},function () {
+                //         // 获得frame索引
+                //         var index = parent.layer.getFrameIndex(window.name);
+                //         //关闭当前frame
+                //         parent.layer.close(index);
+                //     });
+                // }
             })
             //发异步，把数据提交给php
             return false;

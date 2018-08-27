@@ -113,7 +113,7 @@
             <td>其他方式</td>
             <td>申通物流</td>
             <td>{{$v->send_type}}</td>
-            <td>{{$v->time}}</td>
+            <td><?php echo date('Y-m-d H:i:s',$v->time)?></td>
             <td class="td-manage">
                 <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>
@@ -127,14 +127,7 @@
         </tbody>
     </table>
     <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
+        {{$order_data->links()}}
     </div>
 
 </div>
