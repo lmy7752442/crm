@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <button class="layui-btn" lay-submit="" lay-filter="add">确认</button>
+            <div class="layui-btn" lay-submit="" lay-filter="add">确认</div>
         </div>
     </form>
 </div>
@@ -86,26 +86,20 @@
 
         form.on('submit(add)', function(data){
             //获取radio[name='share']的值
-            var share_arr = new Array();
+            var share_arr = '';
             $("input:radio[name=share]:checked").each(function(i){
-                share_arr[i] = $(this).val();
-//                alert(share_arr);
+                share_arr = $(this).val();
             });
-            data.field.share = share_arr.join(",");//将数组合并成字符串
-
+            data.field.share = share_arr;//将数组合并成字符串
             //获取checkbox[name='a_id']的值
             var admin_arr = new Array();
             $("input:checkbox[name=a_id]:checked").each(function(i){
                 admin_arr[i] = $(this).val();
-//                alert(admin_arr);
             });
             data.field.a_id = admin_arr.join(",");//将数组合并成字符串
-
             //获取input[name='c_id']的值
             var c_id = "";
             var c_id = $("[name=c_id]").val();
-//            alert(c_id);
-
             $.ajax({
                 method:'get',
                 url:"/share_add_do",
@@ -115,10 +109,12 @@
 ////                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
                         layer.alert('客户共享成功');
-                        window.location.href="/user_list";
-                    }else{
+                        window.parent.location.reload();
+                    }else if(res=2){
                         layer.alert('客户共享失败');
-                        window.location.href="/share_add";
+                        window.parent.location.reload();
+                    }else{
+                        alert(res)
                     }
                 }
             });
