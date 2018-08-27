@@ -49,6 +49,7 @@
                 <span class="x-red">*</span>定金
             </label>
             <div class="layui-input-inline">
+                <input type="hidden" id="hi" value="{{$data->contract_id}}">
                 <input type="text" id="c_deposit" name="c_name" required="" lay-verify="required"
                        autocomplete="off" class="layui-input" value="{{$data->c_deposit}}">
             </div>
@@ -121,6 +122,7 @@
             var c_rebate = $('#c_rebate').val();
             var c_ctime = $('#c_ctime').val();
             var c_utime = $('#c_utime').val();
+            var id = $('#hi').val();
             $.get('/contract_update_do',
                 {
                     customer_id:customer_id,
@@ -128,7 +130,8 @@
                     c_deposit:c_deposit,
                     c_rebate:c_rebate,
                     c_ctime:c_ctime,
-                    c_utime:c_utime
+                    c_utime:c_utime,
+                    id:id
                 },function(data){
                     if(data==1){
                         //发异步，把数据提交给php
@@ -136,10 +139,9 @@
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
+                            window.parent.location.reload();
                             parent.layer.close(index);
-
-
-                            parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
+                           // parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
                         });
                     }else{
                         //发异步，把数据提交给php

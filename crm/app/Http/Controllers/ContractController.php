@@ -74,6 +74,7 @@ class ContractController extends Controller
         $c_rebate = input::get('c_rebate');
         $c_ctime = input::get('c_ctime');
         $c_utime = input::get('c_utime');
+        $id = input::get('id');
         $arr = [
             'customer_id'=>$customer_id,
             'contype_id'=>$contype_id,
@@ -83,7 +84,7 @@ class ContractController extends Controller
             'c_utime'=>$c_utime,
             'ctime'=>time(),
         ];
-        $res = DB::table('contract')->update($arr);
+        $res = DB::table('contract')->where(['contract_id'=>$id])->update($arr);
         if($res){
             echo 1;
         }else{
