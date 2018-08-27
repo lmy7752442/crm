@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
-
 class UserController extends Controller
 {
     //客户展示
-    public  function user_list(){
-        $data = DB::table('customer')->where(['status'=>1])->paginate(3);
+    public  function user_list(Request $request){
+        $a_id = $request->session()->get('a_id');//管理员id
+        $data = DB::table('customer')->where(['status'=>1,'a_id'=>$a_id])->orderByRaw('ctime DESC')->paginate(3);
 
         foreach($data as $k=>$v){
             $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
@@ -30,8 +30,8 @@ class UserController extends Controller
         $csource = DB::table('csource')->where(['status'=>1])->get();
         return view('user.user_add')->with('ctype',$ctype)->with('clevel',$clevel)->with('csource',$csource);
     }
-    public function user_add_do(){
-
+    public function user_add_do(Request $request){
+        $a_id = $request->session()->get('a_id');//管理员id
         $c_name = input::get('c_name');
         $c_phone = input::get('c_phone');
         //客户类型
@@ -47,10 +47,13 @@ class UserController extends Controller
         $province = input::get('province');
         $city = input::get('city');
         $area = input::get('area');
+        $other_phone = input::get('other_phone');
+        $address = input::get('address');
 
         $arr = [
             'c_name'=>$c_name,
             'c_phone'=>$c_phone,
+            'other_phone'=>$other_phone,
             'ctype_id'=>$ctype,
             'clevel_id'=>$clevel_id,
             'csource_id'=>$csource_id,
@@ -59,21 +62,43 @@ class UserController extends Controller
             'c_province'=>$province,
             'c_city'=>$city,
             'c_area'=>$area,
+            'address'=>$address,
             'ctime'=>time(),
-            'status'=>1
+            'status'=>1,
+            'a_id'=>$a_id
         ];
-        $res = DB::table('customer')->insert($arr);
+        $res = DB::table('customer')->insertGetId($arr);
+
         if($res){
+            $arr2 = [
+                'c_id'=>$res,
+                'action'=>'客户添加',
+                'data_table'=>'客户表',
+                'a_id'=>$a_id,
+                'time'=>time(),
+                'status'=>1
+            ];
+            $result = DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
         }
     }
     //客户删除
-    public function user_del(){
+    public function user_del(Request $request){
         $id = input::get('id');
+        $a_id = $request->session()->get('a_id');
         $res = DB::table('customer')->where(['c_id'=>$id])->update(['status'=>3]);
         if($res){
+            $arr2 = [
+                'c_id'=>$id,
+                'action'=>'客户删除',
+                'data_table'=>'客户表',
+                'a_id'=>$a_id,
+                'time'=>time(),
+                'status'=>1
+            ];
+            $result = DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
@@ -88,7 +113,7 @@ class UserController extends Controller
         $csource = DB::table('csource')->where(['status'=>1])->get();
         return view('user.user_update')->with('data',$data)->with('ctype',$ctype)->with('clevel',$clevel)->with('csource',$csource);
     }
-    public function user_update_do(){
+    public function user_update_do(Request $request){
         $id = input::get('id');
         $c_name = input::get('c_name');
         $c_phone = input::get('c_phone');
@@ -105,7 +130,9 @@ class UserController extends Controller
         $province = input::get('province');
         $city = input::get('city');
         $area = input::get('area');
-
+        $address = input::get('address');
+        $other_phone = input::get('other_phone');
+        $a_id = $request->session()->get('a_id');
         $arr = [
             'c_name'=>$c_name,
             'c_phone'=>$c_phone,
@@ -117,10 +144,21 @@ class UserController extends Controller
             'c_province'=>$province,
             'c_city'=>$city,
             'c_area'=>$area,
+            'address'=>$address,
+            'other_phone'=>$other_phone,
             'ctime'=>time()
         ];
         $res = DB::table('customer')->where(['c_id'=>$id])->update($arr);
         if($res){
+            $arr2 = [
+                'c_id'=>$id,
+                'action'=>'客户修改',
+                'data_table'=>'客户表',
+                'a_id'=>$a_id,
+                'time'=>time(),
+                'status'=>1
+            ];
+            $result = DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
@@ -287,7 +325,7 @@ class UserController extends Controller
         $data = DB::table('contype')->where(['status'=>1])->paginate(3);
         return view('user.contype_list')->with('data',$data);
     }
-    //合同添加
+    //合同类型添加
     public function contype_add(){
         return view('user.contype_add');
     }
@@ -304,7 +342,7 @@ class UserController extends Controller
             echo 2;
         }
     }
-    //合同删除
+    //合同类型删除
     public function contype_del(){
         $id = input::get('id');
         $res = DB::table('contype')->where(['contype_id'=>$id])->update(['status'=>3]);
@@ -330,6 +368,7 @@ class UserController extends Controller
             echo 2;
         }
     }
+<<<<<<< HEAD
 
     /** 点击客户名称 开共享 */
     public function share_add(Request $request){
@@ -381,6 +420,66 @@ class UserController extends Controller
             return 1;
         }else{
             return 2;
+=======
+    //产品展示
+    public function product_list(){
+        $data = DB::table('product')->where(['status'=>1])->paginate(3);
+        return view('product.product_list')->with('data',$data);
+    }
+    //产品添加
+    public function product_add(){
+        return view('product.product_add');
+    }
+    public function product_add_do(){
+        $p_name = input::get('p_name');
+        $p_unit = input::get('p_unit');
+        $p_price = input::get('p_price');
+        $arr = [
+            'p_name'=>$p_name,
+            'p_unit'=>$p_unit,
+            'p_price'=>$p_price,
+            'ctime'=>time(),
+            'status'=>1
+        ];
+        $res = DB::table('product')->insert($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //产品删除
+    public function product_del(){
+        $id = input::get('id');
+        $res = DB::table('product')->where(['product_id'=>$id])->update(['status'=>3]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //产品修改
+    public function product_update(){
+        $id = input::get('id');
+        $data = DB::table('product')->where(['product_id'=>$id])->first();
+        return view('product.product_update')->with('data',$data);
+    }
+    public function product_update_do(){
+        $id = input::get('id');
+        $p_name = input::get('p_name');
+        $p_unit = input::get('p_unit');
+        $p_price = input::get('p_price');
+        $arr = [
+            'p_name'=>$p_name,
+            'p_unit'=>$p_unit,
+            'p_price'=>$p_price
+        ];
+        $res = DB::table('product')->where(['product_id'=>$id])->update($arr);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+>>>>>>> 343598ae3b639304fd1d25bbebf160b05972e17b
         }
     }
 }

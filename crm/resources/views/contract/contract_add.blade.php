@@ -24,18 +24,63 @@
 <div class="x-body">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>合同类型
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="contype" name="c_name" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>
+            <label class="layui-form-label"><span class="x-red">*</span>客户</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                    <select name="customer_id" id="customer_id">
+                        <option>客户</option>
+                        @foreach($data as $v)
+                            <option value="{{$v->c_id}} ">{{$v->c_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="contype_id" id="contype_id">
+                        <option>合同类型</option>
+                        @foreach($arr as $val)
+                            <option value="{{$val->contype_id}} ">{{$val->contype_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>定金
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="c_deposit" name="c_name" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>返利
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="c_rebate" name="c_name" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>开始时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="c_ctime" name="c_name" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
 
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>结束时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="c_utime" name="c_name" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
             </label>
@@ -60,13 +105,32 @@
         $ = layui.jquery;
         var form = layui.form
             ,layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            nikename: function(value){
+                if(value.length < 5){
+                    return '昵称至少得5个字符啊';
+                }
+            }
+        });
+
         // //监听提交
         form.on('submit(add)', function(data){
-            var contype = $('#contype').val();
-
-            $.get('/contype_add_do',
+            var customer_id = $('#customer_id').val();
+            var contype_id = $('#contype_id').val();
+            var c_deposit = $('#c_deposit').val();
+            var c_rebate = $('#c_rebate').val();
+            var c_ctime = $('#c_ctime').val();
+            var c_utime = $('#c_utime').val();
+            $.get('/contract_add_do',
                 {
-                    contype:contype
+                    customer_id:customer_id,
+                    contype_id:contype_id,
+                    c_deposit:c_deposit,
+                    c_rebate:c_rebate,
+                    c_ctime:c_ctime,
+                    c_utime:c_utime
                 },function(data){
                     if(data==1){
                         //发异步，把数据提交给php
@@ -76,7 +140,7 @@
                             // //关闭当前frame
                             window.parent.location.reload();
                             parent.layer.close(index);
-
+                           // parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
                         });
                     }else{
                         //发异步，把数据提交给php
@@ -90,6 +154,8 @@
                 });
             return false;
         });
+
+
     });
 </script>
 

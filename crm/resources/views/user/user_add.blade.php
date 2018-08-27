@@ -25,14 +25,14 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>登录名
+                <span class="x-red">*</span>用户名
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="username" name="c_name" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为您唯一的登入名
+                <span class="x-red">*</span>
             </div>
         </div>
         <div class="layui-form-item">
@@ -44,7 +44,19 @@
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为您唯一的登入名
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>备用手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="other_phone" name="phone" required="" lay-verify="phone"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
             </div>
         </div>
         <div class="layui-form-item">
@@ -120,10 +132,19 @@
                 </div>
             </div>
     </div>
-
 </div>
 
-
+        <div class="layui-form-item">
+            <label for="L_pass" class="layui-form-label">
+                详细地址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="address" name="content" required="" lay-verify="pass"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
@@ -181,7 +202,8 @@
             var province = $('#province').val();
             var city = $('#city').val();
             var area = $('#area').val();
-            // alert(c_name+'|'+c_phone+'|'+Job_id+'|'+ctype+'|'+clevel_id+'|'+csource_id+'|'+c_other_connect+'|'+c_notes+'|'+province+'|'+city+'|'+area);
+            var address = $('#address').val();
+            var other_phone = $('#other_phone').val();
             $.get('/user_add_do',
                 {
                     c_name:c_name,
@@ -193,18 +215,19 @@
                     c_notes:c_notes,
                     province:province,
                     city:city,
-                    area:area
+                    area:area,
+                    address:address,
+                    other_phone:other_phone
                 },function(data){
+                // alert(data)
                     if(data==1){
                         //发异步，把数据提交给php
                         layer.alert("增加成功", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
+                            window.parent.location.reload();
                             parent.layer.close(index);
-
-
-                              parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
                         });
                     }else{
                         //发异步，把数据提交给php

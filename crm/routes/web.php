@@ -138,6 +138,12 @@ Route::get('documentary_dprogress_save_do','DocumentaryController@documentary_dp
 ########## Order控制器 ##########
 //订单列表
 Route::get('order_list','OrderController@order_list');
+//查询用户信息
+Route::get('order_user','OrderController@order_user');
+//订单添加
+Route::get('order_add','OrderController@order_add');
+//订单添加执行
+Route::get('order_add_do','OrderController@order_add_do');
 //订单方式列表
 Route::get('order_mode_list','OrderController@order_mode_list');
 //订单方式添加
@@ -214,7 +220,17 @@ Route::get('product_update_do','UserController@product_update_do');
 //产品删除
 Route::get('product_del','UserController@product_del');
 //合同展示
-Route::get('contract_list','UserController@contract_list');
+Route::get('contract_list','ContractController@contract_list');
+//合同添加
+Route::get('contract_add','ContractController@contract_add');
+Route::get('contract_add_do','ContractController@contract_add_do');
+//合同删除
+Route::get('contract_del','ContractController@contract_del');
+//合同修改
+Route::get('contract_update','ContractController@contract_update');
+Route::get('contract_update_do','ContractController@contract_update_do');
+//搜索
+Route::get('seek','ContractCOntroller@seek');
 
 //开共享
 Route::get('/share_add','UserController@share_add');
