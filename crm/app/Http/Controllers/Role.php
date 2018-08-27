@@ -45,7 +45,7 @@ class Role extends Common
         $res = DB::table('role')->join('power', 'role.power_id', '=', 'power.power_id')->join('admin', 'role.a_id', '=', 'admin.a_id')->where(['r_status'=>1])->paginate(5);
 //        print_r($res);exit;
         //查询总共条数
-        $count = DB::table('role')->count();
+        $count = DB::table('role')->where(['r_status'=>1])->count();
 //        print_r($count);exit;
         return view('role.role_list')->with('new',$res)->with('count',$count);
     }

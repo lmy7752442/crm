@@ -38,6 +38,12 @@ Route::get('/admin_update','Admin@admin_update');
 Route::get('/admin_update_do','Admin@admin_update_do');
 //管理员删除
 Route::get('/admin_del','Admin@admin_del');
+//建议添加
+Route::get('/advince_add','Admin@advince_add');
+//建议执行添加
+Route::get('/advince_add_do','Admin@advince_add_do');
+//客户建议列表
+Route::get('/advince_list','Admin@advince_list');
 
 
 ########## Department控制器 ##########
@@ -83,6 +89,7 @@ Route::get('/power_update','Power@power_update');
 Route::get('/power_update_do','Power@power_update_do');
 //权限删除
 Route::get('/power_del','Power@power_del');
+
 
 
 Route::get('/','Index@index');
@@ -228,6 +235,16 @@ Route::get('contract_del','ContractController@contract_del');
 //合同修改
 Route::get('contract_update','ContractController@contract_update');
 Route::get('contract_update_do','ContractController@contract_update_do');
+//搜索
+Route::get('seek','ContractCOntroller@seek');
+
+//开共享
+Route::get('/share_add','UserController@share_add');
+//执行添加共享
+Route::get('/share_add_do','UserController@share_add_do');
 
 
+########## Count控制器 ##########
+//统计
+Route::get('/count','Count@count');
 

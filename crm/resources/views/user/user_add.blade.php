@@ -25,7 +25,7 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>登录名
+                <span class="x-red">*</span>用户名
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="username" name="c_name" required="" lay-verify="required"
@@ -219,16 +219,15 @@
                     address:address,
                     other_phone:other_phone
                 },function(data){
+                // alert(data)
                     if(data==1){
                         //发异步，把数据提交给php
                         layer.alert("增加成功", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
+                            window.parent.location.reload();
                             parent.layer.close(index);
-
-
-                              parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
                         });
                     }else{
                         //发异步，把数据提交给php

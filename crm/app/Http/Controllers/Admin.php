@@ -50,7 +50,7 @@ class Admin extends Common
         $res = DB::table('admin')->where(['a_status'=>1])->paginate(5);
 //        print_r($res);exit;
         //查询总共条数
-        $count = DB::table('admin')->count();
+        $count = DB::table('admin')->where(['a_status'=>1])->count();
 //        print_r($count);exit;
         return view('admin.admin_list')->with('new',$res)->with('count',$count);
     }
@@ -102,5 +102,52 @@ class Admin extends Common
         }else{
             return 2;
         }
+    }
+
+    /** 添加建议 */
+    public function advince_add(Request $request){
+        //获取当前管理员id
+        $a_id = $request->session()->get('a_id');
+        //获取所有客户id
+        $c_data = DB::table('customer')->where(['a_id'=>$a_id])->get();
+//        print_r($c_data);exit;
+        return view('admin.advince_add')->with('data',$c_data);
+    }
+
+    /** 执行添加 */
+    public function advince_add_do(Request $request){
+        $data = $_GET;
+//        print_r($data);exit;
+        //获取当前管理员id
+        $a_id = $request->session()->get('a_id');
+        $insert_data = [
+            'a_main' => $data['a_main'],
+            'a_advince' => $data['a_advince'],
+            'a_ctime' => time(),
+            'a_utime' => time(),
+            'a_id' => $a_id,
+            'c_id' => $data['c_id']
+        ];
+//        print_r($insert_data);exit;
+        $res = DB::table('advince')->insert($insert_data);
+//        print_r($res);exit;
+        if($res){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+
+    /** 客户建议 */
+    public function advince_list(Request $request){
+        //获取当前管理员id
+//        $a_id = $request->session()->get('a_id');
+//        $a_account = $request->session()->get('a_account');
+//        $res = DB::table('advince')->leftJoin('customer', 'advince.c_id', '=', 'customer.c_id')->where(['a_status'=>1,'advince.a_id'=>$a_id])->paginate(5);
+//        print_r($res);exit;
+        //查询总共条数
+//        $count = DB::table('advince')->count();
+////        print_r($count);exit;
+//        return view('admin.advince_list')->with('new',$res)->with('count',$count)->with('a_account',$a_account);
     }
 }

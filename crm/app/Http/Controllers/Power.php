@@ -38,7 +38,7 @@ class Power extends Common
         $res = DB::table('power')->where(['p_status'=>1])->paginate(5);
 //        print_r($res);exit;
         //查询总共条数
-        $count = DB::table('power')->count();
+        $count = DB::table('power')->where(['p_status'=>1])->count();
 //        print_r($count);exit;
         return view('power.power_list')->with('new',$res)->with('count',$count);
     }
