@@ -65,7 +65,7 @@
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>{{$v->c_name}}</td>
+            <td><a onclick="x_admin_show('客户共享','/share_add?c_id={{$v->c_id}}')">{{$v->c_name}}</a></td>
             <td>{{$v->c_phone}}</td>
             <td>{{$v->ctype_id}}</td>
             <td>{{$v->clevel_id}}</td>
@@ -152,8 +152,6 @@
 
         });
     }
-
-
 
     function delAll (argument) {
 

@@ -47,7 +47,7 @@ class Department extends Common
         $res = DB::table('department')->join('role', 'department.role_id', '=', 'role.role_id')->join('admin', 'department.a_id', '=', 'admin.a_id')->where(['d_status'=>1])->paginate(5);
 //        print_r($res);exit;
         //查询总共条数
-        $count = DB::table('department')->count();
+        $count = DB::table('department')->where(['d_status'=>1])->count();
 //        print_r($count);exit;
         return view('department.department_list')->with('new',$res)->with('count',$count);
     }
