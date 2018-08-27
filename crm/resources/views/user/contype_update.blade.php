@@ -76,6 +76,7 @@
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
+                            window.parent.location.reload();
                             parent.layer.close(index);
                         });
                     }else{

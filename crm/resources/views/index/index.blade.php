@@ -177,6 +177,12 @@
                         </a>
                     </li >
                     <li>
+                        <a _href="share_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>共享客户列表</cite>
+                        </a>
+                    </li >
+                    <li>
                         <a _href="ctype_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>客户类型管理</cite>

@@ -69,7 +69,9 @@
             <div class="layui-input-inline">
                 <input type="text" id="c_ctime" name="c_name" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
+
             </div>
+        </div>
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>结束时间
@@ -136,10 +138,9 @@
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame
+                            window.parent.location.reload();
                             parent.layer.close(index);
-
-
-                            parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
+                           // parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
                         });
                     }else{
                         //发异步，把数据提交给php

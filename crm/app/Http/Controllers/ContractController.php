@@ -10,7 +10,7 @@ class ContractController extends Controller
 {
     //合同展示
     public function contract_list(){
-        $data = DB::table('contract')->where(['status'=>1])->paginate(3);
+        $data = DB::table('contract')->where(['status'=>1,])->orderByRaw('ctime DESC')->paginate(3);
         foreach($data as $k=>$v){
             $customer = DB::table('customer')->where(['c_id'=>$v->customer_id,'status'=>1])->first();
             $v->customer_id = $customer->c_name;
@@ -25,7 +25,8 @@ class ContractController extends Controller
         $arr = DB::table('contype')->where(['status'=>1])->get();
         return view('contract.contract_add')->with('data',$data)->with('arr',$arr);
     }
-    public function contract_add_do(){
+    public function contract_add_do(Request $request){
+        $a_id = $request->session()->get('a_id');
         $customer_id = input::get('customer_id');
         $contype_id = input::get('contype_id');
         $c_deposit = input::get('c_deposit');
@@ -44,16 +45,35 @@ class ContractController extends Controller
         ];
         $res = DB::table('contract')->insert($arr);
         if($res){
+            $arr2 = [
+                'c_id'=>$customer_id,
+                'action'=>'合同添加',
+                'data_table'=>'合同表',
+                'a_id'=>$a_id,
+                'status'=>1,
+                'time'=>time()
+            ];
+           $ressult =  DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
         }
     }
     //合同删除
-    public function contract_del(){
+    public function contract_del(Request $request){
+        $a_id = $request->session()->get('a_id');
         $id = input::get('id');
         $res = DB::table('contract')->where(['contract_id'=>$id])->update(['status'=>3]);
         if($res){
+            $arr2 = [
+                'c_id'=>$id,
+                'action'=>'合同删除',
+                'data_table'=>'合同表',
+                'a_id'=>$a_id,
+                'status'=>1,
+                'time'=>time()
+            ];
+            $ressult =  DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
@@ -67,7 +87,8 @@ class ContractController extends Controller
         $customer = DB::table('customer')->where(['status'=>1])->get();
         return view('contract.contract_update')->with('data',$data)->with('contype',$contype)->with('customer',$customer);
     }
-    public function contract_update_do(){
+    public function contract_update_do(Request $request){
+        $a_id = $request->session()->get('a_id');
         $customer_id = input::get('customer_id');
         $contype_id = input::get('contype_id');
         $c_deposit = input::get('c_deposit');
@@ -86,9 +107,35 @@ class ContractController extends Controller
         ];
         $res = DB::table('contract')->where(['contract_id'=>$id])->update($arr);
         if($res){
+            $arr2 = [
+                'c_id'=>$customer_id,
+                'action'=>'合同修改',
+                'data_table'=>'合同表',
+                'a_id'=>$a_id,
+                'status'=>1,
+                'time'=>time()
+            ];
+            $ressult =  DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
         }
     }
+//    //搜索
+//    public function seek(){
+//        $start = input::get('start');
+//        $end = input::get('end');
+//        $name = input::get('name');
+//        if($start=='' || $end ==''){
+//            $where = [
+//                'c_name'=>$name
+//            ];
+//            $arr = DB::table('customer')->where($where)->get();
+//            $data = DB::table('contract')->where(['customer_id'=>$arr->c_id])->get();
+//        }else if($name == ''){
+//            $data = DB::table('contract')->where('c_ctime','>=',$start)->where('c_utime','<=',$end)->get();
+//        }
+//        print_r($data);exit;
+//        echo json_encode($data);
+//    }
 }

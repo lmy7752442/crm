@@ -79,7 +79,7 @@
             <td>{{$v->c_city}}</td>
             <td>{{$v->c_area}}</td>
             <td>{{$v->address}}</td>
-            <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
+            <td><?php echo date('Y-m-d',$v->ctime); ?></td>
             <td class="td-manage">
                 <a title="查看"  onclick="x_admin_show('编辑','user_update?id={{$v->c_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>

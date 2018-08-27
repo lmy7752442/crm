@@ -30,8 +30,18 @@
       </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+
 </div>
+
 <div class="x-body">
+    <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so">
+            <input class="layui-input" placeholder="开始日" name="start" id="start">
+            <input class="layui-input" placeholder="截止日" name="end" id="end">
+            <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input" id="name">
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach" id="button"><i class="layui-icon">&#xe615;</i></button>
+        </div>
+    </div>
     <div class="layui-row">
     </div>
     <xblock>
@@ -45,12 +55,11 @@
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>合同id</th>
+            {{--<th>合同id</th>--}}
             <th>客户名称</th>
             <th>合同类型</th>
             <th>定金</th>
             <th>返利方式</th>
-
             <th>开始时间</th>
             <th>结束时间</th>
             <th >操作</th>
@@ -62,7 +71,7 @@
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
                 </td>
-                <td>{{$v->contract_id}}</td>
+               {{--// <td>{{$v->contract_id}}</td>--}}
                 <td>{{$v->customer_id}}</td>
                 <td>{{$v->contype_id}}</td>
                 <td>{{$v->c_deposit}}</td>
@@ -84,23 +93,37 @@
     <div class="page">
         {{$data->links()}}
     </div>
-
 </div>
+{{--<script>--}}
+    {{--$('#button').click(function(){--}}
+        {{--var start = $('#start').val();--}}
+        {{--var end = $('#end').val();--}}
+        {{--var name = $('#name').val();--}}
+        {{--$.get('seek',--}}
+            {{--{--}}
+                {{--start:start,--}}
+                {{--end:end,--}}
+                {{--name:name--}}
+            {{--},function(data){--}}
+                {{--alert(data)--}}
+            {{--})--}}
+    {{--})--}}
+{{--</script>--}}
 <script>
     layui.use('laydate', function(){
         var laydate = layui.laydate;
-
         //执行一个laydate实例
-        laydate.render({
-            elem: '#start' //指定元素
-        });
 
+
+        laydate.render({
+            elem: '#start', //指定元素
+            // alert(start)
+        });
         //执行一个laydate实例
         laydate.render({
             elem: '#end' //指定元素
         });
     });
-
     /*用户-停用*/
     function member_stop(obj,id){
         layer.confirm('确认要停用吗？',function(index){

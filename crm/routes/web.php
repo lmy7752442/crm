@@ -222,6 +222,8 @@ Route::get('contract_del','ContractController@contract_del');
 //合同修改
 Route::get('contract_update','ContractController@contract_update');
 Route::get('contract_update_do','ContractController@contract_update_do');
+//搜索
+Route::get('seek','ContractCOntroller@seek');
 
 
 

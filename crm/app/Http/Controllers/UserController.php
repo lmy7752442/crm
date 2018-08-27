@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
-
 class UserController extends Controller
 {
     //客户展示
-    public  function user_list(){
-        $data = DB::table('customer')->where(['status'=>1])->paginate(3);
+    public  function user_list(Request $request){
+        $a_id = $request->session()->get('a_id');//管理员id
+        $data = DB::table('customer')->where(['status'=>1,'a_id'=>$a_id])->orderByRaw('ctime DESC')->paginate(3);
 
         foreach($data as $k=>$v){
             $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
@@ -30,8 +30,8 @@ class UserController extends Controller
         $csource = DB::table('csource')->where(['status'=>1])->get();
         return view('user.user_add')->with('ctype',$ctype)->with('clevel',$clevel)->with('csource',$csource);
     }
-    public function user_add_do(){
-
+    public function user_add_do(Request $request){
+        $a_id = $request->session()->get('a_id');//管理员id
         $c_name = input::get('c_name');
         $c_phone = input::get('c_phone');
         //客户类型
@@ -64,20 +64,41 @@ class UserController extends Controller
             'c_area'=>$area,
             'address'=>$address,
             'ctime'=>time(),
-            'status'=>1
+            'status'=>1,
+            'a_id'=>$a_id
         ];
-        $res = DB::table('customer')->insert($arr);
+        $res = DB::table('customer')->insertGetId($arr);
+
         if($res){
+            $arr2 = [
+                'c_id'=>$res,
+                'action'=>'客户添加',
+                'data_table'=>'客户表',
+                'a_id'=>$a_id,
+                'time'=>time(),
+                'status'=>1
+            ];
+            $result = DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
         }
     }
     //客户删除
-    public function user_del(){
+    public function user_del(Request $request){
         $id = input::get('id');
+        $a_id = $request->session()->get('a_id');
         $res = DB::table('customer')->where(['c_id'=>$id])->update(['status'=>3]);
         if($res){
+            $arr2 = [
+                'c_id'=>$id,
+                'action'=>'客户删除',
+                'data_table'=>'客户表',
+                'a_id'=>$a_id,
+                'time'=>time(),
+                'status'=>1
+            ];
+            $result = DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
@@ -92,7 +113,7 @@ class UserController extends Controller
         $csource = DB::table('csource')->where(['status'=>1])->get();
         return view('user.user_update')->with('data',$data)->with('ctype',$ctype)->with('clevel',$clevel)->with('csource',$csource);
     }
-    public function user_update_do(){
+    public function user_update_do(Request $request){
         $id = input::get('id');
         $c_name = input::get('c_name');
         $c_phone = input::get('c_phone');
@@ -111,7 +132,7 @@ class UserController extends Controller
         $area = input::get('area');
         $address = input::get('address');
         $other_phone = input::get('other_phone');
-
+        $a_id = $request->session()->get('a_id');
         $arr = [
             'c_name'=>$c_name,
             'c_phone'=>$c_phone,
@@ -129,6 +150,15 @@ class UserController extends Controller
         ];
         $res = DB::table('customer')->where(['c_id'=>$id])->update($arr);
         if($res){
+            $arr2 = [
+                'c_id'=>$id,
+                'action'=>'客户修改',
+                'data_table'=>'客户表',
+                'a_id'=>$a_id,
+                'time'=>time(),
+                'status'=>1
+            ];
+            $result = DB::table('record')->insert($arr2);
             echo 1;
         }else{
             echo 2;
@@ -295,7 +325,7 @@ class UserController extends Controller
         $data = DB::table('contype')->where(['status'=>1])->paginate(3);
         return view('user.contype_list')->with('data',$data);
     }
-    //合同添加
+    //合同类型添加
     public function contype_add(){
         return view('user.contype_add');
     }
@@ -312,7 +342,7 @@ class UserController extends Controller
             echo 2;
         }
     }
-    //合同删除
+    //合同类型删除
     public function contype_del(){
         $id = input::get('id');
         $res = DB::table('contype')->where(['contype_id'=>$id])->update(['status'=>3]);
