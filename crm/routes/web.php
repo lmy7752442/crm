@@ -137,6 +137,12 @@ Route::get('order_user','OrderController@order_user');
 Route::get('order_add','OrderController@order_add');
 //订单添加执行
 Route::get('order_add_do','OrderController@order_add_do');
+//订单修改
+Route::get('order_save','OrderController@order_save');
+//订单修改执行
+Route::get('order_save_do','OrderController@order_save_do');
+//订单删除
+Route::get('order_del','OrderController@order_del');
 //订单方式列表
 Route::get('order_mode_list','OrderController@order_mode_list');
 //订单方式添加

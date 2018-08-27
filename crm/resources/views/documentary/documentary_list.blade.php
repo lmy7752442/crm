@@ -46,13 +46,14 @@
             var end_time = $('#end').val();
             var username = $('#username').val();
             if(start_time!='' || end_time!='' || username!=''){
-                $.get('documentary_list',{
-                    start_time:start_time,
-                    end_time:end_time,
-                    username:username
-                },function(data){
-                    $('#zong').html(data)
-                })
+                location.href = 'documentary_list?start_time='+start_time+'&end_time='+end_time+'&username='+username;
+                // $.get('documentary_list',{
+                //     start_time:start_time,
+                //     end_time:end_time,
+                //     username:username
+                // },function(data){
+                //     $('#zong').html(data)
+                // })
             }
         })
     </script>
@@ -112,7 +113,7 @@
         </tbody>
     </table>
     <div class="page">
-        {{ $documentary_data->links() }}
+        {{ $documentary_data->render()}}
     </div>
     </div>
 </div>

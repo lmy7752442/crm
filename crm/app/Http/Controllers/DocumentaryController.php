@@ -52,7 +52,7 @@ class DocumentaryController extends Controller
         if($where == ['status'=>1] && empty($username)){
             return view('documentary.documentary_list',['documentary_data'=>$documentary_data]);
         }else{
-            return view('documentary.documentary_list_where',['documentary_data'=>$documentary_data]);
+            return view('documentary.documentary_list_where',['documentary_data'=>$documentary_data,'username'=>$username,'end_time'=>$end_time,'start_time'=>$start_time]);
         }
     }
 
@@ -80,11 +80,12 @@ class DocumentaryController extends Controller
         $content = $request -> get('content');
         $next_time = strtotime($request -> get('next_time'));
         $admin = 1;
+        $time = time();
         $res = DB::table('documentary')
             ->insert([
                 'd_nexttime'=>$next_time,
                 'd_detailed'=>$content,
-                'd_time'=>time(),
+                'd_time'=>$time,
                 'dprogress_id'=>$dprogress,
                 'dtype_id'=>$dtype,
                 'c_id'=>$user,
@@ -92,6 +93,7 @@ class DocumentaryController extends Controller
                 'warn'=>$warn,
                 'status'=>1
             ]);
+        DB::table('record')->insert(['c_id'=>$user,'action'=>'添加跟单记录','data_table'=>'跟单表','a_id'=>$admin,'time'=>$time]);
         if($res>0){
             $data = DB::table('documentary')->where('status',1)->orderBy('d_time','desc')->limit(10)->get();
             foreach ($data as $v){
@@ -147,7 +149,9 @@ class DocumentaryController extends Controller
      */
     public function documentary_del(Request $request){
         $documentary_id = $request->get('documentary_id');
+        $data = DB::table('documentary')->where('documentary_id',$documentary_id)->first();
         $res = DB::table('documentary')->where('documentary_id',$documentary_id)->update(['status'=>3]);
+        DB::table('record')->insert(['c_id'=>$data->c_id,'action'=>'删除跟单记录','data_table'=>'跟单表','a_id'=>$data->admin_id,'time'=>time()]);
         if($res > 0 ){
             return '1';
         }
@@ -183,17 +187,19 @@ class DocumentaryController extends Controller
         $content = $request -> get('content');
         $next_time = strtotime($request -> get('next_time'));
         $admin = session()->get('a_id');
+        $time = time();
         $res = DB::table('documentary')->where('documentary_id',$documentary_id)
             ->update([
                 'd_nexttime'=>$next_time,
                 'd_detailed'=>$content,
-                'd_time'=>time(),
+                'd_time'=>$time,
                 'dprogress_id'=>$dprogress,
                 'dtype_id'=>$dtype,
                 'c_id'=>$user,
                 'admin_id'=>$admin,
                 'warn'=>$warn
             ]);
+        DB::table('record')->insert(['c_id'=>$user,'action'=>'修改跟单记录','data_table'=>'跟单表','a_id'=>$admin,'time'=>$time]);
         if($res>0){
             $data = DB::table('documentary')->where('documentary_id',$documentary_id)->first();
             $str = "<tr>
