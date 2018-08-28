@@ -172,6 +172,17 @@
                 <input type="text" id="send_type" name="next_time" required="" lay-verify="required"
                        autocomplete="off" value="{{$order_data->send_type}}" class="layui-input">
             </div>
+            <label for="username" class="layui-form-label" >
+                <span class="x-red">*</span>订单状态
+            </label>
+            <div class="layui-input-inline" style="width: 100px">
+                <select id="order_type" name="user" class="valid" lay-filter="username">
+                    <option value="">请选择</option>
+                    @foreach($order_type as $v)
+                        <option value="{{$v->id}}" <?php if($order_data->order_type == $v->id) echo 'selected';?>>{{$v->name}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div class="layui-form-item">
@@ -250,6 +261,7 @@
             var order_mode = $('#order_mode').val();
             var delivery_type = $('#delivery_type   ').val();
             var send_type = $('#send_type').val();
+            var order_type = $('#order_type').val();
             // console.log(o_number+username+instead_money+order_money+discounts_money+discounts_type+get_money+put_money+order_mode+delivery_type+send_type);
             var product_id = '';
             $.each($('input:checkbox:checked'),function(){
@@ -267,6 +279,7 @@
                 order_mode:order_mode,
                 delivery_type:delivery_type,
                 send_type:send_type,
+                order_type:order_type,
                 product_id:product_id
             },function(data){
                 console.log(data);

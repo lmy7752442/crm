@@ -162,6 +162,12 @@
                             <cite>订单方式列表</cite>
                         </a>
                     </li >
+                    <li>
+                        <a _href="order_type_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单状态列表</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -248,7 +254,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="/count">
+                        <a _href="/count_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>统计</cite>
                         </a>
@@ -266,6 +272,18 @@
                         <a _href="publicnotice_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>内部公告</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="seas_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>公海</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="operation_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>操作记录</cite>
                         </a>
                     </li >
                 </ul>

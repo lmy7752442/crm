@@ -23,65 +23,44 @@
 <body>
 <div class="x-nav">
       <span class="layui-breadcrumb">
-        <a href="/">首页</a>
+        <a href="">首页</a>
         <a href="">演示</a>
         <a>
-            <cite>导航元素</cite></a>
+          <cite>导航元素</cite></a>
       </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
+    <div class="layui-row">
+    </div>
     <table class="layui-table">
+        <thead>
         <tr>
-            <th style="rowspan:5">基本情况</th>
-            <th style="rowspan:2">活跃状态</th>
-            {{--colspan--}}
+            <th>管理员名称</th>
+            <th>客户名称</th>
+            <th>操作记录</th>
+            <th>操作表名</th>
+            <th>操作时间</th>
         </tr>
-        <tr>
-            <th>管理员</th>
-            <th>客户</th>
-            <th>跟单</th>
-            <th>订单</th>
-            <th>销量</th>
-            <th>修改</th>
-            <th>删除</th>
-        </tr>
-        <tr>
-            <th>汇总</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
+        </thead>
+        <tbody>
+        @foreach($data as $v)
+            <tr>
+                <td>{{$v->a_id}}</td>
+                <td>{{$v->c_id}}</td>
+                <td>{{$v->action}}</td>
+                <td>{{$v->data_table}}</td>
+                <td><?php echo date('Y-m-d H:i:s',$v->time); ?></td>
+            </tr>
+        @endforeach
+        </tbody>
     </table>
-    <!-- 分页 -->
-
+    <div class="page">
+        {{$data->links()}}
+    </div>
 
 </div>
-<script>
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
-
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#end' //指定元素
-        });
-    });
-</script>
-<script>var _hmt = _hmt || []; (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();</script>
 </body>
 
 </html>
