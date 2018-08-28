@@ -541,16 +541,7 @@ class UserController extends Controller
             echo 2;
         }
     }
-    public function jinxiaofei(){
-        $kehu_id = 3;//传过来客户的id
-        $arr = json_decode(DB::table('jinxiaofei') -> where('crm_cusId',$kehu_id) -> get(),true);//根据要分享的客户的id查数据
-//        print_R($arr);exit;
-        foreach($arr as $k => $v){
-            $data[] = $v['crm_adminId'];
-        }//取出所有分享过该用户的管理员的id
-        $res = json_decode(DB::table('admin') -> whereNotIn('a_id',$data) -> get(),true);//查询条件  管理员的id 不在$data中 即为不在已经分享的管理员的id中
-        print_r($res);
-    }
+
 }
 
 
