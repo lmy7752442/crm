@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class Admin extends Common
+class AdminController extends CommonController
 {
     /** 管理员添加 */
     public function admin_add(){
@@ -104,7 +104,7 @@ class Admin extends Common
         }
     }
 
-    /** 添加建议 */
+    /** 客户建议添加 */
     public function advince_add(Request $request){
         //获取当前管理员id
         $a_id = $request->session()->get('a_id');
@@ -114,7 +114,7 @@ class Admin extends Common
         return view('admin.advince_add')->with('data',$c_data);
     }
 
-    /** 执行添加 */
+    /** 客户建议执行添加 */
     public function advince_add_do(Request $request){
         $data = $_GET;
 //        print_r($data);exit;
@@ -124,7 +124,7 @@ class Admin extends Common
             'a_main' => $data['a_main'],
             'a_advince' => $data['a_advince'],
             'a_ctime' => time(),
-            'a_utime' => time(),
+            'a_solve' => time(),
             'a_id' => $a_id,
             'c_id' => $data['c_id']
         ];
@@ -138,16 +138,32 @@ class Admin extends Common
         }
     }
 
-    /** 客户建议 */
+    /** 客户建议展示 */
     public function advince_list(Request $request){
         //获取当前管理员id
-//        $a_id = $request->session()->get('a_id');
-//        $a_account = $request->session()->get('a_account');
-//        $res = DB::table('advince')->leftJoin('customer', 'advince.c_id', '=', 'customer.c_id')->where(['a_status'=>1,'advince.a_id'=>$a_id])->paginate(5);
+        $a_id = $request->session()->get('a_id');
+        $a_account = $request->session()->get('a_account');
+        $res = DB::table('advince')->leftJoin('customer', 'advince.c_id', '=', 'customer.c_id')->where(['a_status'=>1,'advince.a_id'=>$a_id])->paginate(5);
 //        print_r($res);exit;
         //查询总共条数
-//        $count = DB::table('advince')->count();
-////        print_r($count);exit;
-//        return view('admin.advince_list')->with('new',$res)->with('count',$count)->with('a_account',$a_account);
+        $count = DB::table('advince')->where(['a_status'=>1,'a_id'=>$a_id])->count();
+//        print_r($count);exit;
+        return view('admin.advince_list')->with('new',$res)->with('count',$count)->with('a_account',$a_account)->with('res',$res);
+    }
+
+    /** 客户建议删除 */
+    public function advince_del(){
+        $a_id = $_GET['advince_id'];
+//        print_r($a_id);exit;
+        $update_data = [
+            'a_status' => 2
+        ];
+        $res = DB::table('advince')->where(['advince_id'=>$a_id])->update($update_data);
+//        print_r($res);exit;
+        if($res){
+            return 1;
+        }else{
+            return 2;
+        }
     }
 }

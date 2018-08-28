@@ -105,34 +105,10 @@
         });
     });
 
-    /*部门-停用*/
-    //    function member_stop(obj,id){
-    //        layer.confirm('确认要停用吗？',function(index){
-    //
-    //            if($(obj).attr('title')=='启用'){
-    //
-    //                //发异步把用户状态进行更改
-    //                $(obj).attr('title','停用')
-    //                $(obj).find('i').html('&#xe62f;');
-    //
-    //                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-    //                layer.msg('已停用!',{icon: 5,time:1000});
-    //
-    //            }else{
-    //                $(obj).attr('title','启用')
-    //                $(obj).find('i').html('&#xe601;');
-    //
-    //                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-    //                layer.msg('已启用!',{icon: 5,time:1000});
-    //            }
-    //
-    //        });
-    //    }
-
     /*部门-删除*/
     function member_del(obj,id){
-        console.log(obj);
-        console.log(id);
+//        console.log(obj);
+//        console.log(id);
         layer.confirm('确认要删除吗？',function(index){
             //发异步删除数据
 //            $(obj).parents("tr").remove();
@@ -145,14 +121,14 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('部门删除成功');
+                        layer.msg("部门删除成功", {icon: 6});
                         window.location.href="/department_list";
                     }else if(res == 2) {
-                        layer.alert('部门删除失败');
-                        window.location.href = "/department_list";
+                        layer.msg('部门删除失败', {icon: 5})
+                        layer.close(layer.index);
                     }else{
-                        layer.alert('还有不同角色的员工在此部门下，暂时不能删除');
-                        window.location.href = "/department_list";
+                        layer.msg('还有不同角色的员工在此部门下，暂时不能删除', {icon: 5})
+                        layer.close(layer.index);
                     }
                 }
             });

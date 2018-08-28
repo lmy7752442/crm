@@ -145,14 +145,14 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('角色删除成功');
+                        layer.msg("角色删除成功", {icon: 6});
                         window.location.href="/role_list";
                     }else if(res == 2) {
-                        layer.alert('角色删除失败');
-                        window.location.href = "/role_list";
+                        layer.msg('角色删除失败', {icon: 5})
+                        layer.close(layer.index);
                     }else{
-                        layer.alert('还有不同部门的员工正拥有此角色，暂时不能删除');
-                        window.location.href = "/role_list";
+                        layer.msg('还有不同部门的员工正拥有此角色，暂时不能删除', {icon: 5})
+                        layer.close(layer.index);
                     }
                 }
             });

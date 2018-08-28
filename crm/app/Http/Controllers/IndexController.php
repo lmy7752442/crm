@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-class Index extends Common
+class IndexController extends CommonController
 {
     //首页
     public function index(Request $request){

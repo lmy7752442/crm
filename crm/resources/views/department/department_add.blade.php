@@ -85,34 +85,6 @@
             elem: '#a_birthday' //指定元素
         });
 
-        //自定义验证规则
-//        form.verify({
-//            a_account: function(value){
-//                if(value.length < 5){
-//                    return '昵称至少得5个字符啊';
-//                }
-//            }
-//            a_pwd: [/(.+){6,12}$/, '密码必须6到12位']
-//            ,a_repwd: function(value){
-//                if($('#a_pwd').val()!=$('#a_repwd').val()){
-//                    return '两次密码不一致';
-//                }
-//            }
-//        });
-
-        //监听提交
-//        form.on('submit(add)', function(data){
-//            console.log(data);
-//            //发异步，把数据提交给php
-//            layer.alert("增加成功", {icon: 6},function () {
-//                // 获得frame索引
-//                var index = parent.layer.getFrameIndex(window.name);
-//                //关闭当前frame
-//                parent.layer.close(index);
-//            });
-//            return false;
-//        });
-
         form.on('submit(add)', function(data){
             console.log(data);
             $.ajax({
@@ -123,11 +95,16 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('部门添加成功');
-                        window.location.href="/department_list";
+                        layer.msg("部门添加成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            window.parent.location.reload();
+                        });
                     }else if(res == 2){
-                        layer.alert('部门添加失败');
-                        window.location.href="/department_add";
+                        layer.msg('部门添加失败', {icon: 5})
+                        layer.close(layer.index);
                     }
                 }
             });

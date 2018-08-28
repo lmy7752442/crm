@@ -1,3 +1,122 @@
+<<<<<<< HEAD
+<?php
+$str = "/login
+/login_do
+/login_out
+/admin_add
+/admin_add_do
+/admin_list
+/admin_update
+/admin_update_do
+/admin_del
+/advince_add
+/advince_add_do
+/advince_list
+/advince_del
+/department_add
+/department_add_do
+/department_list
+/department_update
+/department_update_do
+/department_del
+/role_add
+/role_add_do
+/role_list
+/role_update
+/role_update_do
+/role_del
+/power_add
+/power_add_do
+/power_list
+/power_update
+/power_update_do
+/power_del
+/welcome
+/documentary_add
+/documentary_add_do
+/documentary_del
+/documentary_save
+/documentary_save_do
+/documentary_list
+/documentary_dtype_list
+/documentary_dtype_add
+/documentary_dtype_add_do
+/documentary_dtype_del
+/documentary_dtype_save
+/documentary_dtype_save_do
+/documentary_dprogress_list
+/documentary_dprogress_add
+/documentary_dprogress_add_do
+/documentary_dprogress_del
+/documentary_dprogress_save
+/documentary_dprogress_save_do
+/order_list
+/order_user
+/order_add
+/order_add_do
+/order_mode_list
+/order_mode_add
+/order_mode_add_do
+/order_mode_save
+/order_mode_save_do
+/order_mode_del
+/user_list
+/user_add
+/user_add_do
+/user_del
+/user_update
+/user_update_do
+/ctype_list
+/ctype_add
+/ctype_add_do
+/ctype_del
+/ctype_update
+/ctype_update_do
+/clevel_list
+/clevel_add
+/clevel_add_do
+/clevel_update
+/clevel_update_do
+/clevel_del
+/csource_list
+/csource_add
+/csource_add_do
+/csource_update
+/csource_update_do
+/csource_del
+/contype_list
+/contype_add
+/contype_add_do
+/contype_del
+/contype_update
+/contype_update_do
+/product_list
+/product_add
+/product_add_do
+/product_update
+/product_update_do
+/product_del
+/contract_list
+/contract_add
+/contract_add_do
+/contract_del
+/contract_update
+/contract_update_do
+/seek
+/share_add
+/share_add_do
+/count";
+
+$arr = explode("\r\n",$str);
+$val = "(";
+foreach($arr as $v){
+    $val .= "('{$v}'),";
+}
+$val .= ")";
+echo $val;
+
+//print_r($arr);
+=======
 
 <!DOCTYPE html>
 <html>
@@ -197,3 +316,4 @@
     });</script>
 </body>
 </html>
+>>>>>>> e5c8dc76090908313b29da1f2b326b289ccd0ea4

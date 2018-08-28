@@ -18,82 +18,84 @@
 
 ########## Login控制器 ##########
 //显示登录页面
-Route::get('/login','Login@login');
+Route::get('/login','LoginController@login');
 //执行登录
-Route::get('/login_do','Login@login_do');
+Route::get('/login_do','LoginController@login_do');
 //退出
-Route::get('/login_out','Login@login_out');
+Route::get('/login_out','LoginController@login_out');
 
 
 ########## Admin控制器 ##########
 //管理员添加
-Route::get('/admin_add','Admin@admin_add');
+Route::get('/admin_add','AdminController@admin_add');
 //管理员执行添加
-Route::get('/admin_add_do','Admin@admin_add_do');
+Route::get('/admin_add_do','AdminController@admin_add_do');
 //管理员展示
-Route::get('/admin_list','Admin@admin_list');
+Route::get('/admin_list','AdminController@admin_list');
 //管理员修改
-Route::get('/admin_update','Admin@admin_update');
+Route::get('/admin_update','AdminController@admin_update');
 //管理员执行修改
-Route::get('/admin_update_do','Admin@admin_update_do');
+Route::get('/admin_update_do','AdminController@admin_update_do');
 //管理员删除
-Route::get('/admin_del','Admin@admin_del');
+Route::get('/admin_del','AdminController@admin_del');
 //建议添加
-Route::get('/advince_add','Admin@advince_add');
+Route::get('/advince_add','AdmAdminControllerin@advince_add');
 //建议执行添加
-Route::get('/advince_add_do','Admin@advince_add_do');
+Route::get('/advince_add_do','AdminController@advince_add_do');
 //客户建议列表
-Route::get('/advince_list','Admin@advince_list');
+Route::get('/advince_list','AdminController@advince_list');
+//客户建议删除
+Route::get('/advince_del','AdminController@advince_del');
 
 
 ########## Department控制器 ##########
 //部门添加
-Route::get('/department_add','Department@department_add');
+Route::get('/department_add','DepartmentController@department_add');
 //部门执行添加
-Route::get('/department_add_do','Department@department_add_do');
+Route::get('/department_add_do','DepartmentController@department_add_do');
 //部门展示
-Route::get('/department_list','Department@department_list');
+Route::get('/department_list','DepartmentController@department_list');
 //部门修改
-Route::get('/department_update','Department@department_update');
+Route::get('/department_update','DepartmentController@department_update');
 //部门执行修改
-Route::get('/department_update_do','Department@department_update_do');
+Route::get('/department_update_do','DepartmentController@department_update_do');
 //部门删除
-Route::get('/department_del','Department@department_del');
+Route::get('/department_del','DepartmentController@department_del');
 
 
 ########## Role控制器 ##########
 //角色添加
-Route::get('/role_add','Role@role_add');
+Route::get('/role_add','RoleController@role_add');
 //角色执行添加
-Route::get('/role_add_do','Role@role_add_do');
+Route::get('/role_add_do','RoleController@role_add_do');
 //角色展示列表
-Route::get('role_list','Role@role_list');
+Route::get('role_list','RoleController@role_list');
 //角色修改
-Route::get('/role_update','Role@role_update');
+Route::get('/role_update','RoleController@role_update');
 //角色执行修改
-Route::get('/role_update_do','Role@role_update_do');
+Route::get('/role_update_do','RoleController@role_update_do');
 //角色删除
-Route::get('/role_del','Role@role_del');
+Route::get('/role_del','RoleController@role_del');
 
 
 ########## Power控制器 ##########
 //权限添加
-Route::get('/power_add','Power@power_add');
+Route::get('/power_add','PowerController@power_add');
 //权限执行添加
-Route::get('/power_add_do','Power@power_add_do');
+Route::get('/power_add_do','PowerController@power_add_do');
 //权限展示列表
-Route::get('power_list','Power@power_list');
+Route::get('power_list','PowerController@power_list');
 //权限修改
-Route::get('/power_update','Power@power_update');
+Route::get('/power_update','PowerController@power_update');
 //权限执行修改
-Route::get('/power_update_do','Power@power_update_do');
+Route::get('/power_update_do','PowerController@power_update_do');
 //权限删除
-Route::get('/power_del','Power@power_del');
+Route::get('/power_del','PowerController@power_del');
 
 
 
-Route::get('/','Index@index');
-Route::get('welcome','Index@welcome');
+Route::get('/','IndexController@index');
+Route::get('welcome','IndexController@welcome');
 
 
 ########## Documentary控制器 ##########
@@ -248,7 +250,7 @@ Route::get('share_list','UserController@share_list');
 Route::get('share_list_do','UserController@share_list_do');
 ########## Count控制器 ##########
 //统计
-Route::get('/count','Count@count');
+Route::get('/count','CountController@count');
 
 
 

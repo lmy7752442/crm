@@ -57,6 +57,7 @@
             <th>建议解决时间</th>
             <th>管理员</th>
             <th>客户</th>
+            <th>操作</th>
         </thead>
         <tbody>
         @foreach($new as $v)
@@ -64,19 +65,14 @@
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
                 </td>
-                <td>{{$v->a_id}}</td>
-                <td>{{$v->a_account}}</td>
-                <td>{{$v->a_phone}}</td>
-                <td>{{$v->a_email}}</td>
-                <td>{{$v->a_address}}</td>
+                <td>{{$v->a_main}}</td>
+                <td>{{$v->a_advince}}</td>
+                <td>{{$v->a_ctime}}</td>
+                <td>{{$v->a_solve}}</td>
+                <td>{{$a_account}}</td>
+                <td>{{$v->c_name}}</td>
                 <td class="td-manage">
-                    <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                        <i class="layui-icon">&#xe601;</i>
-                    </a>
-                    <a title="编辑"  onclick="x_admin_show('编辑','/admin_update?a_id={{$v->a_id}}')" href="javascript:;">
-                        <i class="layui-icon">&#xe642;</i>
-                    </a>
-                    <a title="删除" onclick="member_del(this,'{{$v->a_id}}')" href="javascript:;">
+                    <a title="删除" onclick="member_del(this,'{{$v->advince_id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>
                     </a>
                 </td>
@@ -105,56 +101,33 @@
         });
     });
 
-    /*管理员-停用*/
-    //    function member_stop(obj,id){
-    //        layer.confirm('确认要停用吗？',function(index){
-    //
-    //            if($(obj).attr('title')=='启用'){
-    //
-    //                //发异步把用户状态进行更改
-    //                $(obj).attr('title','停用')
-    //                $(obj).find('i').html('&#xe62f;');
-    //
-    //                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-    //                layer.msg('已停用!',{icon: 5,time:1000});
-    //
-    //            }else{
-    //                $(obj).attr('title','启用')
-    //                $(obj).find('i').html('&#xe601;');
-    //
-    //                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-    //                layer.msg('已启用!',{icon: 5,time:1000});
-    //            }
-    //
-    //        });
-    //    }
-
     /*管理员-删除*/
     function member_del(obj,id){
-        console.log(obj);
-        console.log(id);
+//        console.log(obj);
+//        console.log(id);
         layer.confirm('确认要删除吗？',function(index){
             //发异步删除数据
 //            $(obj).parents("tr").remove();
 //            layer.msg('已删除!',{icon:1,time:1000});
             $.ajax({
                 method:'get',
-                url:"/admin_del",
-                data:{a_id:id},
+                url:"/advince_del",
+                data:{advince_id:id},
                 success:function(res){
-                    console.log(res);
-//                    layer.msg(res.msg,{icon:res.code});
+//                    console.log(res);
+////                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('管理员删除成功');
-                        window.location.href="/admin_list";
-                    }else if(res == 2) {
-                        layer.alert('管理员删除失败');
-                        window.location.href = "/admin_list";
+//                        layer.alert('客户建议删除成功');
+                        layer.msg("客户建议删除成功", {icon: 6});
+                        window.location.href="/advince_list";
+                    }else{
+                        layer.msg('客户建议删除失败', {icon: 5});
+//                        window.location.href = "/advince_list";
+                        layer.close(layer.index);
                     }
                 }
             });
             return false;
-
         });
     }
 
