@@ -395,10 +395,6 @@ class UserController extends Controller
     /** 执行添加  共享 */
     public function share_add_do(Request $request)
     {
-<<<<<<< HEAD
-        //共享后消失没做
-=======
->>>>>>> fa5d987e722c2b8f6dfc0d3f0189cbfc9b5a1c82
         $c_id = $_GET['c_id'];
         //选中的管理员 id  字符串
         $admin_data = $_GET['admin_arr'];
@@ -406,18 +402,6 @@ class UserController extends Controller
         $admin_data = explode(',',$admin_data);
         //获取当前管理员id
         $a_id = $request->session()->get('a_id');
-<<<<<<< HEAD
-        $insert_data = [
-            'open_a_id' => $a_id,
-            'receive_a_id' => $admin_data[0],
-            'c_id' => $c_id,
-//            'is_share' => $share_arr[0],
-        ];
-//        print_r($insert_data);
-        $res = DB::table('share')->insert($insert_data);
-        if ($res) {
-=======
->>>>>>> fa5d987e722c2b8f6dfc0d3f0189cbfc9b5a1c82
             //这个管理员把这个客户都共享给哪些管理员
             $data1 = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->first();
             if (!empty($data1)) {
@@ -425,21 +409,6 @@ class UserController extends Controller
                 foreach ($data as $k => $v) {
                     $arr[] = $v->receive_a_id;
                 }
-<<<<<<< HEAD
-                if (in_array($admin_data, $arr)) {
-                    echo '该客户已经共享给管理员';
-                    exit;
-                } else {
-                    $insert_data = [
-                        'open_a_id' => $a_id,
-                        'receive_a_id' => $admin_data,
-                        'c_id' => $c_id
-                    ];
-                    $res = DB::table('share')->insert($insert_data);
-                }
-            } else {
-                $insert_data = [
-=======
                 foreach($admin_data as $k=>$v){
                     if (in_array($v, $arr)) {
                         echo '该客户已经共享给管理员';
@@ -458,11 +427,9 @@ class UserController extends Controller
                         $res = DB::table('share')->insert($insert_data);
                     }
                 }
-
             } else {
                 foreach($admin_data as $k=>$v){
                     $insert_data = [
->>>>>>> fa5d987e722c2b8f6dfc0d3f0189cbfc9b5a1c82
                     'open_a_id' => $a_id,
                     'receive_a_id' => $v,
                     'c_id' => $c_id
@@ -481,11 +448,9 @@ class UserController extends Controller
             } else {
                 return 2;
             }
-<<<<<<< HEAD
-        }
-=======
 
->>>>>>> fa5d987e722c2b8f6dfc0d3f0189cbfc9b5a1c82
+
+
     }
 
     //共享展示  我的共享
