@@ -86,9 +86,7 @@
                 <a title="删除" onclick="member_del(this,'{{$v->c_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
-                {{--<a title="共享"  onclick="x_admin_show('编辑','user_update?id={{$v->c_id}}')" href="javascript:;">--}}
-                    {{--<i class="layui-icon">&#xe63c;</i>--}}
-                {{--</a>--}}
+                <a href="扔入公海" href="seas_add?id = {{$v->c_id}}"></a>
             </td>
         </tr>
          @endforeach

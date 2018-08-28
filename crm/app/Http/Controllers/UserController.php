@@ -536,4 +536,7 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //扔入公海
 }
+
+
