@@ -30,15 +30,9 @@
                 <span class="x-red">*</span>管理员
             </label>
             <div class="layui-input-inline">
-                <select name="a_id" id="a_id">
-                    <option value="">管理员</option>
-                    @foreach($data as $v)
-                        <option value="{{$v->a_id}}">{{$v->a_name}}</option>
-                    @endforeach
-                </select>
-                {{--@foreach($data as $v)--}}
-                    {{--<input type="checkbox" name="a_id" lay-skin="primary" title="{{$v->a_name}}" value="{{$v->a_id}}">--}}
-                {{--@endforeach--}}
+                @foreach($data as $v)
+                    <input type="checkbox" name="a_id" lay-skin="primary" title="{{$v->a_name}}" value="{{$v->a_id}}">
+                @endforeach
             </div>
         </div>
         <div class="layui-form-item">
@@ -82,11 +76,10 @@
 
         form.on('submit(add)', function(data){
             //获取checkbox[name='a_id']的值
-            // var admin_arr = '';
-            // $("input:checkbox[name=a_id]:checked").each(function(i){
-            //     admin_arr = $(this).val();
-            // });
-            var admin_arr = $('#a_id').val();
+            var admin_arr = '';
+            $.each($('input:checkbox:checked'),function(){
+                admin_arr = $(this).val()+','+admin_arr;
+            })
             // data.field.a_id = admin_arr.join(",");//将数组合并成字符串
             //获取input[name='c_id']的值
             var c_id = "";

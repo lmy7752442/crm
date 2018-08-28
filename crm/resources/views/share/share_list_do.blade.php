@@ -68,7 +68,7 @@
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
                 </td>
-                <td>{{$arr[$v->receive_a_id]}}</td>
+                <td>{{$arr[$v->open_a_id]}}</td>
                 <td>{{$v->c_name}}</td>
                 <td>{{$v->c_phone}}</td>
                 <td>{{$v->other_phone}}</td>
