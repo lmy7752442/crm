@@ -21,8 +21,8 @@ class CommonController extends BaseController
                 echo "<script>alert('你还没有登录，请先登录');location.href='/login';</script>";
 //                redirect('/login')->send();
             }
-//
-//            //权限
+
+            //权限
 //            $url = $_SERVER;
 ////            print_r($url);exit;
 //            $data = Db::table('admin')
@@ -44,8 +44,8 @@ class CommonController extends BaseController
 //            if(!in_array($url,$default)){
 //                exit('没有权限') ;
 //            }
-////            //print_r($default);
-////
+//            //print_r($default);
+//
             return $next($request);
         });
     }

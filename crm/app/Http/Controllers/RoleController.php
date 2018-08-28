@@ -27,9 +27,9 @@ class RoleController extends CommonController
         $data = $_GET;
 //        print_r($data);exit;
         $insert_data = [
-            'r_name' => $data['r_name'],
+            'r_name' => $data['r_name_arr'],
             'a_id' => $data['a_id'],
-            'power_id' => $data['power_id']
+            'power_id' => $data['power_id_arr']
         ];
         $res = DB::table('role')->insert($insert_data);
 //        print_r($res);exit;
