@@ -383,43 +383,72 @@ class UserController extends Controller
         $other_a_id = DB::table('admin')->whereNotIn('a_id',$where)->get();
         return view('user.share_add')->with('c_id',$c_id)->with('data',$other_a_id);
     }
-
+/*复选框   点击获取管理员的id  便利的时候给状态  where a_id = luo u_id = zhang*/
     /** 执行添加  共享 */
     public function share_add_do(Request $request)
-    {
+    {//共享后消失没做
         $c_id = $_GET['c_id'];
-        $share_arr = $_GET['share_arr'];
         $admin_data = $_GET['admin_arr'];
-        print_r($admin_data);exit;
         //获取当前管理员id
         $a_id = $request->session()->get('a_id');
-        $data = DB::table('share')->where(['open_a_id'=>$a_id,'c_id'=>$c_id])->get();
-        if(empty($data)){
-            $insert_data = [
-                'open_a_id' => $a_id,
-                'receive_a_id' => $admin_data,
-                'c_id' => $c_id,
-            ];
-            $res = DB::table('share')->insert($insert_data);
-            if($res){
-                echo 1;
+        //这个管理员把这个客户都共享给哪些管理员
+        $data1 = DB::table('share')->where(['open_a_id'=>$a_id,'c_id'=>$c_id])->first();
+        if(!empty($data1)){
+            $data = DB::table('share')->where(['open_a_id'=>$a_id,'c_id'=>$c_id])->get();
+            foreach($data as $k=>$v){
+                $arr[]=$v->receive_a_id;
+            }
+            if(in_array($admin_data,$arr)){
+                echo '该客户已经共享给管理员';exit;
             }else{
-                echo 2;
+                $insert_data = [
+                    'open_a_id' => $a_id,
+                    'receive_a_id' => $admin_data,
+                    'c_id' => $c_id
+                ];
+                $res = DB::table('share')->insert($insert_data);
             }
         }else{
-            foreach($data as $k=>$v){
-                if(substr_count($v->receive_a_id,$admin_data) !=0){
-                    echo '该客户已经共享给'.$admin_data.'管理员';exit;
-                }
-                return 2;
+                $insert_data = [
+                    'open_a_id' => $a_id,
+                    'receive_a_id' => $admin_data,
+                    'c_id' => $c_id
+                ];
+                $res = DB::table('share')->insert($insert_data);
             }
-
+        if($res) {
+            return 1;
+        } else {
+            return 2;
         }
-//        if ($res) {
-//            return 1;
-//        } else {
-//            return 2;
-//        }
+    }
+    //共享展示  我的共享
+    public function share_list(Request $request){
+        $a_id = $request->session()->get('a_id');
+        //共享数据
+        $admin = json_decode(DB::table('admin')->get(),true);
+        foreach($admin as $k=>$v){
+            $arr[$v['a_id']] = $v['a_name'];
+        }
+        $data = DB::table('share')
+            ->where(['open_a_id'=>$a_id])
+            ->join('customer','customer.c_id','=','share.c_id')
+            ->paginate(3);
+            return view('share.share_list',['data'=>$data,'arr'=>$arr]);
+    }
+    //共享给我
+    public function share_list_do(Request $request){
+        $a_id = $request->session()->get('a_id');
+        //共享数据
+        $admin = json_decode(DB::table('admin')->get(),true);
+        foreach($admin as $k=>$v){
+            $arr[$v['a_id']] = $v['a_name'];
+        }
+        $data = DB::table('share')
+            ->where(['receive_a_id'=>$a_id])
+            ->join('customer','customer.c_id','=','share.c_id')
+            ->paginate(3);
+        return view('share.share_list_do',['data'=>$data,'arr'=>$arr]);
     }
     //产品展示
     public function product_list(){
@@ -480,6 +509,16 @@ class UserController extends Controller
         }else{
             echo 2;
         }
+    }
+    public function jinxiaofei(){
+        $kehu_id = 3;//传过来客户的id
+        $arr = json_decode(DB::table('jinxiaofei') -> where('crm_cusId',$kehu_id) -> get(),true);//根据要分享的客户的id查数据
+//        print_R($arr);exit;
+        foreach($arr as $k => $v){
+            $data[] = $v['crm_adminId'];
+        }//取出所有分享过该用户的管理员的id
+        $res = json_decode(DB::table('admin') -> whereNotIn('a_id',$data) -> get(),true);//查询条件  管理员的id 不在$data中 即为不在已经分享的管理员的id中
+        print_r($res);
     }
 }
 
