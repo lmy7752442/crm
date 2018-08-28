@@ -373,15 +373,19 @@ class UserController extends Controller
         //客户id
 //        $c_id = $_GET['c_id'];
         $c_id = $request->get('c_id');
-
+        $arr = json_decode(DB::table('jinxiaofei') -> where('crm_cusId',$c_id) -> get(),true);//根据要分享的客户的id查数据
+        foreach($arr as $k => $v){
+            $data[] = $v['crm_adminId'];
+        }//取出所有分享过该用户的管理员的id
+        $res = json_decode(DB::table('admin') -> whereNotIn('a_id',$data) -> get(),true);//查询条件  管理员的id 不在$data中 即为不在已经分享的管理员的id中
         //获取当前管理员id
         $a_id = $request->session()->get('a_id');
         $where = [
             'a_id' => $a_id
         ];
         //其他管理员id
-        $other_a_id = DB::table('admin')->whereNotIn('a_id',$where)->get();
-        return view('user.share_add')->with('c_id',$c_id)->with('data',$other_a_id);
+        //$other_a_id = DB::table('admin')->whereNotIn('a_id',$where)->get();
+        return view('user.share_add')->with('c_id',$c_id)->with('data',$res);
     }
 /*复选框   点击获取管理员的id  便利的时候给状态  where a_id = luo u_id = zhang*/
     /** 执行添加  共享 */
