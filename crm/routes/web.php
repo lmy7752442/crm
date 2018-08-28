@@ -242,8 +242,10 @@ Route::get('seek','ContractCOntroller@seek');
 Route::get('/share_add','UserController@share_add');
 //执行添加共享
 Route::get('/share_add_do','UserController@share_add_do');
-
-
+//共享列表展示  我的共享
+Route::get('share_list','UserController@share_list');
+//共享给我
+Route::get('share_list_do','UserController@share_list_do');
 ########## Count控制器 ##########
 //统计
 Route::get('/count','Count@count');
@@ -263,3 +265,5 @@ Route::get('/publicnotice_save','adt@publicnotice_save');
 Route::get('/publicnotice_save_do','adt@publicnotice_save_do');
 //公告删除
 Route::get('/publicnotice_del','adt@publicnotice_del');
+Route::get('/jin','UserController@jinxiaofei');
+
