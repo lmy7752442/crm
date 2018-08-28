@@ -49,7 +49,7 @@
                 <span class="x-red">*</span>定金
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="c_deposit" name="c_name" required="" lay-verify="required"
+                <input type="number" id="c_deposit" name="c_name" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -67,9 +67,12 @@
                 <span class="x-red">*</span>开始时间
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="c_ctime" name="c_name" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-
+                <div class="layui-row">
+                    <div class="layui-form layui-col-md12 x-so">
+                        <input class="layui-input" placeholder="开始日" name="start" id="c_ctime" lay-verify="required"
+                               autocomplete="off">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
@@ -77,8 +80,12 @@
                 <span class="x-red">*</span>结束时间
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="c_utime" name="c_name" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+                <div class="layui-row">
+                    <div class="layui-form layui-col-md12 x-so">
+                        <input class="layui-input" placeholder="截止日" name="end" id="c_utime" lay-verify="required"
+                               autocomplete="off">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
@@ -101,6 +108,19 @@
 
 </html>
 <script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#c_ctime' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#c_utime' //指定元素
+        });
+    });
     layui.use(['form','layer'], function(){
         $ = layui.jquery;
         var form = layui.form
@@ -158,6 +178,11 @@
 
     });
 </script>
-
+<script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();</script>
 </body>
 </html>
