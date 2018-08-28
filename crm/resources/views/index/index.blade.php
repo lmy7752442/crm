@@ -274,6 +274,12 @@
                             <cite>内部公告</cite>
                         </a>
                     </li >
+                    <li>
+                        <a _href="seas_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>公海</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
         </ul>

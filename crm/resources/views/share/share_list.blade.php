@@ -36,7 +36,9 @@
     </div>
     <xblock>
         {{--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--}}
-        <div class="layui-btn" ><i class="layui-icon"></i><a href="/share_list_do">共享给我</a></div>
+
+        <div class="layui-btn" ><i class="layui-icon"></i><a href="/share_list">共享他人</a></div>
+        <div class="layui-btn" ><i class="layui-icon"></i><a href="/share_list_do">我的共享</a></div>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">

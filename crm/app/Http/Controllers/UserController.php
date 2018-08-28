@@ -460,12 +460,19 @@ class UserController extends Controller
             ->where(['open_a_id'=>$a_id])
             ->join('customer','customer.c_id','=','share.c_id')
             ->paginate(3);
+        foreach($data as $k=>$v){
+            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
+            $v->ctype_id = $ctype->ctype_name;
+            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id,'status'=>1])->first();
+            $v->clevel_id = $clevel->clevel_name;
+            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
+            $v->csource_id = $csource->csource_name;
+        }
             return view('share.share_list',['data'=>$data,'arr'=>$arr]);
     }
     //共享给我
     public function share_list_do(Request $request){
         $a_id = $request->session()->get('a_id');
-        //共享数据
         $admin = json_decode(DB::table('admin')->get(),true);
         foreach($admin as $k=>$v){
             $arr[$v['a_id']] = $v['a_name'];
@@ -474,6 +481,14 @@ class UserController extends Controller
             ->where(['receive_a_id'=>$a_id])
             ->join('customer','customer.c_id','=','share.c_id')
             ->paginate(3);
+        foreach($data as $k=>$v){
+            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
+            $v->ctype_id = $ctype->ctype_name;
+            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id,'status'=>1])->first();
+            $v->clevel_id = $clevel->clevel_name;
+            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
+            $v->csource_id = $csource->csource_name;
+        }
         return view('share.share_list_do',['data'=>$data,'arr'=>$arr]);
     }
     //产品展示
@@ -536,4 +551,111 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //扔入公海
+    public function seas_add(){
+        //接 客户 id
+        $c_id = input::get('id');
+        $res = DB::table('customer')->where(['c_id'=>$c_id])->update(['status'=>2,'ctime'=>time()]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+
+    }
+    //公海展示
+    public function seas_list(){
+        $data = DB::table('customer')->where(['status'=>2])->orderByRaw('ctime DESC')->paginate(3);
+        foreach($data as $k=>$v){
+            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
+            $v->ctype_id = $ctype->ctype_name;
+            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id,'status'=>1])->first();
+            $v->clevel_id = $clevel->clevel_name;
+            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
+            $v->csource_id = $csource->csource_name;
+        }
+        return view('seas.seas_list',['data'=>$data]);
+    }
+    //删除公海数据
+    public function seas_del(Request $request){
+        $id = input::get('id');
+        $a_id = $request->session()->get('a_id');
+        $res = DB::table('customer')->where(['c_id'=>$id])->update(['status'=>3]);
+        if($res){
+            $arr2 = [
+                'c_id'=>$id,
+                'action'=>'公海客户删除',
+                'data_table'=>'客户表',
+                'a_id'=>$a_id,
+                'time'=>time(),
+                'status'=>1
+            ];
+            $result = DB::table('record')->insert($arr2);
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //修改公海数据
+    public function seas_update(){
+        $id = input::get('id');
+        $data = DB::table('customer')->where(['c_id'=>$id,'status'=>2])->first();
+        $ctype = DB::table('ctype')->where(['status'=>1])->get();
+        $clevel = DB::table('clevel')->where(['status'=>1])->get();
+        $csource = DB::table('csource')->where(['status'=>1])->get();
+        return view('seas.seas_update')->with('data',$data)->with('ctype',$ctype)->with('clevel',$clevel)->with('csource',$csource);
+    }
+    public function seas_update_do(Request $request){
+        $id = input::get('id');
+        $c_name = input::get('c_name');
+        $c_phone = input::get('c_phone');
+        //客户类型
+        $ctype = input::get('ctype');
+        //客户等级
+        $clevel_id = input::get('clevel_id');
+        //客户来源
+        $csource_id = input::get('csource_id');
+        //其他联系方式
+        $c_other_connect = input::get('c_other_connect');
+        //备注
+        $c_notes = input::get('c_notes');
+        $province = input::get('province');
+        $city = input::get('city');
+        $area = input::get('area');
+        $address = input::get('address');
+        $other_phone = input::get('other_phone');
+        $a_id = $request->session()->get('a_id');
+        $arr = [
+            'c_name'=>$c_name,
+            'c_phone'=>$c_phone,
+            'ctype_id'=>$ctype,
+            'clevel_id'=>$clevel_id,
+            'csource_id'=>$csource_id,
+            'c_other_connect'=>$c_other_connect,
+            'c_notes'=>$c_notes,
+            'c_province'=>$province,
+            'c_city'=>$city,
+            'c_area'=>$area,
+            'address'=>$address,
+            'other_phone'=>$other_phone,
+            'ctime'=>time()
+        ];
+        $res = DB::table('customer')->where(['c_id'=>$id])->update($arr);
+        if($res){
+            $arr2 = [
+                'c_id'=>$id,
+                'action'=>'公海客户修改',
+                'data_table'=>'客户表',
+                'a_id'=>$a_id,
+                'time'=>time(),
+                'status'=>1
+            ];
+            $result = DB::table('record')->insert($arr2);
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
 }
+
+
