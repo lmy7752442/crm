@@ -162,6 +162,12 @@
                             <cite>订单方式列表</cite>
                         </a>
                     </li >
+                    <li>
+                        <a _href="order_type_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单状态列表</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
             <li>
