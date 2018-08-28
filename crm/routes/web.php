@@ -261,6 +261,8 @@ Route::get('seas_update','UserController@seas_update');
 Route::get('seas_update_do','UserController@seas_update_do');
 //操作记录展示
 Route::get('operation_list','UserController@operation_list');
+//登录日志展示
+Route::get('login.log_list','UserController@login.log_list');
 
 ##############  Contract 控制器########
 //合同展示
