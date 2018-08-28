@@ -66,13 +66,10 @@
                     <td>{{$v->role_id}}</td>
                     <td>{{$v->r_name}}</td>
                     <td>{{$v->a_account}}</td>
-                    <td>{{$v->p_name}}</td>
+                    <td>{{$v->power_id}}</td>
                     {{--<td class="td-status">--}}
                         {{--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
                     <td class="td-manage">
-                        <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                            <i class="layui-icon">&#xe601;</i>
-                        </a>
                         <a title="编辑"  onclick="x_admin_show('编辑','/role_update?role_id={{$v->role_id}}')" href="javascript:;">
                             <i class="layui-icon">&#xe642;</i>
                         </a>
