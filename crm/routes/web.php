@@ -288,5 +288,7 @@ Route::get('seas_del','UserController@seas_del');
 //修改公海数据
 Route::get('seas_update','UserController@seas_update');
 Route::get('seas_update_do','UserController@seas_update_do');
+//操作记录展示
+Route::get('operation_list','UserController@operation_list');
 
 
