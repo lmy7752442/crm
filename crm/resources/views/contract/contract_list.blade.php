@@ -35,17 +35,16 @@
 
 <div class="x-body">
     <div class="layui-row">
-        <div class="layui-form layui-col-md12 x-so">
-            <input class="layui-input" placeholder="开始日" name="start" id="start">
-            <input class="layui-input" placeholder="截止日" name="end" id="end">
-            <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input" id="name">
-            <button class="layui-btn"  lay-submit="" lay-filter="sreach" id="button"><i class="layui-icon">&#xe615;</i></button>
-        </div>
+        {{--<div class="layui-form layui-col-md12 x-so">--}}
+            {{--<input class="layui-input" placeholder="开始日" name="start" id="start">--}}
+            {{--<input class="layui-input" placeholder="截止日" name="end" id="end">--}}
+            {{--<input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input" id="name">--}}
+            {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach" id="button"><i class="layui-icon">&#xe615;</i></button>--}}
+        {{--</div>--}}
     </div>
     <div class="layui-row">
     </div>
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加合同','/contract_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
