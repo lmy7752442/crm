@@ -6968,8 +6968,8 @@
       <file leaf-file-name="UserController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2358">
-              <caret line="496" lean-forward="true" selection-start-line="496" selection-end-line="496" />
+            <state relative-caret-position="970">
+              <caret line="548" selection-start-line="548" selection-end-line="548" />
             </state>
           </provider>
         </entry>
@@ -7402,12 +7402,12 @@
       <workItem from="1535157178761" duration="26141000" />
       <workItem from="1535272675191" duration="1150000" />
       <workItem from="1535330979593" duration="33569000" />
-      <workItem from="1535415739731" duration="8987000" />
+      <workItem from="1535415739731" duration="9439000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167610000" />
+    <option name="totallyTimeSpent" value="168062000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="37" y="10" width="1297" height="700" extended-state="0" />
@@ -7784,8 +7784,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2358">
-          <caret line="496" lean-forward="true" selection-start-line="496" selection-end-line="496" />
+        <state relative-caret-position="970">
+          <caret line="548" selection-start-line="548" selection-end-line="548" />
         </state>
       </provider>
     </entry>

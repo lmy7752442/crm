@@ -282,7 +282,7 @@ class UserController extends Controller
         return view('user.csource_add');
     }
     public function csource_add_do(){
-        $csource = input::get('csource');
+       $csource = input::get('csource');
         $res = DB::table('csource')->insert(['csource_name'=>$csource,'status'=>1]);
         if($res){
             echo 1;
@@ -381,7 +381,7 @@ class UserController extends Controller
         }
         DB::table('admin')->where(['a_id'=>$a_id])->update(['a_status'=>3]);
         //取出所有分享过该用户的管理员的id
-        $res = DB::table('admin') -> whereNotIn('a_id',$data) ->where(['a_status'=>1])-> get();//查询条件  管理员的id 不在$data中 即为不在已经分享的管理员的id中
+       $res = DB::table('admin') -> whereNotIn('a_id',$data) ->where(['a_status'=>1])-> get();//查询条件  管理员的id 不在$data中 即为不在已经分享的管理员的id中
 //        //获取当前管理员id
 //        $a_id = $request->session()->get('a_id');
 //        $where = [
@@ -391,7 +391,7 @@ class UserController extends Controller
 //       // $other_a_id = DB::table('admin')->whereNotIn('a_id',$where)->get();
         return view('user.share_add')->with('c_id',$c_id)->with('data',$res);
     }
-    /*复选框   点击获取管理员的id  便利的时候给状态  where a_id = luo u_id = zhang*/
+/*复选框   点击获取管理员的id  便利的时候给状态  where a_id = luo u_id = zhang*/
     /** 执行添加  共享 */
     public function share_add_do(Request $request)
     {
@@ -402,23 +402,38 @@ class UserController extends Controller
         $admin_data = explode(',',$admin_data);
         //获取当前管理员id
         $a_id = $request->session()->get('a_id');
-        //这个管理员把这个客户都共享给哪些管理员
-        $data1 = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->first();
-        if (!empty($data1)) {
-            $data = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->get();
-            foreach ($data as $k => $v) {
-                $arr[] = $v->receive_a_id;
-            }
-            foreach($admin_data as $k=>$v){
-                if (in_array($v, $arr)) {
-                    echo '该客户已经共享给管理员';
-                    exit;
-                } else {
+            //这个管理员把这个客户都共享给哪些管理员
+            $data1 = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->first();
+            if (!empty($data1)) {
+                $data = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->get();
+                foreach ($data as $k => $v) {
+                    $arr[] = $v->receive_a_id;
+                }
+                foreach($admin_data as $k=>$v){
+                    if (in_array($v, $arr)) {
+                        echo '该客户已经共享给管理员';
+                        exit;
+                    } else {
+                        $insert_data = [
+                            'open_a_id' => $a_id,
+                            'receive_a_id' => $v,
+                            'c_id' => $c_id
+                        ];
+                        $array = [
+                            'admin_id'=>$v,
+                            'c_id'=>$c_id
+                        ];
+                        DB::table('admin_share')->insert($array);
+                        $res = DB::table('share')->insert($insert_data);
+                    }
+                }
+            } else {
+                foreach($admin_data as $k=>$v){
                     $insert_data = [
-                        'open_a_id' => $a_id,
-                        'receive_a_id' => $v,
-                        'c_id' => $c_id
-                    ];
+                    'open_a_id' => $a_id,
+                    'receive_a_id' => $v,
+                    'c_id' => $c_id
+                ];
                     $array = [
                         'admin_id'=>$v,
                         'c_id'=>$c_id
@@ -427,29 +442,12 @@ class UserController extends Controller
                     $res = DB::table('share')->insert($insert_data);
                 }
             }
-        } else {
-            foreach($admin_data as $k=>$v){
-                $insert_data = [
-                    'open_a_id' => $a_id,
-                    'receive_a_id' => $v,
-                    'c_id' => $c_id
-                ];
-                $array = [
-                    'admin_id'=>$v,
-                    'c_id'=>$c_id
-                ];
-                DB::table('admin_share')->insert($array);
-                $res = DB::table('share')->insert($insert_data);
+            if ($res) {
+                return 1;
+            } else {
+                return 2;
             }
-
-        }
-        if ($res) {
-            return 1;
-        } else {
-            return 2;
-        }
     }
-
     //共享展示  我的共享
     public function share_list(Request $request){
         $a_id = $request->session()->get('a_id');
@@ -462,9 +460,8 @@ class UserController extends Controller
             ->where(['open_a_id'=>$a_id])
             ->join('customer','customer.c_id','=','share.c_id')
             ->paginate(3);
-        return view('share.share_list',['data'=>$data,'arr'=>$arr]);
+            return view('share.share_list',['data'=>$data,'arr'=>$arr]);
     }
-
     //共享给我
     public function share_list_do(Request $request){
         $a_id = $request->session()->get('a_id');
@@ -479,7 +476,6 @@ class UserController extends Controller
             ->paginate(3);
         return view('share.share_list_do',['data'=>$data,'arr'=>$arr]);
     }
-
     //产品展示
     public function product_list(){
         $data = DB::table('product')->where(['status'=>1])->paginate(3);
@@ -540,5 +536,4 @@ class UserController extends Controller
             echo 2;
         }
     }
-
 }
