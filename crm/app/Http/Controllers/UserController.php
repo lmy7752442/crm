@@ -656,6 +656,17 @@ class UserController extends Controller
             echo 2;
         }
     }
+    //操作记录展示
+    public function operation_list(){
+        $data = DB::table('record')->where(['status'=>1])->paginate(10);
+        foreach($data as $k=>$v){
+            $a_id = DB::table('admin')->where(['a_id'=>$v->a_id])->first();
+            $v->a_id = $a_id->a_name;
+            $c_id = DB::table('customer')->where(['c_id'=>$v->c_id])->first();
+            $v->c_id = $c_id->c_name;
+        }
+        return view('operation.operation_list',['data'=>$data]);
+    }
 }
 
 

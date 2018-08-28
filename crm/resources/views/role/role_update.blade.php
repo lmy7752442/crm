@@ -23,13 +23,13 @@
 <body>
 <div class="x-body">
     <form action="" method="post" class="layui-form layui-form-pane">
-        <input type="hidden" name="role_id" value="{{$res->role_id}}">
+        <input type="hidden" id="role_id" value="{{$res['role_id']}}">
         <div class="layui-form-item">
             <label for="r_name" class="layui-form-label">
                 <span class="x-red">*</span>角色名称
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="r_name" value="{{$res->r_name}}" name="r_name" required="" lay-verify="required"
+                <input type="text" id="r_name" value="{{$res['r_name']}}" name="r_name" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -42,7 +42,7 @@
                 <select name="a_id">
                     <option value="">请选择</option>
                     @foreach($admin as $v)
-                        <option value="{{$v->a_id}}" @if($v->a_id == $res->a_id) selected @endif>{{$v->a_account}}</option>
+                        <option value="{{$v->a_id}}" @if($v->a_id == $res['a_id']) selected @endif>{{$v->a_account}}</option>
                     @endforeach
                 </select>
             </div>
@@ -53,21 +53,13 @@
                 <span class="x-red">*</span>权限名称
             </label>
             <div class="layui-input-inline">
-                <select name="power_id">
-                    <option value="">请选择</option>
-                    @foreach($power as $v)
-                        <option value="{{$v->power_id}}" @if($v->power_id == $res->power_id) selected @endif>{{$v->p_name}}</option>
+                <div class="layui-input-inline">
+                    @foreach($new as $v)
+                        <input type="checkbox" name="power_id" lay-skin="primary" value="{{$v['power_id']}}" title="{{$v['p_name']}}" {{$v['a']}}>
                     @endforeach
-                </select>
+                </div>
             </div>
         </div>
-
-        {{--描述--}}
-        {{--</label>--}}
-        {{--<div class="layui-input-block">--}}
-        {{--<textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"></textarea>--}}
-        {{--</div>--}}
-        {{--</div>--}}
         <div class="layui-form-item">
             <button class="layui-btn" lay-submit="" lay-filter="update">修改</button>
         </div>
@@ -80,11 +72,31 @@
                 ,layer = layui.layer;
 
         form.on('submit(update)', function(data){
-            console.log(data);
+            //获取角色id
+            var role_id = $("#role_id").val();
+            console.log(role_id);
+
+            //获取角色名称
+            var r_name_arr = $("#r_name").val();
+            console.log(r_name_arr);
+
+            //获取管理员id
+            var a_id = $("[name=a_id]").val();
+            console.log(a_id);
+
+            //获取checkbox[name='power_id']的值
+            var power_id_arr = '';
+            var arr = new Array();
+            $("input:checkbox[name='power_id']:checked").each(function(i){
+                arr[i] = $(this).val();
+            });
+            power_id_arr = arr.join(",");//将数组合并成字符串
+            console.log(power_id_arr);
+
             $.ajax({
                 method:'get',
                 url:"/role_update_do",
-                data:data.field,
+                data:{r_name_arr:r_name_arr,a_id:a_id,power_id_arr:power_id_arr,role_id:role_id},
                 success:function(res){
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
