@@ -34,16 +34,12 @@
 <div class="x-body">
     <div class="layui-row">
     </div>
-    <xblock>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','/user_add')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
-    </xblock>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            {{--<th>--}}
+                {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</th>--}}
             <th>客户名称</th>
             <th>手机号</th>
             <th>备用手机号</th>
@@ -62,41 +58,37 @@
         </thead>
         <tbody>
         @foreach($data as $v)
-        <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td><a onclick="x_admin_show('客户共享','/share_add?c_id={{$v->c_id}}')" style="color:blue;" href="javascript:;">{{$v->c_name}}</a></td>
-            <td>{{$v->c_phone}}</td>
-            <td>{{$v->other_phone}}</td>
-            <td>{{$v->ctype_id}}</td>
-            <td>{{$v->clevel_id}}</td>
-            <td>{{$v->csource_id}}</td>
-            <td>{{$v->c_other_connect}}</td>
-            <td>{{$v->c_notes}}</td>
-            <td>{{$v->c_province}}</td>
-            <td>{{$v->c_city}}</td>
-            <td>{{$v->c_area}}</td>
-            <td>{{$v->address}}</td>
-            <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
-            <td class="td-manage">
-                <a title="查看"  onclick="x_admin_show('编辑','user_update?id={{$v->c_id}}')" href="javascript:;">
-                    <i class="layui-icon">&#xe63c;</i>
-                </a>
-                <a titel="扔入公海" href="javascript:;" onclick="member_seas(this,'{{$v->c_id}}')">
-                    <i class="layui-icon">公海</i>
-                </a>
-                <a title="删除" onclick="member_del(this,'{{$v->c_id}}')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-
-            </td>
-        </tr>
-         @endforeach
+            <tr>
+                {{--<td>--}}
+                    {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
+                {{--</td>--}}
+                <td>{{$v->c_name}}</td>
+                <td>{{$v->c_phone}}</td>
+                <td>{{$v->other_phone}}</td>
+                <td>{{$v->ctype_id}}</td>
+                <td>{{$v->clevel_id}}</td>
+                <td>{{$v->csource_id}}</td>
+                <td>{{$v->c_other_connect}}</td>
+                <td>{{$v->c_notes}}</td>
+                <td>{{$v->c_province}}</td>
+                <td>{{$v->c_city}}</td>
+                <td>{{$v->c_area}}</td>
+                <td>{{$v->address}}</td>
+                <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
+                <td class="td-manage">
+                    <a title="查看"  onclick="x_admin_show('编辑','seas_update?id={{$v->c_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe63c;</i>
+                    </a>
+                    <a title="删除" onclick="member_del(this,'{{$v->c_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
     <div class="page">
-       {{$data->links()}}
+        {{$data->links()}}
     </div>
 
 </div>
@@ -142,7 +134,7 @@
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
             //发异步删除数据
-            $.get('user_del',
+            $.get('seas_del',
                 {
                     id:id
                 },function(data){
@@ -158,24 +150,6 @@
 
         });
     }
-    function member_seas(obj,id){
-        layer.confirm('确认要扔入公海吗？',function(index){
-            $.get('seas_add',
-                {
-                    id:id
-                },function(data){
-                    if(data==1){
-                        $(obj).parents("tr").remove();
-                        layer.msg('已扔进公海!',{icon:1,time:1000});
-                        // parent.$('.layui-table tr:eq(1)').before(strve()); //删除指定行
-                    }else{
-                        $(obj).parents("tr").remove();
-                        layer.msg('扔入失败!',{icon:1,time:1000});
-                    }
-                })
-        })
-    }
-
     function delAll (argument) {
 
         var data = tableCheck.getData();

@@ -281,5 +281,12 @@ Route::get('/publicnotice_save_do','adt@publicnotice_save_do');
 Route::get('/publicnotice_del','adt@publicnotice_del');
 //公海展示
 Route::get('seas_list','UserController@seas_list');
+//扔入公海
+Route::get('seas_add','UserController@seas_add');
+//删除公海数据
+Route::get('seas_del','UserController@seas_del');
+//修改公海数据
+Route::get('seas_update','UserController@seas_update');
+Route::get('seas_update_do','UserController@seas_update_do');
 
 
