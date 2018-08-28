@@ -146,6 +146,12 @@ Route::get('order_user','OrderController@order_user');
 Route::get('order_add','OrderController@order_add');
 //订单添加执行
 Route::get('order_add_do','OrderController@order_add_do');
+//订单修改
+Route::get('order_save','OrderController@order_save');
+//订单修改执行
+Route::get('order_save_do','OrderController@order_save_do');
+//订单删除
+Route::get('order_del','OrderController@order_del');
 //订单方式列表
 Route::get('order_mode_list','OrderController@order_mode_list');
 //订单方式添加
@@ -238,9 +244,28 @@ Route::get('seek','ContractCOntroller@seek');
 Route::get('/share_add','UserController@share_add');
 //执行添加共享
 Route::get('/share_add_do','UserController@share_add_do');
-
-
+//共享列表展示  我的共享
+Route::get('share_list','UserController@share_list');
+//共享给我
+Route::get('share_list_do','UserController@share_list_do');
 ########## Count控制器 ##########
 //统计
 Route::get('/count','CountController@count');
+
+
+
+########## adt控制器 ##########
+//公告展示
+Route::get('/publicnotice_list','adt@publicnotice_list');
+//公告添加
+Route::get('/publicnotice_add','adt@publicnotice_add');
+//公告添加执行
+Route::get('/publicnotice_add_do','adt@publicnotice_add_do');
+//公告修改
+Route::get('/publicnotice_save','adt@publicnotice_save');
+//公告修改执行
+Route::get('/publicnotice_save_do','adt@publicnotice_save_do');
+//公告删除
+Route::get('/publicnotice_del','adt@publicnotice_del');
+Route::get('/jin','UserController@jinxiaofei');
 

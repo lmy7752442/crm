@@ -14,7 +14,8 @@ class IndexController extends CommonController
         return view('index.index')->with('data',$a_account);
     }
     public function welcome(){
-        return view('index.welcome');
+        $notice_data = DB::table('publicnotice')->where('status',1)->orderBy('time','desc')->get();
+        return view('index.welcome',['notice_data'=>$notice_data]);
     }
 
 

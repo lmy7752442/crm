@@ -67,7 +67,7 @@
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td><a onclick="x_admin_show('客户共享','/share_add?c_id={{$v->c_id}}')">{{$v->c_name}}</a></td>
+            <td><a onclick="x_admin_show('客户共享','/share_add?c_id={{$v->c_id}}')" style="color:blue;" href="javascript:;">{{$v->c_name}}</a></td>
             <td>{{$v->c_phone}}</td>
             <td>{{$v->other_phone}}</td>
             <td>{{$v->ctype_id}}</td>
@@ -87,6 +87,9 @@
                 <a title="删除" onclick="member_del(this,'{{$v->c_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
+                {{--<a title="共享"  onclick="x_admin_show('编辑','user_update?id={{$v->c_id}}')" href="javascript:;">--}}
+                    {{--<i class="layui-icon">&#xe63c;</i>--}}
+                {{--</a>--}}
             </td>
         </tr>
          @endforeach

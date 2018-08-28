@@ -24,16 +24,6 @@
 <div class="x-body">
     <form action="" method="post" class="layui-form layui-form-pane">
         <input type="hidden" name="c_id" value="{{$c_id}}">
-        <!-- 是否开共享 -->
-        <div class="layui-form-item">
-            <label for="share" class="layui-form-label">
-                <span class="x-red">*</span>是否共享
-            </label>
-            <div class="layui-input-inline">
-                <input type="radio" name="share" lay-filter="erweima" value="1" title="是">
-                <input type="radio" name="share" lay-filter="erweima" value="2" title="否">
-            </div>
-        </div>
         <!-- 管理员 -->
         <div class="layui-form-item">
             <label for="a_id" class="layui-form-label">
@@ -46,7 +36,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <button class="layui-btn" lay-submit="" lay-filter="add">确认</button>
+            <div class="layui-btn" lay-submit="" lay-filter="add">确认</div>
         </div>
     </form>
 </div>
@@ -85,40 +75,30 @@
 //        });
 
         form.on('submit(add)', function(data){
-            //获取radio[name='share']的值
-            var share_arr = new Array();
-            $("input:radio[name=share]:checked").each(function(i){
-                share_arr[i] = $(this).val();
-//                alert(share_arr);
-            });
-            data.field.share = share_arr.join(",");//将数组合并成字符串
-
             //获取checkbox[name='a_id']的值
-            var admin_arr = new Array();
+            var admin_arr = '';
             $("input:checkbox[name=a_id]:checked").each(function(i){
-                admin_arr[i] = $(this).val();
-//                alert(admin_arr);
+                admin_arr = $(this).val();
             });
-            data.field.a_id = admin_arr.join(",");//将数组合并成字符串
-
+            // data.field.a_id = admin_arr.join(",");//将数组合并成字符串
             //获取input[name='c_id']的值
             var c_id = "";
             var c_id = $("[name=c_id]").val();
-//            alert(c_id);
-
             $.ajax({
                 method:'get',
                 url:"/share_add_do",
-                data:{share_arr:share_arr,admin_arr:admin_arr,c_id:c_id},
+                data:{admin_arr:admin_arr,c_id:c_id},
                 success:function(res){
                     console.log(res);
 ////                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
                         layer.alert('客户共享成功');
-                        window.location.href="/user_list";
-                    }else{
+                        window.parent.location.reload();
+                    }else if(res==2){
                         layer.alert('客户共享失败');
-                        window.location.href="/share_add";
+                        window.parent.location.reload();
+                    }else{
+                        alert(res)
                     }
                 }
             });

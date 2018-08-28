@@ -222,21 +222,6 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
-                    <cite>分类管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="cate.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>多级分类</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
                     <cite>合同管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -251,21 +236,6 @@
                         <a _href="contract_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>合同展示</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>城市联动</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="city.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>三级地区联动</cite>
                         </a>
                     </li >
                 </ul>
@@ -287,17 +257,17 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe6b4;</i>
-                    <cite>图标字体</cite>
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>功能插件</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="crm/unicode.html">
+                        <a _href="publicnotice_list">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>图标对应字体</cite>
+                            <cite>内部公告</cite>
                         </a>
-                    </li>
+                    </li >
                 </ul>
             </li>
         </ul>
