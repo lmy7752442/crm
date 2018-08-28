@@ -10,8 +10,22 @@ class UserController extends Controller
     //客户展示
     public  function user_list(Request $request){
         $a_id = $request->session()->get('a_id');//管理员id
-        $data = DB::table('customer')->where(['status'=>1,'a_id'=>$a_id])->orderByRaw('ctime DESC')->paginate(3);
-
+        $start = input::get('start');//时间
+        $end = input::get('end');
+        $c_name = input::get('name');//客户名称
+        $where = [];
+        if(!empty($start)){
+            $start = strtotime($start);
+            $where[] = ['ctime','>',$start];
+        }
+        if(!empty($end)){
+            $end = strtotime($end);
+            $where[]=['ctime','<',$end];
+        }
+        if(!empty($c_name)){
+            $where[]=['c_name','like','%'.$c_name.'%'];
+        }
+        $data = DB::table('customer')->where(['status'=>1,'a_id'=>$a_id])->where($where)->orderByRaw('ctime DESC')->paginate(3);
         foreach($data as $k=>$v){
             $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
             $v->ctype_id = $ctype->ctype_name;
@@ -23,6 +37,37 @@ class UserController extends Controller
 //        print_r($data);exit;
         return view('user.user_list',['data'=>$data]);
     }
+    //客户搜索
+//    public function user_seek(Request $request){
+//        $a_id = $request->session()->get('a_id');
+//        $start = input::get('start');//时间
+//        $end = input::get('end');
+//        $c_name = input::get('name');//客户名称
+//        $where = [];
+//        if(!empty($start)){
+//            $start = strtotime($start);
+//            $where[] = ['ctime','>',$start];
+//        }
+//        if(!empty($end)){
+//            $end = strtotime($end);
+//            $where[]=['ctime','<',$end];
+//        }
+//        if(!empty($c_name)){
+//            $where[]=['c_name','like','%'.$c_name.'%'];
+//        }
+//        $data = DB::table('customer')->where(['status'=>1,'a_id'=>$a_id])->where($where)->get();
+//        foreach($data as $k=>$v){
+//           // $v->ctime = date('Y-m-d H:i:s',$v->ctime);
+//            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
+//            $v->ctype_id = $ctype->ctype_name;
+//            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id,'status'=>1])->first();
+//            $v->clevel_id = $clevel->clevel_name;
+//            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
+//            $v->csource_id = $csource->csource_name;
+//        }
+//        return $data;
+//
+//    }
     //客户添加
     public function user_add(){
         $ctype = DB::table('ctype')->where(['status'=>1])->get();
