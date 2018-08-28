@@ -165,34 +165,6 @@
             elem: '#a_birthday' //指定元素
         });
 
-//        //自定义验证规则
-//        form.verify({
-//            nikename: function(value){
-//                if(value.length < 5){
-//                    return '昵称至少得5个字符啊';
-//                }
-//            }
-//            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-//            ,repass: function(value){
-//                if($('#L_pass').val()!=$('#L_repass').val()){
-//                    return '两次密码不一致';
-//                }
-//            }
-//        });
-
-//        //监听提交
-//        form.on('submit(add)', function(data){
-//            console.log(data);
-//            //发异步，把数据提交给php
-//            layer.alert("增加成功", {icon: 6},function () {
-//                // 获得frame索引
-//                var index = parent.layer.getFrameIndex(window.name);
-//                //关闭当前frame
-//                parent.layer.close(index);
-//            });
-//            return false;
-//        });
-
         form.on('submit(update)', function(data){
             console.log(data);
             $.ajax({
@@ -203,11 +175,19 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('管理员修改成功');
-                        window.location.href="/admin_list";
+//                        layer.alert('');
+                        layer.msg("管理员修改成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            window.parent.location.reload();
+                        });
+//                        window.location.href="/admin_list";
                     }else if(res == 2) {
-                        layer.alert('管理员修改失败');
-                        window.location.href = "/admin_list";
+                        layer.msg('管理员修改失败', {icon: 5});
+//                        window.location.href = "/admin_list";
+                        layer.close(layer.index);
                     }
                 }
             });

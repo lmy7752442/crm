@@ -212,14 +212,24 @@
                      console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('管理员添加成功');
-                        window.location.href="/admin_list";
+//                        layer.alert('管理员添加成功');
+//                        window.location.href="/admin_list";
+
+                        layer.msg("管理员添加成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            window.parent.location.reload();
+                        });
                     }else if(res == 2){
-                        layer.alert('管理员添加失败');
-                        window.location.href="/admin_add";
+                        layer.msg('管理员添加失败', {icon: 5});
+//                        window.location.href="/admin_add";
+                        layer.close(layer.index);
                     }else{
-                        layer.alert('密码与确认密码不一致');
-                        window.location.href="/admin_add";
+                        layer.msg('密码与确认密码不一致', {icon: 5});
+//                        window.location.href="/admin_add";
+                        layer.close(layer.index);
                     }
                 }
             });

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class Department extends Common
+class DepartmentController extends CommonController
 {
     /** 部门添加 */
     public function department_add(){

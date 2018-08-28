@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-class Index extends Common
+class IndexController extends CommonController
 {
     //首页
     public function index(Request $request){
@@ -14,7 +14,8 @@ class Index extends Common
         return view('index.index')->with('data',$a_account);
     }
     public function welcome(){
-        return view('index.welcome');
+        $notice_data = DB::table('publicnotice')->where('status',1)->orderBy('time','desc')->get();
+        return view('index.welcome',['notice_data'=>$notice_data]);
     }
 
 

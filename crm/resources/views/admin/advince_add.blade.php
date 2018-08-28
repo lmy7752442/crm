@@ -40,8 +40,7 @@
                 <span class="x-red">*</span>建议
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="a_advince" name="a_advince" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+                <textarea id="a_advince" name="a_advince" required lay-verify="required" placeholder="请输入" class="layui-textarea"></textarea>
             </div>
         </div>
         <!-- 客户 -->
@@ -91,11 +90,17 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('客户建议添加成功');
-                        window.location.href="/advince_list";
+                        layer.msg("客户建议添加成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            window.parent.location.reload();
+                        });
+//                        window.location.href="/advince_list";
                     }else{
-                        layer.alert('客户建议添加失败');
-                        window.location.href="/advince_add";
+                        layer.msg('客户建议添加失败', {icon: 5})
+                        layer.close(layer.index);
                     }
                 }
             });

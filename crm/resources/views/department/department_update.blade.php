@@ -124,11 +124,16 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('部门修改成功');
-                        window.location.href="/department_list";
+                        layer.msg("部门修改成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            window.parent.location.reload();
+                        });
                     }else if(res == 2){
-                        layer.alert('部门修改失败');
-                        window.location.href="/department_list";
+                        layer.msg('部门修改失败', {icon: 5})
+                        layer.close(layer.index);
                     }
                 }
             });

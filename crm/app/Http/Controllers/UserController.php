@@ -390,11 +390,26 @@ class UserController extends Controller
 /*复选框   点击获取管理员的id  便利的时候给状态  where a_id = luo u_id = zhang*/
     /** 执行添加  共享 */
     public function share_add_do(Request $request)
+<<<<<<< HEAD
+    {
+=======
     {//共享后消失没做
+>>>>>>> e5c8dc76090908313b29da1f2b326b289ccd0ea4
         $c_id = $_GET['c_id'];
         $admin_data = $_GET['admin_arr'];
         //获取当前管理员id
         $a_id = $request->session()->get('a_id');
+<<<<<<< HEAD
+        $insert_data = [
+            'open_a_id' => $a_id,
+            'receive_a_id' => $admin_data[0],
+            'c_id' => $c_id,
+//            'is_share' => $share_arr[0],
+        ];
+//        print_r($insert_data);
+        $res = DB::table('share')->insert($insert_data);
+        if ($res) {
+=======
         //这个管理员把这个客户都共享给哪些管理员
         $data1 = DB::table('share')->where(['open_a_id'=>$a_id,'c_id'=>$c_id])->first();
         if(!empty($data1)){
@@ -421,11 +436,15 @@ class UserController extends Controller
                 $res = DB::table('share')->insert($insert_data);
             }
         if($res) {
+>>>>>>> e5c8dc76090908313b29da1f2b326b289ccd0ea4
             return 1;
         } else {
             return 2;
         }
     }
+<<<<<<< HEAD
+
+=======
     //共享展示  我的共享
     public function share_list(Request $request){
         $a_id = $request->session()->get('a_id');
@@ -454,6 +473,7 @@ class UserController extends Controller
             ->paginate(3);
         return view('share.share_list_do',['data'=>$data,'arr'=>$arr]);
     }
+>>>>>>> e5c8dc76090908313b29da1f2b326b289ccd0ea4
     //产品展示
     public function product_list(){
         $data = DB::table('product')->where(['status'=>1])->paginate(3);

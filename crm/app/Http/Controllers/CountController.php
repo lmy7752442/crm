@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class Count extends BaseController{
+class CountController extends BaseController{
     /** 统计 */
     public function count(){
         return view('count.count');

@@ -145,11 +145,13 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('管理员删除成功');
+//                        layer.alert('');
+                        layer.msg("管理员删除成功", {icon: 6});
                         window.location.href="/admin_list";
                     }else if(res == 2) {
-                        layer.alert('管理员删除失败');
-                        window.location.href = "/admin_list";
+                        layer.msg('管理员删除失败', {icon: 5});
+//                        window.location.href = "/admin_list";
+                        layer.close(layer.index);
                     }
                 }
             });
