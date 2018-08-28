@@ -248,3 +248,18 @@ Route::get('/share_add_do','UserController@share_add_do');
 //统计
 Route::get('/count','Count@count');
 
+
+
+########## adt控制器 ##########
+//公告展示
+Route::get('/publicnotice_list','adt@publicnotice_list');
+//公告添加
+Route::get('/publicnotice_add','adt@publicnotice_add');
+//公告添加执行
+Route::get('/publicnotice_add_do','adt@publicnotice_add_do');
+//公告修改
+Route::get('/publicnotice_save','adt@publicnotice_save');
+//公告修改执行
+Route::get('/publicnotice_save_do','adt@publicnotice_save_do');
+//公告删除
+Route::get('/publicnotice_del','adt@publicnotice_del');

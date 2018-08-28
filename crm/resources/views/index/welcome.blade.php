@@ -32,6 +32,7 @@
                                             <h3>文章数</h3>
                                             <p>
                                                 <cite>66</cite></p>
+
                                         </a>
                                     </li>
                                     <li class="layui-col-xs2">
@@ -82,16 +83,17 @@
         <div class="layui-field-box">
             <table class="layui-table" lay-skin="line">
                 <tbody>
+                @foreach($notice_data as $v)
                 <tr>
                     <td >
-                        <a class="x-a" target="_blank">新版 2.0上线了</a>
+                        <a class="x-a" target="_blank">{{$v->content}}</a>
+                    </td>
+                    <td style='float:right;'>
+                        公告更新时间:<?php echo date('Y-m-d H:i:s',$v->time);?>
                     </td>
                 </tr>
-                <tr>
-                    <td >
-                        <a class="x-a" target="_blank">欢迎交流</a>
-                    </td>
-                </tr>
+                @endforeach
+
                 </tbody>
             </table>
         </div>
@@ -162,7 +164,7 @@
             function hide_mr(value){
                 var mm = value.year+'-'+value.month+'-'+value.date;
 
-                $('.laydate-theme-grid table tbody').find('[lay-ymd="'+mm+'"]').removeClass('layui-this');
+                $('.laydate-theme-grid table tbody').find('[lay-ymd="'+mm+'"]').removeClass('layer-this');
                 //console.log(value)
             }
 
