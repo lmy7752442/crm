@@ -279,5 +279,7 @@ Route::get('/publicnotice_save','adt@publicnotice_save');
 Route::get('/publicnotice_save_do','adt@publicnotice_save_do');
 //公告删除
 Route::get('/publicnotice_del','adt@publicnotice_del');
+//公海展示
+Route::get('seas_list','UserController@seas_list');
 
 
