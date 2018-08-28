@@ -239,6 +239,30 @@ Route::get('product_update','UserController@product_update');
 Route::get('product_update_do','UserController@product_update_do');
 //产品删除
 Route::get('product_del','UserController@product_del');
+
+//开共享
+Route::get('/share_add','UserController@share_add');
+//执行添加共享
+Route::get('/share_add_do','UserController@share_add_do');
+//共享列表展示我的共享
+Route::get('share_list','UserController@share_list');
+//共享给我
+Route::get('share_list_do','UserController@share_list_do');
+
+
+//公海展示
+Route::get('seas_list','UserController@seas_list');
+//扔入公海
+Route::get('seas_add','UserController@seas_add');
+//删除公海数据
+Route::get('seas_del','UserController@seas_del');
+//修改公海数据
+Route::get('seas_update','UserController@seas_update');
+Route::get('seas_update_do','UserController@seas_update_do');
+//操作记录展示
+Route::get('operation_list','UserController@operation_list');
+
+##############  Contract 控制器########
 //合同展示
 Route::get('contract_list','ContractController@contract_list');
 //合同添加
@@ -250,16 +274,9 @@ Route::get('contract_del','ContractController@contract_del');
 Route::get('contract_update','ContractController@contract_update');
 Route::get('contract_update_do','ContractController@contract_update_do');
 //搜索
-Route::get('seek','ContractCOntroller@seek');
+Route::get('seek','ContractController@seek');
 
-//开共享
-Route::get('/share_add','UserController@share_add');
-//执行添加共享
-Route::get('/share_add_do','UserController@share_add_do');
-//共享列表展示我的共享
-Route::get('share_list','UserController@share_list');
-//共享给我
-Route::get('share_list_do','UserController@share_list_do');
+
 ########## Count控制器 ##########
 //统计
 Route::get('/count_list','CountController@count_list');
@@ -279,16 +296,6 @@ Route::get('/publicnotice_save','adt@publicnotice_save');
 Route::get('/publicnotice_save_do','adt@publicnotice_save_do');
 //公告删除
 Route::get('/publicnotice_del','adt@publicnotice_del');
-//公海展示
-Route::get('seas_list','UserController@seas_list');
-//扔入公海
-Route::get('seas_add','UserController@seas_add');
-//删除公海数据
-Route::get('seas_del','UserController@seas_del');
-//修改公海数据
-Route::get('seas_update','UserController@seas_update');
-Route::get('seas_update_do','UserController@seas_update_do');
-//操作记录展示
-Route::get('operation_list','UserController@operation_list');
+
 
 
