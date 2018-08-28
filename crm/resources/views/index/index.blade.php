@@ -286,12 +286,6 @@
                             <cite>操作记录</cite>
                         </a>
                     </li >
-                    <li>
-                        <a _href="login.log_list">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>登录日志</cite>
-                        </a>
-                    </li >
                 </ul>
             </li>
         </ul>
