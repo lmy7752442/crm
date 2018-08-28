@@ -106,11 +106,16 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('权限修改成功');
-                        window.location.href="/power_list";
+                        layer.msg("权限修改成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            window.parent.location.reload();
+                        });
                     }else if(res == 2){
-                        layer.alert('权限修改失败');
-                        window.location.href="/power_list";
+                        layer.msg('权限修改失败', {icon: 5});
+                        layer.close(layer.index);
                     }
                 }
             });

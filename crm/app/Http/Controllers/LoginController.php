@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class Login extends BaseController
+class LoginController extends BaseController
 {
     /** 显示登录页面 */
     public function login(){

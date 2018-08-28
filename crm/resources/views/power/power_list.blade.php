@@ -161,11 +161,11 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('权限删除成功');
+                        layer.msg("权限删除成功", {icon: 6});
                         window.location.href="/power_list";
                     }else if(res == 2) {
-                        layer.alert('权限删除失败');
-                        window.location.href = "/power_list";
+                        layer.msg('权限删除失败', {icon: 5})
+                        layer.close(layer.index);
                     }
                 }
             });

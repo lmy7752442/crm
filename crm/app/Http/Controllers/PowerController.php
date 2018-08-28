@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use DB;
 
-class Power extends Common
+class PowerController extends CommonController
 {
     /** 权限添加 */
     public function power_add(){
@@ -35,7 +35,7 @@ class Power extends Common
 
     /** 权限展示 */
     public function power_list(){
-        $res = DB::table('power')->where(['p_status'=>1])->paginate(5);
+        $res = DB::table('power')->where(['p_status'=>1])->paginate(10);
 //        print_r($res);exit;
         //查询总共条数
         $count = DB::table('power')->where(['p_status'=>1])->count();

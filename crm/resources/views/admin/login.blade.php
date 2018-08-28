@@ -54,10 +54,10 @@
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-                        layer.alert('登录成功');
+                        layer.msg('登录成功');
                         window.location.href="/";
                     }else{
-                        layer.alert('登录失败');
+                        layer.msg('登录失败');
                         window.location.href="/login";
                     }
                 }
