@@ -7,7 +7,11 @@ use DB;
 
 class OrderController extends Controller
 {
-    //订单列表
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *  订单展示
+     */
     public function order_list(Request $request){
         $start_time = $request->get('start_time');
         $end_time = $request->get('end_time');
@@ -40,6 +44,11 @@ class OrderController extends Controller
         return view('order.order_list',['order_data'=>$order_data,'order_type'=>$order_type,'order_type2'=>$order_type2,'order_number'=>$order_number,'end_time'=>$end_time,'start_time'=>$start_time]);
 
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * 订单添加
+     */
     public function order_add(){
         $user_data = DB::table('customer')->where('status',1)->get();
         $order_number = time().rand(1000,9999);
@@ -47,6 +56,12 @@ class OrderController extends Controller
         $order_type = DB::table('ordertype')->where('status',1)->get();
         return view('order.order_add',['user_data'=>$user_data,'order_number'=>$order_number,'product'=>$product,'order_type'=>$order_type]);
     }
+
+    /**
+     * @param Request $request
+     * @return int
+     * 订单添加执行
+     */
     public function order_add_do(Request $request){
         $arr['o_number'] = $request->get('o_number');
         $data = DB::table('order')->where('o_number',$arr['o_number'])->first();
@@ -77,6 +92,12 @@ class OrderController extends Controller
             return 1;
         }
     }
+
+    /**
+     * @param Request $request
+     * @return string
+     * 订单展示用户信息
+     */
     public function order_user(Request $request){
         $uid = $request -> get('uid');
         $user_data = DB::table('customer')->where('status',1)->where('c_id',$uid)->first();
@@ -89,6 +110,12 @@ class OrderController extends Controller
         ];
         return json_encode($arr);
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * 订单修改
+     */
     public function order_save(Request $request){
         $id = $request -> get('id');
         $order_data = DB::table('order')->where('order_id',$id)->first();
@@ -99,6 +126,12 @@ class OrderController extends Controller
         $order_type = DB::table('ordertype')->where('status',1)->get();
         return view('order.order_save',['order_data'=>$order_data,'user_data'=>$user_data,'user'=>$user,'product'=>$product,'order_product'=>$order_product,'order_type'=>$order_type]);
     }
+
+    /**
+     * @param Request $request
+     * @return int
+     * 订单修改执行
+     */
     public function order_save_do(Request $request){
         $o_number = $request->get('o_number');
         $arr['c_id'] = $request->get('username');
@@ -124,6 +157,12 @@ class OrderController extends Controller
             return 1;
         }
     }
+
+    /**
+     * @param Request $request
+     * @return int
+     * 订单删除
+     */
     public function order_del(Request $request){
           $id = $request -> get('id');
           $data = DB::table('order')->where('order_id',$id)->first();
@@ -133,14 +172,29 @@ class OrderController extends Controller
               return 1;
           }
     }
-    //订单状态列表
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * 订单状态展示
+     */
     public function order_type_list(){
         $data = DB::table('ordertype')->where('status',1)->paginate(10);
         return view('order.order_type_list',['data'=>$data]);
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * 订单状态添加
+     */
     public function order_type_add(){
         return view('order.order_type_add');
     }
+
+    /**
+     * @param Request $request
+     * @return int
+     * 订单状态添加执行
+     */
     public function order_type_add_do(Request $request){
         $ordertype = $request ->get('ordertype');
         $res = DB::table('ordertype')->insert(['name'=>$ordertype,'time'=>time()]);
@@ -148,11 +202,23 @@ class OrderController extends Controller
             return 1;
         }
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * 订单状态修改
+     */
     public function order_type_save(Request $request){
         $ordertype_id = $request ->get('id');
         $data = DB::table('ordertype')->where('id',$ordertype_id)->first();
         return view('order.order_type_save',['data'=>$data]);
     }
+
+    /**
+     * @param Request $request
+     * @return int
+     * 订单状态修改执行
+     */
     public function order_type_save_do(Request $request){
         $ordertype_id = $request ->get('ordertype_id');
         $ordertype_name = $request ->get('ordertype');
@@ -161,6 +227,12 @@ class OrderController extends Controller
             return 1;
         }
     }
+
+    /**
+     * @param Request $request
+     * @return int
+     * 订单状态删除
+     */
     public function order_type_del(Request $request){
         $ordertype_id = $request ->get('id');
         $res = DB::table('ordertype')->where('id',$ordertype_id)->update(['status'=>3]);

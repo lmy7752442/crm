@@ -256,13 +256,13 @@ Route::get('seek','ContractCOntroller@seek');
 Route::get('/share_add','UserController@share_add');
 //执行添加共享
 Route::get('/share_add_do','UserController@share_add_do');
-//共享列表展示  我的共享
+//共享列表展示我的共享
 Route::get('share_list','UserController@share_list');
 //共享给我
 Route::get('share_list_do','UserController@share_list_do');
 ########## Count控制器 ##########
 //统计
-Route::get('/count','CountController@count');
+Route::get('/count_list','CountController@count_list');
 
 
 

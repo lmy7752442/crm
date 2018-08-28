@@ -79,7 +79,7 @@ class DocumentaryController extends Controller
         $dprogress = $request -> get('dprogress');
         $content = $request -> get('content');
         $next_time = strtotime($request -> get('next_time'));
-        $admin = 1;
+        $admin = session()->get('a_id');
         $time = time();
         $res = DB::table('documentary')
             ->insert([
@@ -91,7 +91,8 @@ class DocumentaryController extends Controller
                 'c_id'=>$user,
                 'admin_id'=>$admin,
                 'warn'=>$warn,
-                'status'=>1
+                'status'=>1,
+                ''
             ]);
         DB::table('record')->insert(['c_id'=>$user,'action'=>'添加跟单记录','data_table'=>'跟单表','a_id'=>$admin,'time'=>$time]);
         if($res>0){
