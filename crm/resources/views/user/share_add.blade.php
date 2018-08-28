@@ -49,9 +49,9 @@
         form.on('submit(add)', function(data){
             //获取checkbox[name='a_id']的值
             var admin_arr = '';
-            $("input:checkbox[name=a_id]:checked").each(function(i){
-                admin_arr = $(this).val();
-            });
+            $.each($('input:checkbox:checked'),function(){
+                admin_arr = $(this).val()+','+admin_arr;
+            })
             // data.field.a_id = admin_arr.join(",");//将数组合并成字符串
             //获取input[name='c_id']的值
             var c_id = "";
