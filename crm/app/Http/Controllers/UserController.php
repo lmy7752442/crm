@@ -441,18 +441,13 @@ class UserController extends Controller
                     DB::table('admin_share')->insert($array);
                     $res = DB::table('share')->insert($insert_data);
                 }
-
             }
             if ($res) {
                 return 1;
             } else {
                 return 2;
             }
-
-
-
     }
-
     //共享展示  我的共享
     public function share_list(Request $request){
         $a_id = $request->session()->get('a_id');
@@ -467,7 +462,6 @@ class UserController extends Controller
             ->paginate(3);
             return view('share.share_list',['data'=>$data,'arr'=>$arr]);
     }
-
     //共享给我
     public function share_list_do(Request $request){
         $a_id = $request->session()->get('a_id');
@@ -482,7 +476,6 @@ class UserController extends Controller
             ->paginate(3);
         return view('share.share_list_do',['data'=>$data,'arr'=>$arr]);
     }
-
     //产品展示
     public function product_list(){
         $data = DB::table('product')->where(['status'=>1])->paginate(3);
@@ -543,9 +536,4 @@ class UserController extends Controller
             echo 2;
         }
     }
-
 }
-
-
-
-
