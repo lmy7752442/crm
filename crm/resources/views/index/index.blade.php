@@ -254,7 +254,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="/count">
+                        <a _href="/count_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>统计</cite>
                         </a>
