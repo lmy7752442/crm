@@ -32,14 +32,14 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-            <input class="layui-input" placeholder="开始日" name="start" id="start">
-            <input class="layui-input" placeholder="截止日" name="end" id="end">
-            <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
-    </div>
+    {{--<div class="layui-row">--}}
+        {{--<form class="layui-form layui-col-md12 x-so">--}}
+            {{--<input class="layui-input" placeholder="开始日" name="start" id="start">--}}
+            {{--<input class="layui-input" placeholder="截止日" name="end" id="end">--}}
+            {{--<input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">--}}
+            {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>--}}
+        {{--</form>--}}
+    {{--</div>--}}
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','/admin_add')"><i class="layui-icon"></i>添加</button>
@@ -104,30 +104,6 @@
             elem: '#end' //指定元素
         });
     });
-
-    /*管理员-停用*/
-//    function member_stop(obj,id){
-//        layer.confirm('确认要停用吗？',function(index){
-//
-//            if($(obj).attr('title')=='启用'){
-//
-//                //发异步把用户状态进行更改
-//                $(obj).attr('title','停用')
-//                $(obj).find('i').html('&#xe62f;');
-//
-//                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-//                layer.msg('已停用!',{icon: 5,time:1000});
-//
-//            }else{
-//                $(obj).attr('title','启用')
-//                $(obj).find('i').html('&#xe601;');
-//
-//                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-//                layer.msg('已启用!',{icon: 5,time:1000});
-//            }
-//
-//        });
-//    }
 
     /*管理员-删除*/
     function member_del(obj,id){

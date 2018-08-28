@@ -44,6 +44,17 @@ class LoginController extends BaseController
 
     /** 退出 */
     public function login_out(Request $request){
+        //获取当前管理员id
+        $a_id = $request->session()->get('a_id');
+//        print_r($a_id);exit;
+        $where = [
+            'a_id' => $a_id
+        ];
+        $update_data = [
+            'a_status' => 1
+        ];
+        $res = DB::table('admin')->where($where)->update($update_data);
+//        print_r($res);exit;
         $request->session()->forget('a_id');
         $request->session()->forget('a_account');
         $a_id = $request->session()->has('a_id');

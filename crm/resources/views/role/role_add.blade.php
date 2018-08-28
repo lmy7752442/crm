@@ -53,12 +53,9 @@
                 <span class="x-red">*</span>权限名称
             </label>
             <div class="layui-input-inline">
-                <select name="power_id">
-                    <option value="">请选择</option>
-                    @foreach($data as $v)
-                        <option value="{{$v->power_id}}">{{$v->p_name}}</option>
-                    @endforeach
-                </select>
+                @foreach($data as $v)
+                    <input type="checkbox" name="power_id" lay-skin="primary" title="{{$v->p_name}}" value="{{$v->power_id}}">
+                @endforeach
             </div>
         </div>
         <div class="layui-form-item">
@@ -73,11 +70,27 @@
                 ,layer = layui.layer;
 
         form.on('submit(add)', function(data){
-            console.log(data);
+            //获取角色名称
+            var r_name_arr = $("#r_name").val();
+            console.log(r_name_arr);
+
+            //获取管理员id
+            var a_id = $("[name=a_id]").val();
+            console.log(a_id);
+
+            //获取checkbox[name='power_id']的值
+            var power_id_arr = '';
+            var arr = new Array();
+            $("input:checkbox[name='power_id']:checked").each(function(i){
+                arr[i] = $(this).val();
+            });
+            power_id_arr = arr.join(",");//将数组合并成字符串
+            console.log(power_id_arr);
+
             $.ajax({
                 method:'get',
                 url:"/role_add_do",
-                data:data.field,
+                data:{r_name_arr:r_name_arr,a_id:a_id,power_id_arr:power_id_arr},
                 success:function(res){
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
