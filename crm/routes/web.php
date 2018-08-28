@@ -39,7 +39,7 @@ Route::get('/admin_update_do','AdminController@admin_update_do');
 //管理员删除
 Route::get('/admin_del','AdminController@admin_del');
 //建议添加
-Route::get('/advince_add','AdmAdminControllerin@advince_add');
+Route::get('/advince_add','AdminController@advince_add');
 //建议执行添加
 Route::get('/advince_add_do','AdminController@advince_add_do');
 //客户建议列表
