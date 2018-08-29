@@ -23,12 +23,12 @@
 <body>
 <div class="x-body layui-anim layui-anim-up">
     <form class="layui-form">
-        <div class="layui-form-item layui-form-text">
-            <label for="desc" class="layui-form-label">
-                公告内容
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                物流公司
             </label>
-            <div class="layui-input-block">
-                <textarea placeholder="请输入内容" id="content" name="desc" class="layui-textarea"></textarea>
+            <div class="layui-input-inline">
+                <input type="text" id="wuliuname" name="email" required="" class="layui-input">
             </div>
         </div>
 
@@ -63,9 +63,9 @@
 
         //监听提交
         form.on('submit(add)', function(data){
-            var content = $('#content').val();
-            $.get('publicnotice_add_do',{
-                content:content
+            var wuliuname = $('#wuliuname').val();
+            $.get('wuliu_type_add_do',{
+                name:wuliuname
             },function(data){
                 if(data == 1){
                     //发异步，把数据提交给php
@@ -74,7 +74,13 @@
                         var index = parent.layer.getFrameIndex(window.name);
                         //关闭当前frame
                         parent.layer.close(index);
-                        parent.location.reload();
+                    });
+                }else{
+                    layer.alert("请勿重复添加", {icon: 6},function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
                     });
                 }
             })
