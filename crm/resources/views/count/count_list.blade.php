@@ -47,16 +47,17 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($data as $v)
         <tr>
-            <td>{{$admin_data->a_account}}</td>
-            <td>{{$user_count}}</td>
-            <td>{{$documentary_count}}</td>
-            <td>{{$order_count}}</td>
-            <td>{{$sales}}</td>
-            <td>{{$del_count}}</td>
-            <td>{{$save_count}}</td>
+            <td>{{$v['admin_name']}}</td>
+            <td>{{$v['user_count']}}</td>
+            <td>{{$v['documentary_count']}}</td>
+            <td>{{$v['order_count']}}</td>
+            <td>{{$v['sale']}}</td>
+            <td>{{$v['del_count']}}</td>
+            <td>{{$v['save_count']}}</td>
         </tr>
-
+        @endforeach
         </tbody>
     </table>
     <div class="page">
