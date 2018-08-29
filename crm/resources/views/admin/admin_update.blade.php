@@ -78,19 +78,6 @@
                     {{--<span class="x-red">*</span>将会成为您唯一的姓名--}}
                 </div>
             </div>
-            <!-- 生日 -->
-            <div class="layui-form-item">
-                <label for="a_birthday" class="layui-form-label">
-                    <span class="x-red">*</span>生日
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="a_birthday" value="{{$res->a_birthday}}" name="a_birthday" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--<span class="x-red">*</span>将会成为您唯一的登入名--}}
-                </div>
-            </div>
             <!-- 邮箱 -->
             <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">
@@ -124,32 +111,6 @@
                 </label>
                 <div class="layui-input-inline">
                     <input type="text" id="a_address" value="{{$res->a_address}}" name="a_address" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--6到16个字符--}}
-                </div>
-            </div>
-            <!-- IDcard -->
-            <div class="layui-form-item">
-                <label for="a_idcard" class="layui-form-label">
-                    <span class="x-red">*</span>IDcard
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="a_idcard" value="{{$res->a_idcard}}" name="a_idcard" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--6到16个字符--}}
-                </div>
-            </div>
-            <!-- 客户量 -->
-            <div class="layui-form-item">
-                <label for="a_client_num" class="layui-form-label">
-                    <span class="x-red">*</span>客户量
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="a_client_num" value="{{$res->a_client_num}}" name="a_client_num" required="" lay-verify="required"
                            autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">

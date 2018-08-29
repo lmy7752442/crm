@@ -30,12 +30,9 @@ class AdminController extends CommonController
                 'role_id' => $data['role_id'],
                 'a_phone' => $data['a_phone'],
                 'a_name' => $data['a_name'],
-                'a_birthday' => $data['a_birthday'],
                 'a_email' => $data['a_email'],
                 'a_pwd' => $data['a_pwd'],
                 'a_address' => $data['a_address'],
-                'a_idcard' => $data['a_idcard'],
-                'a_client_num' => $data['a_client_num'],
             ];
             $res = DB::table('admin')->insert($insert_data);
 //            print_r($res);exit;
@@ -80,12 +77,9 @@ class AdminController extends CommonController
             'role_id' => $data['role_id'],
             'a_phone' => $data['a_phone'],
             'a_name' => $data['a_name'],
-            'a_birthday' => $data['a_birthday'],
             'a_email' => $data['a_email'],
             'a_pwd' => $data['a_pwd'],
             'a_address' => $data['a_address'],
-            'a_idcard' => $data['a_idcard'],
-            'a_client_num' => $data['a_client_num'],
         ];
         $res = DB::table('admin')->where(['a_id'=>$data['a_id']])->update($update_data);
 //        print_r($res);exit;
