@@ -53,7 +53,7 @@ class RoleController extends CommonController
     public function role_list(){
 //        $res = DB::table('role')->join('power', 'role.power_id', '=', 'power.power_id')->where(['r_status'=>1])->paginate(5);
 //        print_r($res);exit;
-        $new = DB::table('role')->where('r_status',1)->paginate(5);
+        $new = DB::table('role')->where('r_status',1)->paginate(10);
 
 //        foreach($new as $k=>$v ){
 //            $str = '';

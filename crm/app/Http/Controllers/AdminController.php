@@ -51,7 +51,7 @@ class AdminController extends CommonController
 
     /** 管理员展示列表 */
     public function admin_list(Request $request){
-        $res = DB::table('admin')->where(['a_status'=>1])->join('role', 'admin.role_id', '=', 'role.role_id')->paginate(5);
+        $res = DB::table('admin')->where(['a_status'=>1])->join('role', 'admin.role_id', '=', 'role.role_id')->paginate(10);
 //        print_r($res);exit;
         //查询总共条数
         $count = DB::table('admin')->where(['a_status'=>1])->count();

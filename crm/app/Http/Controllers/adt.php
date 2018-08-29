@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class adt extends BaseController{
+class adt extends CommonController{
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * 公告展示
