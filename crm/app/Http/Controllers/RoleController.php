@@ -14,7 +14,10 @@ class RoleController extends CommonController
     /** 显示角色添加页面 */
     public function role_add(){
         //查询权限数据
-        $data = DB::table('power')->get();
+        $not = [
+            10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,47,48,54,60,64,70,76,82,88,94,100,106,116,120,126,128,129,130,131,132,133,135,136,142
+        ];
+        $data = DB::table('power')->whereNotIn('power_id',$not)->get();
 //        print_r($data);exit;
         //查询管理员数据
         $admin = DB::table('admin')->get();
@@ -31,12 +34,18 @@ class RoleController extends CommonController
             'a_id' => $data['a_id'],
             'power_id' => $data['power_id_arr']
         ];
-        $res = DB::table('role')->insert($insert_data);
-//        print_r($res);exit;
-        if($res){
-            return 1;
+        //根据管理员id查询有没有数据
+        $find = DB::table('role')->where(['a_id'=>$data['a_id']])->first();
+        if($find){
+            return 3;
         }else{
-            return 2;
+            $res = DB::table('role')->insert($insert_data);
+//            print_r($res);exit;
+            if($res){
+                return 1;
+            }else{
+                return 2;
+            }
         }
     }
 

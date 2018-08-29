@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class OrderController extends Controller
+class OrderController extends CommonController
 {
     /**
      * @param Request $request

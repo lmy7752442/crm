@@ -102,8 +102,11 @@
                             parent.layer.close(index);
                             window.parent.location.reload();
                         });
-                    }else{
+                    }else if(res == 2){
                         layer.msg('角色添加失败', {icon: 5})
+                        layer.close(layer.index);
+                    }else{
+                        layer.msg('此管理员已拥有角色，不能再拥有了', {icon: 5})
                         layer.close(layer.index);
                     }
                 }

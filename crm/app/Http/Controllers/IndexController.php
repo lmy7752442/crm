@@ -13,6 +13,7 @@ class IndexController extends CommonController
 //        print_r($a_account);exit;
         return view('index.index')->with('data',$a_account);
     }
+
     public function welcome(){
         $notice_data = DB::table('publicnotice')->where('status',1)->orderBy('time','desc')->get();
         $a_id = session()->get('a_id');
@@ -28,6 +29,11 @@ class IndexController extends CommonController
         $del_count = DB::table('record')->where('a_id',$a_id)->where('action','like','%删除%')->count();
         $save_count = DB::table('record')->where('a_id',$a_id)->where('action','like','%修改%')->count();
         return view('index.welcome',['notice_data'=>$notice_data,'user_count'=>$user_count,'documentary_count'=>$documentary_count,'order_count'=>$order_count,'sales'=>$sales,'del_count'=>$del_count,'save_count'=>$save_count,'admin_data'=>$admin_data]);
+    }
+
+    /** 没有权限  错误页面 */
+    public function not_power(){
+        return view('index.not_power');
     }
 
 

@@ -22,29 +22,95 @@ class CommonController extends BaseController
 //                redirect('/login')->send();
             }
 
+            $c = '';
+            for($i=10;$i<=141;$i++){
+                $c .= $i.',';
+            }
+            // 134
+            $c = rtrim($c,',');
+//            print_r($c);exit;
+
+
             //权限
-//            $url = $_SERVER;
-////            print_r($url);exit;
-//            $data = Db::table('admin')
-//                -> join('role', 'role.a_id', '=', 'admin.a_id')
+            $r_url = $_SERVER['REQUEST_URI'];
+            $num = strpos($r_url,"?");
+            $url = $r_url;
+            if($num){
+                $url = substr($r_url,0,$num);
+            }
+            $data = (array)Db::table('admin')
+                -> join('role', 'role.a_id', '=', 'admin.a_id')
 //                -> join('power', 'role.power_id', '=', 'power.power_id')
-//                -> where('admin.a_id',$u_id)
-//                -> first();
-////            print_r($data);exit;
-////            $new_data = json_decode($data,true);
-////            print_r($new_data);exit;
-//            $a = explode(',',$data -> power_id);
-////            print_r($a);exit;
-//            $power_data = Db::table('power') -> whereIn('power_id',$a) -> get();
-////            print_r($power_data);exit;
-//            foreach($power_data as $k=>$v){
-//                $default[]=$v -> p_rule;
-//            }
-//            print_r($default);exit;
-//            if(!in_array($url,$default)){
-//                exit('没有权限') ;
-//            }
-//            //print_r($default);
+                -> where('admin.a_id',$u_id)
+                -> first();
+//            print_r($data);exit;
+            //当前管理员 权限id
+            $power_id = explode(',',$data['power_id']);
+//            print_r($power_id);exit;
+
+            $power_data = Db::table('power') -> whereIn('power_id',$power_id) -> get();
+//            print_r($power_data);exit;
+            $default=[
+                ## 登陆 10,11,12,40,116
+                '/',
+                '/notpower',
+                '/login',
+                '/login_do',
+                '/login_out',
+                '/welcome',
+                ## 统计 135
+                '/count_list',
+                ## 客户建议 21
+                '/advince_list',
+                ## 客户 70
+                '/user_list',
+                ## 客户类型 76
+                '/ctype_list',
+                ## 客户等级 82
+                '/clevel_list',
+                ## 客户来源 88
+                '/csource_list',
+                ## 合同 106
+                '/contract_list',
+                ## 合同类型 94
+                '/contype_list',
+                ## 产品 100
+                '/product_list',
+                ## 共享 126
+                '/share_list',
+                ## 公海 128 129 130 131 132
+                '/seas_list',
+                '/seas_add',
+                '/seas_del',
+                '/seas_update',
+                '/seas_update_do',
+                ## 公告 136
+                '/publicnotice_list',
+                ## 跟单 47
+                '/documentary_list',
+                ## 跟单类型 48
+                '/documentary_dtype_list',
+                ## 跟单进度 54
+                '/documentary_dprogress_list',
+                ## 订单 60
+                '/order_list',
+                ## 订单状态 120
+                '/order_type_list',
+                ## 订单方式 64
+                '/order_mode_list',
+
+            ];
+            foreach($power_data as $k=>$v){
+                $default[]=$v -> p_rule;
+            }
+//            print_r($default);
+//            echo $url;exit;
+
+            if(!in_array($url,$default)){
+//                exit('没有权限'.$url) ;
+                return redirect('/notpower');
+            }
+            //print_r($default);
 //
             return $next($request);
         });

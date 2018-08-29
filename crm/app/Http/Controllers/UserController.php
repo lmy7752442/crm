@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
-class UserController extends Controller
+class UserController extends CommonController
 {
     //客户展示
     public  function user_list(Request $request){

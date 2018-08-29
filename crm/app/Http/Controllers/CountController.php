@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class CountController extends BaseController{
+class CountController extends CommonController{
     /** 统计 */
     public function count_list(){
         $a_id = session()->get('a_id');
