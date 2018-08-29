@@ -22,12 +22,12 @@ class CommonController extends BaseController
 //                redirect('/login')->send();
             }
 
-            $c = '';
-            for($i=10;$i<=141;$i++){
-                $c .= $i.',';
-            }
-            // 134
-            $c = rtrim($c,',');
+//            $c = '';
+//            for($i=10;$i<=141;$i++){
+//                $c .= $i.',';
+//            }
+//            // 134
+//            $c = rtrim($c,',');
 //            print_r($c);exit;
 
 
@@ -39,7 +39,7 @@ class CommonController extends BaseController
                 $url = substr($r_url,0,$num);
             }
             $data = (array)Db::table('admin')
-                -> join('role', 'role.a_id', '=', 'admin.a_id')
+                -> join('role', 'admin.role_id', '=', 'role.role_id')
 //                -> join('power', 'role.power_id', '=', 'power.power_id')
                 -> where('admin.a_id',$u_id)
                 -> first();
@@ -105,7 +105,7 @@ class CommonController extends BaseController
             }
 //            print_r($default);
 //            echo $url;exit;
-
+//
             if(!in_array($url,$default)){
 //                exit('没有权限'.$url) ;
                 return redirect('/notpower');

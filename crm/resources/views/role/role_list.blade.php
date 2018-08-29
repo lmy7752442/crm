@@ -53,7 +53,6 @@
             </th>
             <th>角色ID</th>
             <th>角色名称</th>
-            <th>管理员账号</th>
             <th>权限名称</th>
             <th>操作</th>
         </thead>
@@ -65,7 +64,6 @@
                     </td>
                     <td>{{$v->role_id}}</td>
                     <td>{{$v->r_name}}</td>
-                    <td>{{$v->a_account}}</td>
                     <td>{{$v->power_id}}</td>
                     {{--<td class="td-status">--}}
                         {{--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
@@ -125,7 +123,7 @@
                         layer.msg('角色删除失败', {icon: 5})
                         layer.close(layer.index);
                     }else{
-                        layer.msg('还有不同部门的员工正拥有此角色，暂时不能删除', {icon: 5})
+                        layer.msg('还有管理员正拥有此角色，暂时不能删除', {icon: 5})
                         layer.close(layer.index);
                     }
                 }

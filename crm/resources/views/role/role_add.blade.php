@@ -33,20 +33,6 @@
                        autocomplete="off" class="layui-input">
             </div>
         </div>
-        <!-- 管理员 -->
-        <div class="layui-form-item">
-            <label for="a_id" class="layui-form-label">
-                <span class="x-red">*</span>管理员
-            </label>
-            <div class="layui-input-inline">
-                <select name="a_id">
-                    <option value="">请选择</option>
-                    @foreach($admin as $v)
-                        <option value="{{$v->a_id}}">{{$v->a_account}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
         <!-- 权限名称 -->
         <div class="layui-form-item">
             <label for="power_id" class="layui-form-label">
@@ -74,10 +60,6 @@
             var r_name_arr = $("#r_name").val();
             console.log(r_name_arr);
 
-            //获取管理员id
-            var a_id = $("[name=a_id]").val();
-            console.log(a_id);
-
             //获取checkbox[name='power_id']的值
             var power_id_arr = '';
             var arr = new Array();
@@ -90,7 +72,7 @@
             $.ajax({
                 method:'get',
                 url:"/role_add_do",
-                data:{r_name_arr:r_name_arr,a_id:a_id,power_id_arr:power_id_arr},
+                data:{r_name_arr:r_name_arr,power_id_arr:power_id_arr},
                 success:function(res){
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
@@ -104,9 +86,6 @@
                         });
                     }else if(res == 2){
                         layer.msg('角色添加失败', {icon: 5})
-                        layer.close(layer.index);
-                    }else{
-                        layer.msg('此管理员已拥有角色，不能再拥有了', {icon: 5})
                         layer.close(layer.index);
                     }
                 }

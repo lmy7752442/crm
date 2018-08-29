@@ -32,14 +32,6 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    {{--<div class="layui-row">--}}
-        {{--<form class="layui-form layui-col-md12 x-so">--}}
-            {{--<input class="layui-input" placeholder="开始日" name="start" id="start">--}}
-            {{--<input class="layui-input" placeholder="截止日" name="end" id="end">--}}
-            {{--<input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">--}}
-            {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>--}}
-        {{--</form>--}}
-    {{--</div>--}}
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','/admin_add')"><i class="layui-icon"></i>添加</button>
@@ -53,6 +45,7 @@
             </th>
             <th>ID</th>
             <th>账号</th>
+            <th>角色</th>
             <th>手机</th>
             <th>邮箱</th>
             <th>地址</th>
@@ -66,6 +59,7 @@
                     </td>
                     <td>{{$v->a_id}}</td>
                     <td>{{$v->a_account}}</td>
+                    <td>{{$v->r_name}}</td>
                     <td>{{$v->a_phone}}</td>
                     <td>{{$v->a_email}}</td>
                     <td>{{$v->a_address}}</td>
