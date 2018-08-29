@@ -107,21 +107,21 @@
                 <span class="x-red">*</span>代收
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="instead_money" name="next_time" required="" lay-verify="required"
+                <input type="number" id="instead_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>订单金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="order_money" name="next_time" required="" lay-verify="required"
+                <input type="number" id="order_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>优惠金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="discounts_money" name="next_time" required="" lay-verify="required"
+                <input type="number" id="discounts_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -138,14 +138,14 @@
                 <span class="x-red">*</span>实收金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="get_money" name="next_time" required="" lay-verify="required"
+                <input type="number" id="get_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>打款金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="put_money" name="next_time" required="" lay-verify="required"
+                <input type="number" id="put_money" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label">
@@ -169,8 +169,10 @@
                 <span class="x-red">*</span>运费
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="send_type" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+                <select  name="user" id="send_type" class="valid" lay-filter="username">
+                    <option value="已付">已付</option>
+                    <option value="到付">到付</option>
+                </select>
             </div>
             <label for="username" class="layui-form-label" >
                 <span class="x-red">*</span>订单状态
@@ -267,6 +269,10 @@
             $.each($('input:checkbox:checked'),function(){
                 product_id = $(this).val()+','+product_id;
             });
+            if(product_id == ''){
+                alert('产品必填');
+                return false;
+            }
             $.get('order_add_do',{
                 o_number:o_number,
                 username:username,

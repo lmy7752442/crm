@@ -183,6 +183,24 @@ Route::get('order_mode_save','OrderController@order_mode_save');
 Route::get('order_mode_save_do','OrderController@order_mode_save_do');
 //订单方式删除
 Route::get('order_mode_del','OrderController@order_mode_del');
+//物流展示
+Route::get('wuliu_list','OrderController@wuliu_list');
+//物流添加
+Route::get('wuliu_add','OrderController@wuliu_add');
+//物流订单信息
+Route::get('wuliu_order','OrderController@wuliu_order');
+//物流添加执行
+Route::get('wuliu_add_do','OrderController@wuliu_add_do');
+//物流修改
+Route::get('wuliu_save','OrderController@wuliu_save');
+//物流修改执行
+Route::get('wuliu_save_do','OrderController@wuliu_save_do');
+//物流删除
+Route::get('wuliu_del','OrderController@wuliu_del');
+//物流公司添加
+Route::get('wuliu_type_add','OrderController@wuliu_type_add');
+//物流公司添加执行
+Route::get('wuliu_type_add_do','OrderController@wuliu_type_add_do');
 
 ###########User 控制器###########
 

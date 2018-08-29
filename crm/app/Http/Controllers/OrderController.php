@@ -275,4 +275,107 @@ class OrderController extends CommonController
             return 1;
         }
     }
+    public function wuliu_list(){
+        $wuliu_data = DB::table('wuliu')->where('status',1)->paginate(10);
+        foreach($wuliu_data as $v){
+            $order_data = DB::table('order')->where('order_id',$v->order_id)->first();
+            $v->order_id = $order_data->o_number;
+            $wuliu_type = DB::table('wuliutype')->find($v->wuliu_id);
+            $v->wuliu_id = $wuliu_type->name;
+        }
+        return view('order.wuliu_list',['data'=>$wuliu_data]);
+    }
+    public function wuliu_add(){
+        $wuliutype_data = DB::table('wuliutype')->where('status',1)->get();
+        $a_id = session()->get('a_id');
+        $wuliustatus_data = DB::table('ordertype')->where('status',1)->get();
+        $order_data = DB::table('order')->where('status',1)->where('a_id',$a_id)->get();
+        return view('order.wuliu_add',['wuliutype_data'=>$wuliutype_data,'order_data'=>$order_data,'wuliustatus_data'=>$wuliustatus_data]);
+    }
+    public function wuliu_order(Request $request){
+        $order_id = $request->get('order_id');
+        $data = DB::table('order')->where('order_id',$order_id)->first();
+        $user_data = DB::table('customer')->where('c_id',$data->c_id)->first();
+        $arr = [
+            'username'=>$user_data->c_name,
+            'province'=>$user_data->c_province,
+            'city'=>$user_data->c_city,
+            'area'=>$user_data->c_area,
+            'address'=>$user_data->address,
+            'instead_money'=>$data->instead_money,
+            'wuliustatus'=>$data->order_type,
+            'admin' => session()->get('a_account')
+        ];
+        return $arr;
+    }
+    public function wuliu_add_do(Request $request){
+        $arr['order_id'] = $request ->get('o_number');
+        $arr['username'] = $request ->get('username');
+        $arr['province'] = $request ->get('province');
+        $arr['city'] = $request ->get('city');
+        $arr['area'] = $request ->get('area');
+        $arr['address'] = $request ->get('address');
+        $arr['odd_number'] = $request ->get('wuliu_number');
+        $arr['instead_money'] = $request ->get('instead_money');
+        $arr['admin'] = $request ->get('admin');
+        $arr['send_money'] = $request ->get('send_money');
+        $arr['wuliu_id'] = $request ->get('wuliu_type');
+        $arr['notes'] = $request ->get('notes');
+        $arr['wuliustatus'] = $request ->get('wuliu_status');
+        $arr['time'] = time();
+        $res = DB::table('wuliu')->insert($arr);
+        if($res > 0){
+            return 1;
+        }
+    }
+    public function wuliu_save(Request $request){
+        $id = $request -> get('id');
+        $data = DB::table('wuliu')->find($id);
+        $wuliutype_data = DB::table('wuliutype')->get();
+        $a_id = session()->get('a_id');
+        $order_data = DB::table('order')->where('status',1)->where('a_id',$a_id)->get();
+        $wuliustatus_data = DB::table('ordertype')->where('status',1)->get();
+        return view('order.wuliu_save',['wuliutype_data'=>$wuliutype_data,'order_data'=>$order_data,'data'=>$data,'wuliustatus_data'=>$wuliustatus_data]);
+    }
+    public function wuliu_save_do(Request $request){
+        $id = $request ->get('id');
+        $arr['order_id'] = $request ->get('o_number');
+        $arr['username'] = $request ->get('username');
+        $arr['province'] = $request ->get('province');
+        $arr['city'] = $request ->get('city');
+        $arr['area'] = $request ->get('area');
+        $arr['address'] = $request ->get('address');
+        $arr['odd_number'] = $request ->get('wuliu_number');
+        $arr['instead_money'] = $request ->get('instead_money');
+        $arr['admin'] = $request ->get('admin');
+        $arr['send_money'] = $request ->get('send_money');
+        $arr['wuliu_id'] = $request ->get('wuliu_type');
+        $arr['notes'] = $request ->get('notes');
+        $arr['wuliustatus'] = $request ->get('wuliu_status');
+        $res = DB::table('wuliu')->where('id',$id)->update($arr);
+        if($res > 0){
+            return 1;
+        }
+    }
+    public function wuliu_del(Request $request){
+        $id = $request->get('id');
+        $res = DB::table('wuliu')->where('id',$id)->update(['status'=>3]);
+        if($res > 0){
+            return 1;
+        }
+    }
+    public function wuliu_type_add(){
+        return view('order.wuliu_type_add');
+    }
+    public function wuliu_type_add_do(Request $request){
+        $name = $request ->get('name');
+        $data = DB::table('wuliutype')->where('name',$name)->first();
+        if(!empty($data)){
+            return 2;
+        }
+        $res = DB::table('wuliutype')->insert(['name'=>$name,'time'=>time()]);
+        if($res > 0){
+            return 1;
+        }
+    }
 }
