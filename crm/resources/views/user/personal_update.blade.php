@@ -23,15 +23,16 @@
 <body>
 <div class="x-body">
     <div class="layui-form">
-    {{--<form class="layui-form" method="get" action="/admin_add_do">--}}
-    <!-- 账号 -->
+        {{--<form class="layui-form" method="get" action="/admin_update_do">--}}
+        <input type="hidden" name="a_id" value="{{$res->a_id}}">
+        <!-- 账号 -->
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>名称
+                <span class="x-red">*</span>账号
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="a_account" name="a_account" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input" value="{{$data->a_account}}">
+                <input type="text" id="a_account" value="{{$res->a_account}}" name="a_account" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
                 {{--<span class="x-red">*</span>将会成为您唯一的登入名--}}
@@ -46,7 +47,7 @@
                 <select name="role_id">
                     <option value="">请选择</option>
                     @foreach($role as $v)
-                        <option value="{{$v->role_id}}">{{$v->r_name}}</option>
+                        <option value="{{$v->role_id}}" @if($v->role_id == $res->role_id) selected @endif>{{$v->r_name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -57,7 +58,7 @@
                 <span class="x-red">*</span>手机
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="a_phone" name="a_phone" required="" lay-verify="phone"
+                <input type="text" id="a_phone" value="{{$res->a_phone}}" name="a_phone" required="" lay-verify="phone"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -70,7 +71,7 @@
                 <span class="x-red">*</span>姓名
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="a_name" name="a_name" required="" lay-verify="required"
+                <input type="text" id="a_name" value="{{$res->a_name}}" name="a_name" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -83,7 +84,7 @@
                 <span class="x-red">*</span>邮箱
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="a_email" name="a_email" required="" lay-verify="email"
+                <input type="text" id="a_email" value="{{$res->a_email}}" name="a_email" required="" lay-verify="email"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -96,21 +97,11 @@
                 <span class="x-red">*</span>密码
             </label>
             <div class="layui-input-inline">
-                <input type="password" id="a_pwd" name="a_pwd" required="" lay-verify="pass"
+                <input type="password" id="a_pwd" value="{{$res->a_pwd}}" name="a_pwd" required="" lay-verify="pass"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
                 {{--6到16个字符--}}
-            </div>
-        </div>
-        <!-- 确认密码 -->
-        <div class="layui-form-item">
-            <label for="L_repass" class="layui-form-label">
-                <span class="x-red">*</span>确认密码
-            </label>
-            <div class="layui-input-inline">
-                <input type="password" id="a_repwd" name="a_repwd" required="" lay-verify="repass"
-                       autocomplete="off" class="layui-input">
             </div>
         </div>
         <!-- 地址 -->
@@ -119,18 +110,18 @@
                 <span class="x-red">*</span>地址
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="a_address" name="a_address" required="" lay-verify="required"
+                <input type="text" id="a_address" value="{{$res->a_address}}" name="a_address" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
                 {{--6到16个字符--}}
             </div>
         </div>
-
+        <!-- 修改 -->
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
             </label>
-            <button  class="layui-btn" lay-filter="add" lay-submit="">
+            <button  class="layui-btn" lay-filter="update" lay-submit="">
                 修改
             </button>
         </div>
@@ -149,33 +140,28 @@
             elem: '#a_birthday' //指定元素
         });
 
-        form.on('submit(add)', function(data){
+        form.on('submit(update)', function(data){
             console.log(data);
             $.ajax({
                 method:'get',
-                url:"/admin_add_do",
+                url:"/admin_update_do",
                 data:data.field,
                 success:function(res){
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
-//                        layer.alert('管理员添加成功');
-//                        window.location.href="/admin_list";
-
-                        layer.msg("管理员添加成功", {icon: 6},function () {
+//                        layer.alert('');
+                        layer.msg("管理员修改成功", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             //关闭当前frame
                             parent.layer.close(index);
                             window.parent.location.reload();
                         });
-                    }else if(res == 2){
-                        layer.msg('管理员添加失败', {icon: 5});
-//                        window.location.href="/admin_add";
-                        layer.close(layer.index);
-                    }else{
-                        layer.msg('密码与确认密码不一致', {icon: 5});
-//                        window.location.href="/admin_add";
+//                        window.location.href="/admin_list";
+                    }else if(res == 2) {
+                        layer.msg('管理员修改失败', {icon: 5});
+//                        window.location.href = "/admin_list";
                         layer.close(layer.index);
                     }
                 }
@@ -183,10 +169,8 @@
             return false;
         });
 
+
     });
-
-
-
 </script>
 <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");
