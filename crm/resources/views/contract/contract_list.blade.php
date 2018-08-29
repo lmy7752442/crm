@@ -80,8 +80,8 @@
                 <td>{{$v->c_ctime}}</td>
                 <td>{{$v->c_utime}}</td>
                 <td class="td-manage">
-                    <a title="查看"  onclick="x_admin_show('编辑','contract_update?id={{$v->contract_id}}')" href="javascript:;">
-                        <i class="layui-icon">&#xe63c;</i>
+                    <a title="编辑"  onclick="x_admin_show('编辑','contract_update?id={{$v->contract_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
                     </a>
                     <a title="删除" onclick="member_del(this,'{{$v->contract_id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>

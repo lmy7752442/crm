@@ -35,26 +35,19 @@
     <div class="layui-row">
     </div>
     <xblock>
-
         <button class="layui-btn" onclick="x_admin_show('添加来源','csource_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-            <th>来源</th>
+            <th>客户来源</th>
             <th >操作</th>
         </tr>
         </thead>
         <tbody>
         @foreach($data as  $k=>$v)
             <tr>
-                <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                </td>
                 <td>{{$v->csource_name}}</td>
                 <td class="td-manage">
                     <a title="查看"  onclick="x_admin_show('编辑','csource_update?id={{$v->csource_id}}')" href="javascript:;">

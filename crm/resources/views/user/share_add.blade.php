@@ -52,7 +52,6 @@
             $.each($('input:checkbox:checked'),function(){
                 admin_arr = $(this).val()+','+admin_arr;
             })
-            // data.field.a_id = admin_arr.join(",");//将数组合并成字符串
             //获取input[name='c_id']的值
             var c_id = "";
             var c_id = $("[name=c_id]").val();
@@ -61,7 +60,7 @@
                 url:"/share_add_do",
                 data:{admin_arr:admin_arr,c_id:c_id},
                 success:function(res){
-                    console.log(res);
+                    // console.log(res);
 ////                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
                         layer.alert('客户共享成功');
@@ -70,7 +69,8 @@
                         layer.alert('客户共享失败');
                         window.parent.location.reload();
                     }else{
-                        alert(res)
+                        layer.alert(res);
+                        window.parent.location.reload();
                     }
                 }
             });

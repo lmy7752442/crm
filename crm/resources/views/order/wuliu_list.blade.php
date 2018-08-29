@@ -32,29 +32,45 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    <div class="layui-row">
-    </div>
+
     <xblock>
-        {{--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--}}
-        <button class="layui-btn" onclick="x_admin_show('添加等级','/clevel_add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn" onclick="x_admin_show('添加类型','wuliu_add')"><i class="layui-icon"></i>添加物流信息</button>
+        <button class="layui-btn" onclick="x_admin_show('添加类型','wuliu_type_add')"><i class="layui-icon"></i>添加物流公司</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>客户等级</th>
-            <th >操作</th>
+            <th>订单编号</th>
+            <th>物流编号</th>
+            <th>客户</th>
+            <th>地址</th>
+            <th>代收</th>
+            <th>物流</th>
+            <th>运费</th>
+            <th>业务</th>
+            <th>备注</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($data as  $k=>$v)
+        @foreach($data as $v)
             <tr>
-                <td>{{$v->clevel_name}}</td>
+                <td>{{$v->order_id}}</td>
+                <td>{{$v->odd_number}}</td>
+                <td>{{$v->username}}</td>
+                <td>{{$v->province}}{{$v->city}}{{$v->area}}{{$v->address}}</td>
+                <td>{{$v->instead_money}}</td>
+                <td>{{$v->wuliu_id}}</td>
+                <td>{{$v->send_money}}</td>
+                <td>{{$v->admin}}</td>
+                <td>{{$v->notes}}</td>
                 <td class="td-manage">
-                    <a title="查看"  onclick="x_admin_show('编辑','clevel_update?id={{$v->clevel_id}}')" href="javascript:;">
+                    <a title="查看"  onclick="x_admin_show('编辑','wuliu_save?id={{$v->id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe63c;</i>
                     </a>
-                    <a title="删除" onclick="member_del(this,'{{$v->clevel_id}}')" href="javascript:;">
+                    <a title="删除" onclick="member_del(this,'{{$v->id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>
                     </a>
                 </td>
@@ -63,7 +79,7 @@
         </tbody>
     </table>
     <div class="page">
-     {{$data->links()}}
+        {{$data->links()}}
     </div>
 
 </div>
@@ -109,24 +125,18 @@
     /*用户-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
-            $.get('clevel_del',
-                {
-                    id:id
-                },function(data){
-                    if(data==1){
-                        $(obj).parents("tr").remove();
-                        layer.msg('已删除!',{icon:1,time:1000});
-                    }else{
-                        $(obj).parents("tr").remove();
-                        layer.msg('删除失败!',{icon:1,time:1000});
-                    }
-                })
-            //发异步删除数据
-
+            var wuliu_id = id;
+            $.get('wuliu_del',{
+                id:wuliu_id
+            },function(data){
+                if(data == 1){
+                    //发异步删除数据
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                }
+            })
         });
     }
-
-
 
     function delAll (argument) {
 
@@ -145,7 +155,6 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();</script>
-
 </body>
 
 </html>
