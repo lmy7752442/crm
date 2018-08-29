@@ -38,7 +38,8 @@
             <a href="javascript:;">{{$data}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','personal')">个人信息</a></dd>
-              <dd><a onclick="x_admin_show('切换帐号','login_out')">切换帐号</a></dd>
+              {{--<dd><a onclick="x_admin_show('切换帐号','login_out')">切换帐号</a></dd>--}}
+                <dd><a href="javascript:;" id="out">切换账号</a></dd>
               <dd><a href="javascript:;" id="out">退出</a></dd>
             </dl>
           </li>

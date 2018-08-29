@@ -124,21 +124,4 @@ class ContractController extends CommonController
             echo 2;
         }
     }
-//    //搜索
-//    public function contract_seek(){
-//        $start = input::get('start');
-//        $end = input::get('end');
-//        $name = input::get('name');
-//        if($start=='' || $end ==''){
-//            $where = [
-//                'c_name'=>$name
-//            ];
-//            $arr = DB::table('customer')->where($where)->get();
-//            $data = DB::table('contract')->where(['customer_id'=>$arr->c_id])->get();
-//        }else if($name == ''){
-//            $data = DB::table('contract')->where('c_ctime','>=',$start)->where('c_utime','<=',$end)->get();
-//        }
-//        print_r($data);exit;
-//        echo json_encode($data);
-//    }
 }

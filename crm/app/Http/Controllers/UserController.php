@@ -336,7 +336,7 @@ class UserController extends CommonController
     }
     //合同类型列表
     public function contype_list(){
-        $data = DB::table('contype')->where(['status'=>1])->paginate(3);
+        $data = DB::table('contype')->where(['status'=>1])->paginate(10);
         return view('user.contype_list')->with('data',$data);
     }
     //合同类型添加
