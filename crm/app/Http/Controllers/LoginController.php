@@ -66,24 +66,5 @@ class LoginController extends BaseController
             return 1;
         }
     }
-    //登录日志展示
-    public function login_log(){
-        $data = DB::table('login_log')->orderByRaw('time DESC')->where(['status'=>1])->paginate(10);
-        foreach($data as $k=>$v){
-            $arr = DB::table('admin')->where(['a_id'=>$v->a_id])->first();
-            $v->time = date('Y-m-d H:i:s',$v->time);
-            $v->a_id = $arr->a_name;
-        }
-        //print_r($data);exit;
-        return view('admin.login_log')->with('data',$data);
-    }
-    public function login_log_del(Request $request){
-        $id = $request->get('id');
-        $res = DB::table('login_log')->where(['id'=>$id])->update(['status'=>3]);
-        if($res){
-            echo 1;
-        }else{
-            echo 2;
-        }
-    }
+
 }
