@@ -25,6 +25,8 @@ Route::get('/login_do','LoginController@login_do');
 Route::get('/login_out','LoginController@login_out');
 //登录日志
 Route::get('login_log','LoginController@login_log');
+//删除
+Route::get('login_log_del','LoginController@login_log_del');
 
 
 ########## Admin控制器 ##########

@@ -35,7 +35,8 @@ class LoginController extends BaseController
             $arr = [
                 'a_id'=>$a_id,
                 'time'=>time(),
-                'ip'=>$data['ip']
+                'ip'=>$data['ip'],
+                'status'=>1
             ];
             DB::table('login_log')->insert($arr);
             return 1;
@@ -67,6 +68,22 @@ class LoginController extends BaseController
     }
     //登录日志展示
     public function login_log(){
-        $data = DB::table('login_log')->get();
+        $data = DB::table('login_log')->orderByRaw('time DESC')->where(['status'=>1])->paginate(10);
+        foreach($data as $k=>$v){
+            $arr = DB::table('admin')->where(['a_id'=>$v->a_id])->first();
+            $v->time = date('Y-m-d H:i:s',$v->time);
+            $v->a_id = $arr->a_name;
+        }
+        //print_r($data);exit;
+        return view('admin.login_log')->with('data',$data);
+    }
+    public function login_log_del(Request $request){
+        $id = $request->get('id');
+        $res = DB::table('login_log')->where(['id'=>$id])->update(['status'=>3]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
     }
 }
