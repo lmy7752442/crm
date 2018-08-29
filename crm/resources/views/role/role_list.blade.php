@@ -32,25 +32,13 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-    {{--<div class="layui-row">--}}
-        {{--<form class="layui-form layui-col-md12 x-so">--}}
-            {{--<input class="layui-input" placeholder="开始日" name="start" id="start">--}}
-            {{--<input class="layui-input" placeholder="截止日" name="end" id="end">--}}
-            {{--<input type="text" name="r_name"  placeholder="请输入用户名" autocomplete="off" class="layui-input">--}}
-            {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>--}}
-        {{--</form>--}}
-    {{--</div>--}}
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','/role_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：{{$count}} 条</span>
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
             <th>角色ID</th>
             <th>角色名称</th>
             <th>权限名称</th>
@@ -59,9 +47,6 @@
         <tbody>
             @foreach($new as $v)
                 <tr>
-                    <td>
-                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                    </td>
                     <td>{{$v->role_id}}</td>
                     <td>{{$v->r_name}}</td>
                     <td>{{$v->power_id}}</td>

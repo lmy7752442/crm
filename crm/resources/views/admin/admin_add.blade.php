@@ -33,9 +33,9 @@
                     <input type="text" id="a_account" name="a_account" required="" lay-verify="required"
                            autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--<span class="x-red">*</span>将会成为您唯一的登入名--}}
-                </div>
+                {{--<div class="layui-form-mid layui-word-aux">--}}
+                    {{--<span class="x-red">*</span>--}}
+                {{--</div>--}}
             </div>
             <!-- 角色 -->
             <div class="layui-form-item">
@@ -60,9 +60,6 @@
                     <input type="text" id="a_phone" name="a_phone" required="" lay-verify="phone"
                            autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--<span class="x-red">*</span>将会成为您唯一的手机号--}}
-                </div>
             </div>
             <!-- 姓名 -->
             <div class="layui-form-item">
@@ -72,22 +69,6 @@
                 <div class="layui-input-inline">
                     <input type="text" id="a_name" name="a_name" required="" lay-verify="required"
                            autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--<span class="x-red">*</span>将会成为您唯一的姓名--}}
-                </div>
-            </div>
-            <!-- 生日 -->
-            <div class="layui-form-item">
-                <label for="a_birthday" class="layui-form-label">
-                    <span class="x-red">*</span>生日
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="a_birthday" name="a_birthday" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--<span class="x-red">*</span>将会成为您唯一的登入名--}}
                 </div>
             </div>
             <!-- 邮箱 -->
@@ -99,9 +80,6 @@
                     <input type="text" id="a_email" name="a_email" required="" lay-verify="email"
                            autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--<span class="x-red">*</span>--}}
-                </div>
             </div>
             <!-- 密码 -->
             <div class="layui-form-item">
@@ -111,9 +89,6 @@
                 <div class="layui-input-inline">
                     <input type="password" id="a_pwd" name="a_pwd" required="" lay-verify="pass"
                            autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--6到16个字符--}}
                 </div>
             </div>
             <!-- 确认密码 -->
@@ -135,35 +110,6 @@
                     <input type="text" id="a_address" name="a_address" required="" lay-verify="required"
                            autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--6到16个字符--}}
-                </div>
-            </div>
-            <!-- IDcard -->
-            <div class="layui-form-item">
-                <label for="a_idcard" class="layui-form-label">
-                    <span class="x-red">*</span>IDcard
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="a_idcard" name="a_idcard" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--6到16个字符--}}
-                </div>
-            </div>
-            <!-- 客户量 -->
-            <div class="layui-form-item">
-                <label for="a_client_num" class="layui-form-label">
-                    <span class="x-red">*</span>客户量
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="a_client_num" name="a_client_num" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    {{--6到16个字符--}}
-                </div>
             </div>
             <!-- 增加 -->
             <div class="layui-form-item">
@@ -182,6 +128,39 @@
         var form = layui.form
                 ,layer = layui.layer
                 ,laydate = layui.laydate;
+
+        // 验证
+//        check_a_account = 0;
+
+        //验证账号
+//        $('#a_account').focus(function(){
+//            $('#a_account').next().remove();
+//            $('#a_account').after("<font color='gray'>请输入4-8汉字</font>");
+//        });
+//        $('#a_account').blur(function(){
+//            $('#a_account').next().remove();
+//            var h_name=$('#a_account').val();
+//            var reg=/^[\u4e00-\u9fa5]{4,8}$/;
+//            ///^[\x{4e00}-\x{9fa5}]{2,4}$/u
+//            if(h_name==''){
+//                $('#a_account').after("<font color='red'>名字不能为空</font>");
+//                check_a_account=0;
+//            }else if(!reg.test(h_name)){
+//                $('#a_account').after("<font color='red'>请输入4-8位汉字</font>");
+//                check_a_account=0;
+//            }else{
+//                $.get("{:U('House/house_sea')}",{h_name:h_name}).done(function(meg){
+//                    if(meg=='ok'){
+//                        $('#a_account').after("<font color='green'>√</font>");
+//                        check_a_account=1;
+//                    }else{
+//                        $('#a_account').after("<font color='red'>该名称已存在</font>");
+//                        check_a_account=0;
+//                    }
+//                })
+//            }
+//        });
+
 
         //执行一个laydate实例
         laydate.render({
