@@ -30,6 +30,7 @@ Route::get('login_log','UserController@login_log');
 Route::get('admin_del','Index@admin_del');
 
 Route::get('login_log_del','UserController@login_log_del');
+
 //个人信息
 Route::get('personal','UserController@personal');
 //修改个人信息
