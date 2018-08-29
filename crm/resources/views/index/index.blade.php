@@ -37,8 +37,8 @@
           <li class="layui-nav-item">
             <a href="javascript:;">{{$data}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
-              <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+              <dd><a onclick="x_admin_show('个人信息','personal')">个人信息</a></dd>
+              <dd><a onclick="x_admin_show('切换帐号','login_out')">切换帐号</a></dd>
               <dd><a href="javascript:;" id="out">退出</a></dd>
             </dl>
           </li>
@@ -292,10 +292,11 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>物流列表</cite>
                         </a>
+                    </li>
+                    <li>
                         <a _href="login_log">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>登录日志</cite>
-
                         </a>
                     </li >
                 </ul>

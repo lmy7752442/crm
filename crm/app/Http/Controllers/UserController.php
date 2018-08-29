@@ -684,6 +684,42 @@ class UserController extends CommonController
         }
         return view('operation.operation_list',['data'=>$data]);
     }
+    //登录日志展示
+    public function login_log(){
+        $data = DB::table('login_log')->orderByRaw('time DESC')->where(['status'=>1])->paginate(10);
+        foreach($data as $k=>$v){
+            $arr = DB::table('admin')->where(['a_id'=>$v->a_id])->first();
+            $v->time = date('Y-m-d H:i:s',$v->time);
+            $v->a_id = $arr->a_name;
+        }
+        //print_r($data);exit;
+        return view('admin.login_log')->with('data',$data);
+    }
+    //删除 日志
+    public function login_log_del(Request $request){
+        $id = $request->get('id');
+        $res = DB::table('login_log')->where(['id'=>$id])->update(['status'=>3]);
+        if($res){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    //个人中心
+    public function personal(Request $request){
+        $a_id = $request->session()->get('a_id');
+        $admin_arr = DB::table('admin')->where(['a_id'=>$a_id])->first();
+        $role = DB::table('role')->where(['role_id'=>$a_id])->frist();
+        $admin_arr->role_id = $role->r_name;
+        return view('user.personal')->with('data',$admin_arr);
+    }
+    //修改 个人信息
+    public function personal_update(Request $request){
+        $id = $request->get('id');
+        $data = DB::table('admin')->where(['a_id'=>$id])->first();
+        $role = DB::table('role')->get();
+        return view('user.personal_update')->with('data',$data)->with('role',$role);
+    }
 }
 
 

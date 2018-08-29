@@ -106,10 +106,10 @@ class CommonController extends BaseController
 //            print_r($default);
 //            echo $url;exit;
 //
-            if(!in_array($url,$default)){
-//                exit('没有权限'.$url) ;
-                return redirect('/notpower');
-            }
+//            if(!in_array($url,$default)){
+////                exit('没有权限'.$url) ;
+//                return redirect('/notpower');
+//            }
             //print_r($default);
 //
             return $next($request);

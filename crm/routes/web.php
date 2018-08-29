@@ -24,10 +24,14 @@ Route::get('/login_do','LoginController@login_do');
 //退出
 Route::get('/login_out','LoginController@login_out');
 //登录日志
-Route::get('login_log','LoginController@login_log');
+Route::get('login_log','UserController@login_log');
 //删除
-Route::get('login_log_del','LoginController@login_log_del');
-
+Route::get('login_log_del','UserController@login_log_del');
+//个人信息
+Route::get('personal','UserController@personal');
+//修改个人信息
+Route::get('personal_update','UserController@personal_update');
+Route::get('personal_update_do','UserController@personal_update_do');
 
 ########## Admin控制器 ##########
 //管理员添加
