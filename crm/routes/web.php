@@ -22,10 +22,6 @@ Route::get('welcome','Index@welcome');
 Route::get('admin_list','Index@admin_list');
 //删除
 Route::get('admin_del','Index@admin_del');
-//跟单添加
-Route::get('documentary_add','DocumentaryController@documentary_add');
-//跟单列表
-Route::get('documentary_list','DocumentaryController@documentary_list');
 //订单列表
 Route::get('order_list','OrderController@order_list');
 //角色列表
