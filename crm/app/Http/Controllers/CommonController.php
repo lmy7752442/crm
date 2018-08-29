@@ -108,6 +108,10 @@ class CommonController extends BaseController
                 '/wuliu_del',
                 '/wuliu_type_add',
                 '/wuliu_type_add_do',
+                ## 个人中心 156,157,158
+                '/personal',
+                '/personal_update',
+                '/personal_update_do'
             ];
             foreach($power_data as $k=>$v){
                 $default[]=$v -> p_rule;

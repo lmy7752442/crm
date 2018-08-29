@@ -27,6 +27,7 @@ Route::get('/login_out','LoginController@login_out');
 Route::get('login_log','UserController@login_log');
 //删除
 Route::get('login_log_del','UserController@login_log_del');
+
 //个人信息
 Route::get('personal','UserController@personal');
 //修改个人信息
