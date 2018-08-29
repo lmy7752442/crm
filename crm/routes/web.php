@@ -184,6 +184,8 @@ Route::get('order_mode_del','OrderController@order_mode_del');
 
 //客户管理列表
 Route::get('user_list','UserController@user_list');
+//客户搜索
+Route::get('user_seek','UserController@user_seek');
 //添加客户
 Route::get('user_add','UserController@user_add');
 Route::get('user_add_do','UserController@user_add_do');
@@ -279,7 +281,7 @@ Route::get('contract_del','ContractController@contract_del');
 Route::get('contract_update','ContractController@contract_update');
 Route::get('contract_update_do','ContractController@contract_update_do');
 //搜索
-Route::get('seek','ContractController@seek');
+Route::get('contract_seek','ContractController@contract_seek');
 
 
 ########## Count控制器 ##########

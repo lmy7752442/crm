@@ -35,12 +35,12 @@
 
 <div class="x-body">
     <div class="layui-row">
-        {{--<div class="layui-form layui-col-md12 x-so">--}}
+        <div class="layui-form layui-col-md12 x-so">
             {{--<input class="layui-input" placeholder="开始日" name="start" id="start">--}}
             {{--<input class="layui-input" placeholder="截止日" name="end" id="end">--}}
             {{--<input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input" id="name">--}}
             {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach" id="button"><i class="layui-icon">&#xe615;</i></button>--}}
-        {{--</div>--}}
+        </div>
     </div>
     <div class="layui-row">
     </div>
@@ -51,12 +51,13 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            {{--<th>--}}
+                {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</th>--}}
             {{--<th>合同id</th>--}}
             <th>客户名称</th>
             <th>合同类型</th>
+            <th>业务员</th>
             <th>定金</th>
             <th>返利方式</th>
             <th>开始时间</th>
@@ -67,12 +68,13 @@
         <tbody>
         @foreach($data as $v)
             <tr>
-                <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                </td>
+                {{--<td>--}}
+                    {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
+                {{--</td>--}}
                {{--// <td>{{$v->contract_id}}</td>--}}
                 <td>{{$v->customer_id}}</td>
                 <td>{{$v->contype_id}}</td>
+                <td>{{$v->a_id}}</td>
                 <td>{{$v->c_deposit}}</td>
                 <td>{{$v->c_rebate}}</td>
                 <td>{{$v->c_ctime}}</td>

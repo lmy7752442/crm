@@ -16,6 +16,8 @@ class ContractController extends CommonController
             $v->customer_id = $customer->c_name;
             $contype = DB::table('contype')->where(['contype_id'=>$v->contype_id,'status'=>1])->first();
             $v->contype_id = $contype->contype_name;
+            $a_id = DB::table('admin')->where(['a_id'=>$v->a_id])->first();
+            $v->a_id = $a_id->a_name;
         }
         return view('contract.contract_list')->with('data',$data);
     }
@@ -41,7 +43,8 @@ class ContractController extends CommonController
             'c_ctime'=>$c_ctime,
             'c_utime'=>$c_utime,
             'ctime'=>time(),
-            'status'=>1
+            'status'=>1,
+            'a_id'=>$a_id
         ];
         $res = DB::table('contract')->insert($arr);
         if($res){
@@ -122,7 +125,7 @@ class ContractController extends CommonController
         }
     }
 //    //搜索
-//    public function seek(){
+//    public function contract_seek(){
 //        $start = input::get('start');
 //        $end = input::get('end');
 //        $name = input::get('name');

@@ -33,6 +33,14 @@
 </div>
 <div class="x-body">
     <div class="layui-row">
+        <div class="layui-row">
+            <form class="layui-form layui-col-md12 x-so">
+                <input class="layui-input" placeholder="添加时间" name="start" id="start">
+                <input class="layui-input" placeholder="截止日" name="end" id="end">
+                <input type="text" name="username" id="name"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                <div class="layui-btn"  lay-submit="" lay-filter="sreach" id="seek"><i class="layui-icon">&#xe615;</i></div>
+            </form>
+        </div>
     </div>
     <xblock>
         <button class="layui-btn" onclick="x_admin_show('添加用户','/user_add')"><i class="layui-icon"></i>添加</button>
@@ -98,8 +106,44 @@
     <div class="page">
        {{$data->links()}}
     </div>
-
 </div>
+<script>
+    $('#seek').on('click',function(){
+        var start = $('#start').val();
+        var name  = $('#name').val();
+        var end = $('#end').val();
+        location.href = 'user_list?start='+start+'&name='+name+'&end='+end;
+       // alert(1)
+       //  $.get('user_seek',
+       //      {
+       //          start:start,
+       //          end:end,
+       //          name:name
+       //      },function(data){
+       //         var str = '';
+       //         for(i in data){
+       //             str +="<tr>"
+       //                 + "<td>"+"<div class='layui-unselect layui-form-checkbox' lay-skin='primary' data-id='2'><i class='layui-icon'>&#xe605;</i></div>"+"</td>"
+       //                 + "<td>"+"<a onclick='x_admin_show('客户共享','/share_add?c_id="+data[i]['c_id']+"')' style='color:blue;' href='javascript:;'>"+data[i]['c_name']+"</a>"+"</td>"
+       //                 + "<td>"+data[i]['c_phone']+"</td>"
+       //                 + "<td>"+data[i]['other_phone']+"</td>"
+       //                 + "<td>"+data[i]['ctype_id']+"</td>"
+       //                 + "<td>"+data[i]['clevel_id']+"</td>"
+       //                 + "<td>"+data[i]['cspurce_id']+"</td>"
+       //                 + "<td>"+data[i]['c_other_connect']+"</td>"
+       //                 + "<td>"+data[i]['c_notes']+"</td>"
+       //                 + "<td>"+data[i]['c_province']+"</td>"
+       //                 + "<td>"+data[i]['c_city']+"</td>"
+       //                 + "<td>"+data[i]['c_area']+"</td>"
+       //                 + "<td>"+data[i]['address']+"</td>"
+       //                 + "<td>"+data[i]['ctime']+"</td>"
+       //                 + "<td>"+"<a title='查看'  onclick="+"x_admin_show('编辑','user_update?id="+data[i]['c_id']+"')"+ "href='javascript:;'><i class='layui-icon'>&#xe63c;</i></a><a titel='扔入公海' href='javascript:;' onclick='member_seas(this,'"+data[i]['c_id']+"')'><i class='layui-icon'>公海</i></a><a title='删除' onclick='member_del(this,'"+data[i]['c_id']+"')' href='javascript:;'><i class='layui-icon'>&#xe640;</i></a>"+"</td>"
+       //                 +"</tr>"
+       //         }
+       //
+       //      })
+    })
+</script>
 <script>
     layui.use('laydate', function(){
         var laydate = layui.laydate;

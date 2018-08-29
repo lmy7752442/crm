@@ -17,7 +17,7 @@
 <body>
 <div class="x-body layui-anim layui-anim-up">
     <blockquote class="layui-elem-quote">欢迎管理员：
-        <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53</blockquote>
+        <span class="x-red">{{$admin_data->a_name}}</span>！当前时间:<?php echo date('Y-m-d H:i:s',$time);?></blockquote>
     <fieldset class="layui-elem-field">
         <legend>数据统计</legend>
         <div class="layui-field-box">
@@ -98,6 +98,24 @@
             </table>
         </div>
     </fieldset>
+     <fieldset class="layui-elem-field">
+            <legend>跟单提醒</legend>
+            <div class="layui-field-box">
+                <table class="layui-table" lay-skin="line">
+                    <tbody>
+                    @foreach($user_data as $v)
+                    <tr>
+                        <td >
+                            您的客户<a class="x-a" target="_blank" style="color:red">{{$v->c_name}}</a>距离您上次设置的跟单时间已不足一天请及时跟进
+                        </td>
+
+                    </tr>
+                    @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
     <div class="layui-container" style="padding: 15px;">
         <div class="layui-row">
             <div class="layui-col-md12">
