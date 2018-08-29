@@ -35,137 +35,48 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">{{$data}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
-              <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-              <dd><a href="./login.html">退出</a></dd>
+              <dd><a onclick="x_admin_show('个人信息','personal')">个人信息</a></dd>
+              <dd><a onclick="x_admin_show('切换帐号','login_out')">切换帐号</a></dd>
+              <dd><a href="javascript:;" id="out">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
         </ul>
         
     </div>
+    <script>
+        layui.use(['layer'], function(){
+            $ = layui.jquery;
+            var layer = layui.layer;
+
+            $("#out").click(function(){
+                $.ajax({
+                    url:"/login_out",
+                    success:function(res){
+                        console.log(res);
+//                    layer.msg(res.msg,{icon:res.code});
+                        if(res == 1) {
+                            layer.msg('退出成功');
+                            window.location.href="/login";
+                        }else if(res == 2){
+                            layer.msg('退出失败');
+                            window.location.href="/";
+                        }
+                    }
+                });
+                return false;
+            })
+
+        });
+    </script>
     <!-- 顶部结束 -->
     <!-- 中部开始 -->
      <!-- 左侧菜单开始 -->
     <div class="left-nav">
       <div id="side-nav">
         <ul id="nav">
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
-                    <cite>会员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="/admin_list">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员列表</cite>
-                            
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="admin_del">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员删除</cite>
-                            
-                        </a>
-                    </li>
-                    {{--<li>--}}
-                        {{--<a href="javascript:;">--}}
-                            {{--<i class="iconfont">&#xe70b;</i>--}}
-                            {{--<cite>会员管理</cite>--}}
-                            {{--<i class="iconfont nav_right">&#xe697;</i>--}}
-                        {{--</a>--}}
-                        {{--<ul class="sub-menu">--}}
-                            {{--<li>--}}
-                                {{--<a _href="admin_list">--}}
-                                    {{--<i class="iconfont">&#xe6a7;</i>--}}
-                                    {{--<cite>会员列表</cite>--}}
-                                    {{----}}
-                                {{--</a>--}}
-                            {{--</li >--}}
-                            {{--<li>--}}
-                                {{--<a _href="crm/member-del.html">--}}
-                                    {{--<i class="iconfont">&#xe6a7;</i>--}}
-                                    {{--<cite>会员删除</cite>--}}
-                                    {{----}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a _href="xx.html">--}}
-                                    {{--<i class="iconfont">&#xe6a7;</i>--}}
-                                    {{--<cite>等级管理</cite>--}}
-                                    {{----}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{----}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>订单管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="order_list">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>订单列表</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>客户管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="order_list">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>客户列表</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>分类管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="cate.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>多级分类</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>城市联动</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="city.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>三级地区联动</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
@@ -180,21 +91,160 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="role_list">
+                        <a _href="/role_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="power_list">
+                        <a _href="/department_list">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
+                            <cite>部门管理</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="crm/admin-rule.html">
+                        <a _href="/power_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限管理</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+<<<<<<< HEAD
+=======
+                    <cite>跟单管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="documentary_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>跟单列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="documentary_dtype_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>跟单类型列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="documentary_dprogress_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>跟单进度列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+>>>>>>> 8e1dca3f6c79c9e76df863e86396789e23671fa2
+                    <cite>订单管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="order_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="order_mode_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单方式列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="order_type_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单状态列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>产品管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="product_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>产品列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>客户管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="user_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="share_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>共享客户列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="ctype_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户类型管理</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="clevel_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户等级管理</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="csource_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户来源管理</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/advince_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户建议</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>合同管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="contype_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>合同类型</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="contract_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>合同展示</cite>
                         </a>
                     </li >
                 </ul>
@@ -207,68 +257,51 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="crm/echarts1.html">
+                        <a _href="/count_list">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>拆线图</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="crm/echarts2.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>柱状图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="crm/echarts3.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>地图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="crm/echarts4.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>饼图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="crm/echarts5.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>雷达图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="crm/echarts6.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>k线图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="crm/echarts7.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>热力图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="crm/echarts8.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>仪表图</cite>
+                            <cite>统计</cite>
                         </a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe6b4;</i>
-                    <cite>图标字体</cite>
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>功能插件</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="crm/unicode.html">
+                        <a _href="publicnotice_list">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>图标对应字体</cite>
+                            <cite>内部公告</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="seas_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>公海</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="operation_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>操作记录</cite>
+                        </a>
+                    </li >
+                    <li>
+
+                        <a _href="wuliu_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>物流列表</cite>
                         </a>
                     </li>
+                    <li>
+                        <a _href="login_log">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>登录日志</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
         </ul>

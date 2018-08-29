@@ -28,7 +28,7 @@
                 <span class="x-red">*</span>客户姓名
             </label>
             <div class="layui-input-inline">
-                <select id="shipping" name="shipping" class="valid">
+                <select id="user" name="user" class="valid">
                     <option value="">请选择</option>
                     @foreach($admin_data as $v)
                     <option value="{{$v->c_id}}">{{$v->c_name}}</option>
@@ -39,7 +39,7 @@
                 <span class="x-red">*</span>跟单类型
             </label>
             <div class="layui-input-inline">
-                <select id="shipping" name="shipping" class="valid">
+                <select id="dtype" name="dtype" class="valid">
                     <option value="">请选择</option>
                     @foreach($dtype_data as $v)
                         <option value="{{$v->dtype_id}}">{{$v->dtype_name}}</option>
@@ -50,21 +50,20 @@
                 <span class="x-red">*</span>跟单进度
             </label>
             <div class="layui-input-inline">
-                <select id="shipping" name="shipping" class="valid">
+                <select id="dprogress" name="dprogress" class="valid">
                     <option value="">请选择</option>
                     @foreach($dprogress_data as $v)
                         <option value="{{$v->dprogress_id}}">{{$v->dprogress_name}}</option>
                     @endforeach
                 </select>
             </div>
-
         </div>
         <div class="layui-form-item layui-form-text">
             <label for="desc" class="layui-form-label">
                 详细内容
             </label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"></textarea>
+                <textarea placeholder="请输入内容" id="content" name="desc" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
@@ -72,7 +71,7 @@
                 <span class="x-red">*</span>下次联系时间
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="next_time" name="username" required="" lay-verify="required"
+                <input type="text" id="next_time" name="next_time" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -81,7 +80,7 @@
                 <span class="x-red">*</span>提前
             </label>
             <div class="layui-input-inline" style="width: 50px;">
-                <input type="number" id="" name="username" required="" lay-verify="required"
+                <input type="number" id="warn" name="username" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <label for="username" class="layui-form-label" style="margin-left: -40px">
@@ -128,14 +127,44 @@
 
         //监听提交
         form.on('submit(add)', function(data){
-            console.log(data);
+           // console.log(data);
+            var user = $('#user').val();
+            var dtype = $('#dtype').val();
+            var dprogress = $('#dprogress').val();
+            var content = $('#content').val();
+            var next_time = $('#next_time').val();
+            var warn = $('#warn').val();
+            $.get('documentary_add_do',{
+                user:user,
+                dtype:dtype,
+                dprogress:dprogress,
+                content:content,
+                next_time:next_time,
+                warn:warn
+            },function(data){
+                console.log(data);
+                if(data.status == 1){
+                    layer.alert("增加成功", {icon: 6},function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                        // parent.$('.layui-table').append(str);//表格结尾追加
+                        //  parent.$('.layui-table tr:eq(0)').before(str); //首行前追加
+                        // parent.$('.layui-table tr:eq(0)').after(str); //首行后追加
+                        parent.$('.layui-table tbody').html(data.data); //
+                        //parent.$('.layui-table tr:eq(1)').remoable tr:eq(1)').before(strve(); //删除指定行
+                    });
+                }else{
+                    layer.alert("增加失败", {icon: 6},function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                    });
+                }
+            })
             //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-            });
             return false;
         });
 
