@@ -25,6 +25,8 @@ Route::get('/login_do','LoginController@login_do');
 Route::get('/login_out','LoginController@login_out');
 //登录日志
 Route::get('login_log','LoginController@login_log');
+//删除
+Route::get('login_log_del','LoginController@login_log_del');
 
 
 ########## Admin控制器 ##########
@@ -181,6 +183,7 @@ Route::get('order_mode_save','OrderController@order_mode_save');
 Route::get('order_mode_save_do','OrderController@order_mode_save_do');
 //订单方式删除
 Route::get('order_mode_del','OrderController@order_mode_del');
+
 //物流展示
 Route::get('wuliu_list','OrderController@wuliu_list');
 //物流添加

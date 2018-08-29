@@ -44,7 +44,7 @@ class DepartmentController extends CommonController
 
     /** 部门展示 */
     public function department_list(){
-        $res = DB::table('department')->join('role', 'department.role_id', '=', 'role.role_id')->join('admin', 'department.a_id', '=', 'admin.a_id')->where(['d_status'=>1])->paginate(5);
+        $res = DB::table('department')->join('role', 'department.role_id', '=', 'role.role_id')->join('admin', 'department.a_id', '=', 'admin.a_id')->where(['d_status'=>1])->paginate(10);
 //        print_r($res);exit;
         //查询总共条数
         $count = DB::table('department')->where(['d_status'=>1])->count();

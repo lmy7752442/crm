@@ -23,7 +23,7 @@
 <body>
 <div class="x-nav">
       <span class="layui-breadcrumb">
-        <a href="/">首页</a>
+        <a href="">首页</a>
         <a href="">演示</a>
         <a>
           <cite>导航元素</cite></a>
@@ -32,93 +32,61 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
+    <div class="layui-row">
+    </div>
     <xblock>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','/role_add')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：{{$count}} 条</span>
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>角色ID</th>
-            <th>角色名称</th>
-            <th>权限名称</th>
-            <th>操作</th>
+            <th>编号</th>
+            <th>管理员</th>
+            <th>ip地址</th>
+            <th>登录时间</th>
+            <th >操作</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach($new as $v)
-                <tr>
-                    <td>{{$v->role_id}}</td>
-                    <td>{{$v->r_name}}</td>
-                    <td>{{$v->power_id}}</td>
-                    {{--<td class="td-status">--}}
-                        {{--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
-                    <td class="td-manage">
-                        <a title="编辑"  onclick="x_admin_show('编辑','/role_update?role_id={{$v->role_id}}')" href="javascript:;">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" onclick="member_del(this,'{{$v->role_id}}')" href="javascript:;">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
+        @foreach($data as $k=>$v)
+            <tr>
+                <td>{{$v->id}}</td>
+                <td>{{$v->a_id}}</td>
+                <td>{{$v->ip}}</td>
+                <td>{{$v->time}}</td>
+                <td><a title="删除" onclick="member_del(this,'{{$v->id}}')" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+                </a>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
-    <!-- 分页 -->
     <div class="page">
-        {{$new -> links()}}
+        {{$data->links()}}
     </div>
 
 </div>
 <script>
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
-
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#end' //指定元素
-        });
-    });
-
-
     /*用户-删除*/
     function member_del(obj,id){
-        console.log(obj);
-        console.log(id);
         layer.confirm('确认要删除吗？',function(index){
             //发异步删除数据
-//            $(obj).parents("tr").remove();
-//            layer.msg('已删除!',{icon:1,time:1000});
-            $.ajax({
-                method:'get',
-                url:"/role_del",
-                data:{role_id:id},
-                success:function(res){
-                    console.log(res);
-//                    layer.msg(res.msg,{icon:res.code});
-                    if(res == 1) {
-                        layer.msg("角色删除成功", {icon: 6});
-                        window.location.href="/role_list";
-                    }else if(res == 2) {
-                        layer.msg('角色删除失败', {icon: 5})
-                        layer.close(layer.index);
+            $.get('login_log_del',
+                {
+                    id:id
+                },function(data){
+                    if(data==1){
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!',{icon:1,time:1000});
+                        // parent.$('.layui-table tr:eq(1)').before(strve()); //删除指定行
                     }else{
-                        layer.msg('还有管理员正拥有此角色，暂时不能删除', {icon: 5})
-                        layer.close(layer.index);
+                        $(obj).parents("tr").remove();
+                        layer.msg('删除失败!',{icon:1,time:1000});
                     }
-                }
-            });
-            return false;
+                })
+
         });
     }
-
-
-
     function delAll (argument) {
 
         var data = tableCheck.getData();
@@ -136,6 +104,7 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();</script>
+
 </body>
 
 </html>

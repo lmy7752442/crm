@@ -33,16 +33,12 @@
 </div>
 <div class="x-body">
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','/admin_add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：{{$count}} 条</span>
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
             <th>ID</th>
             <th>账号</th>
             <th>角色</th>
@@ -54,9 +50,6 @@
         <tbody>
             @foreach($new as $v)
                 <tr>
-                    <td>
-                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                    </td>
                     <td>{{$v->a_id}}</td>
                     <td>{{$v->a_account}}</td>
                     <td>{{$v->r_name}}</td>
@@ -64,9 +57,6 @@
                     <td>{{$v->a_email}}</td>
                     <td>{{$v->a_address}}</td>
                     <td class="td-manage">
-                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                    <i class="layui-icon">&#xe601;</i>
-                </a>
                 <a title="编辑"  onclick="x_admin_show('编辑','/admin_update?a_id={{$v->a_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
                 </a>

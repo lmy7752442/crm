@@ -98,7 +98,16 @@ class CommonController extends BaseController
                 '/order_type_list',
                 ## 订单方式 64
                 '/order_mode_list',
-
+                ## 物流 143,144,145,146,147,148,149,150,151
+                '/wuliu_list',
+                '/wuliu_add',
+                '/wuliu_order',
+                '/wuliu_add_do',
+                '/wuliu_save',
+                '/wuliu_save_do',
+                '/wuliu_del',
+                '/wuliu_type_add',
+                '/wuliu_type_add_do',
             ];
             foreach($power_data as $k=>$v){
                 $default[]=$v -> p_rule;
