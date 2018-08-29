@@ -65,4 +65,8 @@ class LoginController extends BaseController
             return 1;
         }
     }
+    //登录日志展示
+    public function login_log(){
+        $data = DB::table('login_log')->get();
+    }
 }

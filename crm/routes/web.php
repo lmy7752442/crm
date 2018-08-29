@@ -23,6 +23,8 @@ Route::get('/login','LoginController@login');
 Route::get('/login_do','LoginController@login_do');
 //退出
 Route::get('/login_out','LoginController@login_out');
+//登录日志
+Route::get('login_log','LoginController@login_log');
 
 
 ########## Admin控制器 ##########
