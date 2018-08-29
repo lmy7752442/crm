@@ -50,13 +50,14 @@
         </div>
         <div class="layui-form-item">
             <label for="L_pass" class="layui-form-label">
-               价格
+                <span class="x-red">*</span>价格
             </label>
             <div class="layui-input-inline">
-                <input type="number" id="p_price" name="content" required="" lay-verify="pass"
+                <input type="number" id="p_price" name="content" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
             </div>
         </div>
 
@@ -111,15 +112,21 @@
                         layer.alert("增加成功", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
+                            window.parent.location.reload();
                             // //关闭当前frame
                             parent.layer.close(index);
 
-
-                            parent.$('.layui-table tr:eq(1)').before(str); //首行后追加
                         });
-                    }else{
+                    }else if(data==2){
                         //发异步，把数据提交给php
                         layer.alert("增加失败", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            // //关闭当前frame
+                            parent.layer.close(index);
+                        });
+                    }else{
+                        layer.alert("已有该数据", {icon: 6},function () {
                             // 获得frame索引
                             var index = parent.layer.getFrameIndex(window.name);
                             // //关闭当前frame

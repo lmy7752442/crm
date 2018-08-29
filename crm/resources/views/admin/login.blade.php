@@ -14,6 +14,8 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="crm/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="crm/js/xadmin.js"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+
 
 </head>
 <body class="login-bg">
@@ -23,9 +25,10 @@
     <div id="darkbannerwrap"></div>
     <div class="layui-form">
         {{--<form method="post" class="layui-form layui-form-pane" action="">--}}
-            <input name="a_account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <input name="a_account" id="a_account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
-            <input name="a_pwd" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <input name="a_pwd" lay-verify="required" placeholder="密码" id="a_pwd" type="password" class="layui-input">
+            <input type="hidden" value="returnCitySN['cip']" name="ip">
             <hr class="hr15">
             {{--<input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">--}}
             <button class="layui-btn" lay-submit="" lay-filter="login">登录</button>
@@ -44,17 +47,22 @@
                 ,layer = layui.layer;
 
         form.on('submit(login)', function(data){
-//            layer.alert(111);
-//            console.log(data);
+                var a_account = $('#a_account').val();
+                var a_pwd = $('#a_pwd').val();
+                // alert(a_account);
+                // alert(a_pwd);
+                // alert(returnCitySN['cip'])
             $.ajax({
                 method:'get',
                 url:"/login_do",
-                data:data.field,
+                data:{ip:returnCitySN['cip'],a_account:a_account,a_pwd:a_pwd},
+                //data:data.field,
                 success:function(res){
-                    console.log(res);
+                    //console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
                         layer.msg('登录成功');
+                        //alert(returnCitySN['cip'] );
                         window.location.href="/";
                     }else{
                         layer.msg('登录失败');

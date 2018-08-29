@@ -35,16 +35,16 @@
     <div class="layui-row">
     </div>
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        {{--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--}}
         <button class="layui-btn" onclick="x_admin_show('添加用户','/product_add')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        {{--<span class="x-right" style="line-height:40px">共有数据：88 条</span>--}}
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            {{--<th>--}}
+                {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</th>--}}
             <th>产品名称</th>
             <th>价格</th>
             <th>单位</th>
@@ -55,16 +55,16 @@
         <tbody>
         @foreach($data as $v)
             <tr>
-                <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                </td>
+                {{--<td>--}}
+                    {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
+                {{--</td>--}}
                 <td>{{$v->p_name}}</td>
                 <td>{{$v->p_unit}}</td>
                 <td>{{$v->p_price}}</td>
                 <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
                 <td class="td-manage">
-                    <a title="查看"  onclick="x_admin_show('编辑','product_update?id={{$v->product_id}}')" href="javascript:;">
-                        <i class="layui-icon">&#xe63c;</i>
+                    <a title="编辑"  onclick="x_admin_show('编辑','product_update?id={{$v->product_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
                     </a>
                     <a title="删除" onclick="member_del(this,'{{$v->product_id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>

@@ -44,9 +44,6 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
             <th>共享</th>
             <th>客户名称</th>
             <th>手机号</th>
@@ -67,10 +64,7 @@
         <tbody>
         @foreach($data as $v)
             <tr>
-                <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                </td>
-                <td>{{$arr[$v->open_a_id]}}</td>
+                <td>{{$v->open_a_id}}</td>
                 <td>{{$v->c_name}}</td>
                 <td>{{$v->c_phone}}</td>
                 <td>{{$v->other_phone}}</td>

@@ -42,19 +42,13 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-            <th>类型</th>
+            <th> 合同类型</th>
             <th >操作</th>
         </tr>
         </thead>
         <tbody>
         @foreach($data as  $v)
             <tr>
-                <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                </td>
                 <td>{{$v->contype_name}}</td>
                 <td class="td-manage">
                     <a title="查看"  onclick="x_admin_show('编辑','contype_update?id={{$v->contype_id}}')" href="javascript:;">
