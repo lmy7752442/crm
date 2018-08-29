@@ -58,10 +58,10 @@
                         console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
                         if(res == 1) {
-                            layer.alert('退出成功');
+                            layer.msg('退出成功');
                             window.location.href="/login";
                         }else if(res == 2){
-                            layer.alert('退出失败');
+                            layer.msg('退出失败');
                             window.location.href="/";
                         }
                     }
@@ -106,12 +106,6 @@
                         <a _href="/power_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限管理</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="/advince_list">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>客户建议</cite>
                         </a>
                     </li >
                 </ul>
@@ -221,6 +215,12 @@
                         <a _href="csource_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>客户来源管理</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/advince_list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户建议</cite>
                         </a>
                     </li >
                 </ul>

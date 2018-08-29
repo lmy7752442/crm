@@ -37,6 +37,20 @@
                     {{--<span class="x-red">*</span>将会成为您唯一的登入名--}}
                 </div>
             </div>
+            <!-- 角色 -->
+            <div class="layui-form-item">
+                <label for="a_id" class="layui-form-label">
+                    <span class="x-red">*</span>角色
+                </label>
+                <div class="layui-input-inline">
+                    <select name="role_id">
+                        <option value="">请选择</option>
+                        @foreach($role as $v)
+                            <option value="{{$v->role_id}}">{{$v->r_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <!-- 手机 -->
             <div class="layui-form-item">
                 <label for="phone" class="layui-form-label">

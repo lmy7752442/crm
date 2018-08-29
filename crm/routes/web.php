@@ -93,9 +93,12 @@ Route::get('/power_update_do','PowerController@power_update_do');
 Route::get('/power_del','PowerController@power_del');
 
 
-
 Route::get('/','IndexController@index');
 Route::get('welcome','IndexController@welcome');
+
+Route::get('/notpower',function(){
+    return view('index.not_power');
+});
 
 
 ########## Documentary控制器 ##########
@@ -242,6 +245,8 @@ Route::get('product_update_do','UserController@product_update_do');
 //产品删除
 Route::get('product_del','UserController@product_del');
 
+
+############################################################
 //开共享
 Route::get('/share_add','UserController@share_add');
 //执行添加共享

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
 
-class ContractController extends Controller
+class ContractController extends CommonController
 {
     //合同展示
     public function contract_list(){
