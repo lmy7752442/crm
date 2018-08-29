@@ -709,16 +709,37 @@ class UserController extends CommonController
     public function personal(Request $request){
         $a_id = $request->session()->get('a_id');
         $admin_arr = DB::table('admin')->where(['a_id'=>$a_id])->first();
-        $role = DB::table('role')->where(['role_id'=>$a_id])->frist();
+        $role = DB::table('role')->where(['role_id'=>$admin_arr->role_id])->first();
+       // print_r($role);exit;
         $admin_arr->role_id = $role->r_name;
         return view('user.personal')->with('data',$admin_arr);
     }
     //修改 个人信息
     public function personal_update(Request $request){
         $id = $request->get('id');
-        $data = DB::table('admin')->where(['a_id'=>$id])->first();
+        $res = DB::table('admin')->where(['a_id'=>$id])->first();
         $role = DB::table('role')->get();
-        return view('user.personal_update')->with('data',$data)->with('role',$role);
+        return view('user.personal_update')->with('res',$res)->with('role',$role);
+    }
+    public function admin_update_do(){
+        $data = $_GET;
+//        print_r($data);exit;
+        $update_data = [
+            'a_account' => $data['a_account'],
+            'role_id' => $data['role_id'],
+            'a_phone' => $data['a_phone'],
+            'a_name' => $data['a_name'],
+            'a_email' => $data['a_email'],
+            'a_pwd' => $data['a_pwd'],
+            'a_address' => $data['a_address'],
+        ];
+        $res = DB::table('admin')->where(['a_id'=>$data['a_id']])->update($update_data);
+//        print_r($res);exit;
+        if($res){
+            return 1;
+        }else{
+            return 2;
+        }
     }
 }
 
