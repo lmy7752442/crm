@@ -35,12 +35,12 @@
 
 <div class="x-body">
     <div class="layui-row">
-        {{--<div class="layui-form layui-col-md12 x-so">--}}
+        <div class="layui-form layui-col-md12 x-so">
             {{--<input class="layui-input" placeholder="开始日" name="start" id="start">--}}
             {{--<input class="layui-input" placeholder="截止日" name="end" id="end">--}}
             {{--<input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input" id="name">--}}
             {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach" id="button"><i class="layui-icon">&#xe615;</i></button>--}}
-        {{--</div>--}}
+        </div>
     </div>
     <div class="layui-row">
     </div>
@@ -80,8 +80,8 @@
                 <td>{{$v->c_ctime}}</td>
                 <td>{{$v->c_utime}}</td>
                 <td class="td-manage">
-                    <a title="查看"  onclick="x_admin_show('编辑','contract_update?id={{$v->contract_id}}')" href="javascript:;">
-                        <i class="layui-icon">&#xe63c;</i>
+                    <a title="编辑"  onclick="x_admin_show('编辑','contract_update?id={{$v->contract_id}}')" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
                     </a>
                     <a title="删除" onclick="member_del(this,'{{$v->contract_id}}')" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>

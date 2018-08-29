@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class DocumentaryController extends Controller
+class DocumentaryController extends CommonController
 {
     /**
      * @param Request $request

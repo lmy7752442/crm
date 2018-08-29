@@ -53,7 +53,6 @@
             </th>
             <th>角色ID</th>
             <th>角色名称</th>
-            <th>管理员账号</th>
             <th>权限名称</th>
             <th>操作</th>
         </thead>
@@ -65,7 +64,6 @@
                     </td>
                     <td>{{$v->role_id}}</td>
                     <td>{{$v->r_name}}</td>
-                    <td>{{$v->a_account}}</td>
                     <td>{{$v->power_id}}</td>
                     {{--<td class="td-status">--}}
                         {{--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
@@ -102,29 +100,6 @@
         });
     });
 
-    /*用户-停用*/
-//    function member_stop(obj,id){
-//        layer.confirm('确认要停用吗？',function(index){
-//
-//            if($(obj).attr('title')=='启用'){
-//
-//                //发异步把用户状态进行更改
-//                $(obj).attr('title','停用')
-//                $(obj).find('i').html('&#xe62f;');
-//
-//                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-//                layer.msg('已停用!',{icon: 5,time:1000});
-//
-//            }else{
-//                $(obj).attr('title','启用')
-//                $(obj).find('i').html('&#xe601;');
-//
-//                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-//                layer.msg('已启用!',{icon: 5,time:1000});
-//            }
-//
-//        });
-//    }
 
     /*用户-删除*/
     function member_del(obj,id){
@@ -148,7 +123,7 @@
                         layer.msg('角色删除失败', {icon: 5})
                         layer.close(layer.index);
                     }else{
-                        layer.msg('还有不同部门的员工正拥有此角色，暂时不能删除', {icon: 5})
+                        layer.msg('还有管理员正拥有此角色，暂时不能删除', {icon: 5})
                         layer.close(layer.index);
                     }
                 }

@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+header("content-type:text/html;charset=utf8");
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
-class UserController extends Controller
+class UserController extends CommonController
 {
     //客户展示
     public  function user_list(Request $request){
@@ -25,7 +25,7 @@ class UserController extends Controller
         if(!empty($c_name)){
             $where[]=['c_name','like','%'.$c_name.'%'];
         }
-        $data = DB::table('customer')->where(['status'=>1,'a_id'=>$a_id])->where($where)->orderByRaw('ctime DESC')->paginate(3);
+        $data = DB::table('customer')->where(['status'=>1,'a_id'=>$a_id])->where($where)->orderByRaw('ctime DESC')->paginate(5);
         foreach($data as $k=>$v){
             $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
             $v->ctype_id = $ctype->ctype_name;
@@ -212,7 +212,7 @@ class UserController extends Controller
 
     //类型展示
     public function ctype(){
-        $data = DB::table('ctype')->where(['status'=>1])->paginate(3);
+        $data = DB::table('ctype')->where(['status'=>1])->paginate(10);
         return view('user.ctype_list')->with('data',$data);
     }
     //类型添加
@@ -267,7 +267,7 @@ class UserController extends Controller
     }
     //等级展示
     public function clevel_list(){
-        $data = DB::table('clevel')->where(['status'=>1])->paginate(3);
+        $data = DB::table('clevel')->where(['status'=>1])->paginate(10);
         return view('user.clevel_list')->with('data',$data);
     }
     //添加等级
@@ -419,21 +419,17 @@ class UserController extends Controller
         $a_id = $request->session()->get('a_id');
         //客户id
         $c_id = $request->get('c_id');
+        //根据客户id 查关联表    这个客户都分享给哪些管理员
         $arr = json_decode(DB::table('admin_share') -> where('c_id',$c_id) -> get(),true);//根据要分享的客户的id查数据
         $data = [];
         foreach($arr as $k => $v){
+            //把管理员id 放入  data  数组里
             $data[] = $v['admin_id'];
         }
+        //把当前管理员  状态  改为3   在退出时状态改为1
         DB::table('admin')->where(['a_id'=>$a_id])->update(['a_status'=>3]);
-        //取出所有分享过该用户的管理员的id
+        //取出所有没有分享过该用户的管理员的id
        $res = DB::table('admin') -> whereNotIn('a_id',$data) ->where(['a_status'=>1])-> get();//查询条件  管理员的id 不在$data中 即为不在已经分享的管理员的id中
-//        //获取当前管理员id
-//        $a_id = $request->session()->get('a_id');
-//        $where = [
-//            'a_id' => $a_id
-//        ];
-//        //其他管理员id
-//       // $other_a_id = DB::table('admin')->whereNotIn('a_id',$where)->get();
         return view('user.share_add')->with('c_id',$c_id)->with('data',$res);
     }
 /*复选框   点击获取管理员的id  便利的时候给状态  where a_id = luo u_id = zhang*/
@@ -496,15 +492,11 @@ class UserController extends Controller
     //共享展示  我的共享
     public function share_list(Request $request){
         $a_id = $request->session()->get('a_id');
-        //共享数据
-        $admin = json_decode(DB::table('admin')->get(),true);
-        foreach($admin as $k=>$v){
-            $arr[$v['a_id']] = $v['a_name'];
-        }
+        //当前管理员 分享的所有数据
         $data = DB::table('share')
             ->where(['open_a_id'=>$a_id])
             ->join('customer','customer.c_id','=','share.c_id')
-            ->paginate(3);
+            ->paginate(10);
         foreach($data as $k=>$v){
             $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
             $v->ctype_id = $ctype->ctype_name;
@@ -512,20 +504,18 @@ class UserController extends Controller
             $v->clevel_id = $clevel->clevel_name;
             $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
             $v->csource_id = $csource->csource_name;
+            $id = DB::table('admin')->where(['a_id'=>$v->receive_a_id])->first();
+            $v->receive_a_id = $id->a_name;
         }
-            return view('share.share_list',['data'=>$data,'arr'=>$arr]);
+            return view('share.share_list',['data'=>$data]);
     }
     //共享给我
     public function share_list_do(Request $request){
         $a_id = $request->session()->get('a_id');
-        $admin = json_decode(DB::table('admin')->get(),true);
-        foreach($admin as $k=>$v){
-            $arr[$v['a_id']] = $v['a_name'];
-        }
         $data = DB::table('share')
             ->where(['receive_a_id'=>$a_id])
             ->join('customer','customer.c_id','=','share.c_id')
-            ->paginate(3);
+            ->paginate(10);
         foreach($data as $k=>$v){
             $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
             $v->ctype_id = $ctype->ctype_name;
@@ -533,12 +523,14 @@ class UserController extends Controller
             $v->clevel_id = $clevel->clevel_name;
             $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
             $v->csource_id = $csource->csource_name;
+            $id = DB::table('admin')->where(['a_id'=>$v->open_a_id])->first();
+            $v->open_a_id = $id->a_name;
         }
-        return view('share.share_list_do',['data'=>$data,'arr'=>$arr]);
+        return view('share.share_list_do',['data'=>$data]);
     }
     //产品展示
     public function product_list(){
-        $data = DB::table('product')->where(['status'=>1])->paginate(3);
+        $data = DB::table('product')->where(['status'=>1])->orderByRaw('ctime DESC')->paginate(10);
         return view('product.product_list')->with('data',$data);
     }
     //产品添加
@@ -556,6 +548,16 @@ class UserController extends Controller
             'ctime'=>time(),
             'status'=>1
         ];
+        $arr1 = [
+            'p_name'=>$p_name,
+            'p_unit'=>$p_unit,
+            'p_price'=>$p_price,
+            'status'=>1
+        ];
+        $result = DB::table('product')->where($arr1)->first();
+        if($result){
+            echo '已经添加该数据了';exit;
+        }
         $res = DB::table('product')->insert($arr);
         if($res){
             echo 1;
@@ -610,7 +612,7 @@ class UserController extends Controller
     }
     //公海展示
     public function seas_list(){
-        $data = DB::table('customer')->where(['status'=>2])->orderByRaw('ctime DESC')->paginate(3);
+        $data = DB::table('customer')->where(['status'=>2])->orderByRaw('ctime DESC')->paginate(10);
         foreach($data as $k=>$v){
             $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
             $v->ctype_id = $ctype->ctype_name;
@@ -703,7 +705,8 @@ class UserController extends Controller
     }
     //操作记录展示
     public function operation_list(){
-        $data = DB::table('record')->where(['status'=>1])->paginate(10);
+       //dump($_SERVER);exit;
+        $data = DB::table('record')->where(['status'=>1])->orderByRaw('time DESC')->paginate(10);
         foreach($data as $k=>$v){
             $a_id = DB::table('admin')->where(['a_id'=>$v->a_id])->first();
             $v->a_id = $a_id->a_name;

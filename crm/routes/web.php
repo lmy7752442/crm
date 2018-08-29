@@ -23,6 +23,8 @@ Route::get('/login','LoginController@login');
 Route::get('/login_do','LoginController@login_do');
 //退出
 Route::get('/login_out','LoginController@login_out');
+//登录日志
+Route::get('login_log','LoginController@login_log');
 
 
 ########## Admin控制器 ##########
@@ -93,9 +95,12 @@ Route::get('/power_update_do','PowerController@power_update_do');
 Route::get('/power_del','PowerController@power_del');
 
 
-
 Route::get('/','IndexController@index');
 Route::get('welcome','IndexController@welcome');
+
+Route::get('/notpower',function(){
+    return view('index.not_power');
+});
 
 
 ########## Documentary控制器 ##########
@@ -260,6 +265,8 @@ Route::get('product_update_do','UserController@product_update_do');
 //产品删除
 Route::get('product_del','UserController@product_del');
 
+
+############################################################
 //开共享
 Route::get('/share_add','UserController@share_add');
 //执行添加共享
@@ -316,6 +323,4 @@ Route::get('/publicnotice_save','adt@publicnotice_save');
 Route::get('/publicnotice_save_do','adt@publicnotice_save_do');
 //公告删除
 Route::get('/publicnotice_del','adt@publicnotice_del');
-
-
 

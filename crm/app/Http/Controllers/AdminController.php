@@ -14,7 +14,10 @@ class AdminController extends CommonController
 {
     /** 管理员添加 */
     public function admin_add(){
-        return view('admin.admin_add');
+        //查询角色数据
+        $role = DB::table('role')->where(['r_status'=>1])->get();
+//        print_r($role);exit;
+        return view('admin.admin_add')->with('role',$role);
     }
 
     /** 执行添加 */
@@ -24,6 +27,7 @@ class AdminController extends CommonController
         if($data['a_pwd'] == $data['a_repwd']){
             $insert_data = [
                 'a_account' => $data['a_account'],
+                'role_id' => $data['role_id'],
                 'a_phone' => $data['a_phone'],
                 'a_name' => $data['a_name'],
                 'a_birthday' => $data['a_birthday'],
@@ -47,7 +51,7 @@ class AdminController extends CommonController
 
     /** 管理员展示列表 */
     public function admin_list(Request $request){
-        $res = DB::table('admin')->where(['a_status'=>1])->paginate(5);
+        $res = DB::table('admin')->where(['a_status'=>1])->join('role', 'admin.role_id', '=', 'role.role_id')->paginate(5);
 //        print_r($res);exit;
         //查询总共条数
         $count = DB::table('admin')->where(['a_status'=>1])->count();
@@ -59,9 +63,12 @@ class AdminController extends CommonController
     public function admin_update(){
         $a_id = $_GET['a_id'];
 //        print_r($a_id);exit;
-        $res = DB::table('admin')->where(['a_id'=>$a_id])->first();
+        $res = DB::table('admin')->where(['a_id'=>$a_id])->join('role', 'admin.role_id', '=', 'role.role_id')->first();
 //        print_r($res);exit;
-        return view('admin.admin_update')->with('res',$res);
+        //查询角色数据
+        $role = DB::table('role')->where(['r_status'=>1])->get();
+//        print_r($role);exit;
+        return view('admin.admin_update')->with('res',$res)->with('role',$role);
     }
 
     /** 管理员执行修改 */
@@ -70,6 +77,7 @@ class AdminController extends CommonController
 //        print_r($data);exit;
         $update_data = [
             'a_account' => $data['a_account'],
+            'role_id' => $data['role_id'],
             'a_phone' => $data['a_phone'],
             'a_name' => $data['a_name'],
             'a_birthday' => $data['a_birthday'],

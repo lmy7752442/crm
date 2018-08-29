@@ -100,6 +100,21 @@
 
 </html>
 <script>
+
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+
+
+        laydate.render({
+            elem: '#c_ctime', //指定元素
+            // alert(start)
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#c_utime' //指定元素
+        });
+    });
     layui.use(['form','layer'], function(){
         $ = layui.jquery;
         var form = layui.form

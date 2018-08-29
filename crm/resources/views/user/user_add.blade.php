@@ -63,24 +63,24 @@
             <label class="layui-form-label"><span class="x-red">*</span>客户</label>
             <div class="layui-input-block">
                 <div class="layui-input-inline">
-                    <select name="ctype_id" id="ctype">
-                        <option>客户类型</option>
+                    <select name="ctype_id" id="ctype" lay-verify="required">
+                        <option value="0">客户类型</option>
                        @foreach($ctype as $v)
                         <option value="{{$v->ctype_id}} ">{{$v->ctype_name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="csource_id" id="csource_id">
-                        <option>客户来源</option>
+                    <select name="csource_id" id="csource_id" lay-verify="required">
+                        <option value="0">客户来源</option>
                         @foreach($csource as $val)
                         <option value="{{$val->csource_id}}">{{$val->csource_name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="clevel_id" id="clevel_id">
-                        <option>客户等级</option>
+                    <select name="clevel_id" id="clevel_id" lay-verify="required">
+                        <option value="0">客户等级</option>
                         @foreach($clevel as $value)
                         <option value="{{$value->clevel_id}}">{{$value->clevel_name}}</option>
                         @endforeach
@@ -94,10 +94,11 @@
                其他联系方式
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="c_other_connect" name="content" required="" lay-verify="pass"
+                <input type="text" id="c_other_connect" name="content" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
             </div>
         </div>
         <div class="layui-form-item">
@@ -105,8 +106,11 @@
                 <span class="x-red"></span>备注
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="c_notes" name="c_notes" required="" lay-verify="repass"
+                <input type="text" id="c_notes" name="c_notes" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
             </div>
         </div>
 
@@ -139,10 +143,11 @@
                 详细地址
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="address" name="content" required="" lay-verify="pass"
+                <input type="text" id="address" name="content" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
             </div>
         </div>
 
@@ -162,7 +167,7 @@
 
         layui.code();
 
-        $('#x-city').xcity('广东','广州市','东山区');
+        $('#x-city').xcity('请选择','请选择','请选择');
 
     });
 </script>
@@ -204,42 +209,62 @@
             var area = $('#area').val();
             var address = $('#address').val();
             var other_phone = $('#other_phone').val();
-            $.get('/user_add_do',
-                {
-                    c_name:c_name,
-                    c_phone:c_phone,
-                    ctype:ctype,
-                    clevel_id:clevel_id,
-                    csource_id:csource_id,
-                    c_other_connect:c_other_connect,
-                    c_notes:c_notes,
-                    province:province,
-                    city:city,
-                    area:area,
-                    address:address,
-                    other_phone:other_phone
-                },function(data){
-                // alert(data)
-                    if(data==1){
-                        //发异步，把数据提交给php
-                        layer.alert("增加成功", {icon: 6},function () {
-                            // 获得frame索引
-                            var index = parent.layer.getFrameIndex(window.name);
-                            // //关闭当前frame
-                            window.parent.location.reload();
-                            parent.layer.close(index);
-                        });
-                    }else{
-                        //发异步，把数据提交给php
-                        layer.alert("增加失败", {icon: 6},function () {
-                            // 获得frame索引
-                            var index = parent.layer.getFrameIndex(window.name);
-                            // //关闭当前frame
-                            parent.layer.close(index);
-                        });
-                    }
+            if(ctype==0){
+                layer.msg("请选择客户类型", {icon: 6},function () {
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
                 });
-            return false;
+                return false;
+            }else if(clevel_id==0){
+                layer.msg("请选择客户等级", {icon: 6},function () {
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                });
+                return false;
+            }else if(csource_id==0){
+                layer.msg("请选择客户来源", {icon: 6},function () {
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                });
+                return false;
+            }else {
+                $.get('/user_add_do',
+                    {
+                        c_name: c_name,
+                        c_phone: c_phone,
+                        ctype: ctype,
+                        clevel_id: clevel_id,
+                        csource_id: csource_id,
+                        c_other_connect: c_other_connect,
+                        c_notes: c_notes,
+                        province: province,
+                        city: city,
+                        area: area,
+                        address: address,
+                        other_phone: other_phone
+                    }, function (data) {
+                        // alert(data)
+                        if (data == 1) {
+                            //发异步，把数据提交给php
+                            layer.alert("增加成功", {icon: 6}, function () {
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                // //关闭当前frame
+                                window.parent.location.reload();
+                                parent.layer.close(index);
+                            });
+                        } else {
+                            //发异步，把数据提交给php
+                            layer.alert("增加失败", {icon: 6}, function () {
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                // //关闭当前frame
+                                parent.layer.close(index);
+                            });
+                        }
+                    });
+                return false;
+            }
         });
 
 

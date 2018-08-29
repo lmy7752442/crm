@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
 
-class ContractController extends Controller
+class ContractController extends CommonController
 {
     //合同展示
     public function contract_list(){
-        $data = DB::table('contract')->where(['status'=>1,])->orderByRaw('ctime DESC')->paginate(3);
+        $data = DB::table('contract')->where(['status'=>1,])->orderByRaw('ctime DESC')->paginate(10);
         foreach($data as $k=>$v){
             $customer = DB::table('customer')->where(['c_id'=>$v->customer_id,'status'=>1])->first();
             $v->customer_id = $customer->c_name;
