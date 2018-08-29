@@ -7257,7 +7257,7 @@
       <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="37" />
     <option name="y" value="10" />
     <option name="width" value="1297" />
