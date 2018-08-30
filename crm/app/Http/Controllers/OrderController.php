@@ -32,7 +32,7 @@ class OrderController extends CommonController
         if(!empty($order_number)){
             $where[] = ['o_number','like',"%$order_number%"];
         }
-        $order_data = DB::table('order')->where('status',1)->where('status','!=',3)->where($where)-> paginate(10);
+        $order_data = DB::table('order')->where('status',1)->where('status','!=',3)->where($where)->where('a_id',session()->get('a_id')) ->orderBy('time','desc')-> paginate(10);
         foreach($order_data as $v){
             $user_data = DB::table('customer')->where('c_id',$v->c_id)->first();
             $v->c_id = $user_data->c_name;
@@ -89,6 +89,7 @@ class OrderController extends CommonController
             $res2 = DB::table('order_product')->insert(['product_id'=>$v,'order_number'=>$arr['o_number']]);
         }
         if($res>0 && $res2>0){
+
             return 1;
         }
     }

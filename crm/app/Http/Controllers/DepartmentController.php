@@ -15,7 +15,7 @@ class DepartmentController extends CommonController
     /** 部门添加 */
     public function department_add(){
         //查询管理员数据
-        $admin = DB::table('admin')->get();
+        $admin = DB::table('admin')->where(['a_status'=>1])->get();
 //        print_r($admin);exit;
         //查询角色数据
         $role = DB::table('role')->get();

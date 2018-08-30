@@ -144,7 +144,7 @@
             console.log(data);
             $.ajax({
                 method:'get',
-                url:"/personal_update_do",
+                url:"/admin_update_do",
                 data:data.field,
                 success:function(res){
                     console.log(res);
