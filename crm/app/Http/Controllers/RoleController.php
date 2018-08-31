@@ -20,7 +20,7 @@ class RoleController extends CommonController
         $data = DB::table('power')->whereNotIn('power_id',$not)->get();
         //查询管理员数据
         $admin = DB::table('admin')->get();
-        return view("Role.role_add")->with('data',$data)->with('admin',$admin);
+        return view("role.role_add")->with('data',$data)->with('admin',$admin);
     }
 
     /** 执行添加 */

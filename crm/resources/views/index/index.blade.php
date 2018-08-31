@@ -38,8 +38,12 @@
             <a href="javascript:;">{{$data}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','personal')">个人信息</a></dd>
+<<<<<<< HEAD
               {{--<dd><a onclick="x_admin_show('切换帐号','login_out')">切换帐号</a></dd>--}}
                 <dd><a href="javascript:;" id="out">切换账号</a></dd>
+=======
+              <dd><a id="qie">切换帐号</a></dd>
+>>>>>>> e0fe83f4619f1bfd174060cc6237d080b058c741
               <dd><a href="javascript:;" id="out">退出</a></dd>
             </dl>
           </li>
@@ -63,6 +67,23 @@
                             window.location.href="/login";
                         }else if(res == 2){
                             layer.msg('退出失败');
+                            window.location.href="/";
+                        }
+                    }
+                });
+                return false;
+            })
+            $("#qie").click(function(){
+                $.ajax({
+                    url:"/login_out",
+                    success:function(res){
+                        console.log(res);
+//                    layer.msg(res.msg,{icon:res.code});
+                        if(res == 1) {
+                            layer.msg('切换成功');
+                            window.location.href="/login";
+                        }else if(res == 2){
+                            layer.msg('切换失败');
                             window.location.href="/";
                         }
                     }
@@ -141,6 +162,7 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
+
                     <cite>订单管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
