@@ -434,6 +434,7 @@ class UserController extends CommonController
                             'c_id'=>$c_id
                         ];
                         DB::table('admin_share')->insert($array);
+                        DB::table('admin')->where(['a_id'=>$a_id])->update(['a_status'=>1]);
                         $res = DB::table('share')->insert($insert_data);
                     }
                 }

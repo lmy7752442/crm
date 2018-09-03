@@ -52,10 +52,6 @@ class LoginController extends BaseController
         $where = [
             'a_id' => $a_id
         ];
-        $update_data = [
-            'a_status' => 1
-        ];
-        $res = DB::table('admin')->where($where)->update($update_data);
 //        print_r($res);exit;
         $request->session()->forget('a_id');
         $request->session()->forget('a_account');
