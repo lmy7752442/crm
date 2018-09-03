@@ -71,7 +71,7 @@ class AdminController extends CommonController
     /** 管理员执行修改 */
     public function admin_update_do(){
         $data = $_GET;
-//        print_r($data);exit;
+        //print_r($data);exit;
         $update_data = [
             'a_account' => $data['a_account'],
             'role_id' => $data['role_id'],
@@ -95,7 +95,7 @@ class AdminController extends CommonController
         $a_id = $_GET;
 //        print_r($a_id);exit;
         $update_data = [
-            'a_status' => 2
+            'a_status' => 3
         ];
         $res = DB::table('admin')->where(['a_id'=>$a_id])->update($update_data);
 //        print_r($res);exit;

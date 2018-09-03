@@ -144,26 +144,26 @@
             console.log(data);
             $.ajax({
                 method:'get',
-                url:"/personal_update_do",
+                url:"/admin_update_do",
                 data:data.field,
                 success:function(res){
                     console.log(res);
 //                    layer.msg(res.msg,{icon:res.code});
-                    if(res == 1) {
-//                        layer.alert('');
-                        layer.msg("管理员修改成功", {icon: 6},function () {
-                            // 获得frame索引
-                            var index = parent.layer.getFrameIndex(window.name);
-                            //关闭当前frame
-                            parent.layer.close(index);
-                            window.parent.location.reload();
-                        });
-//                        window.location.href="/admin_list";
-                    }else if(res == 2) {
-                        layer.msg('管理员修改失败', {icon: 5});
-//                        window.location.href = "/admin_list";
-                        layer.close(layer.index);
-                    }
+//                    if(res == 1) {
+////                        layer.alert('');
+//                        layer.msg("管理员修改成功", {icon: 6},function () {
+//                            // 获得frame索引
+//                            var index = parent.layer.getFrameIndex(window.name);
+//                            //关闭当前frame
+//                            parent.layer.close(index);
+//                            window.parent.location.reload();
+//                        });
+////                        window.location.href="/admin_list";
+//                    }else if(res == 2) {
+//                        layer.msg('管理员修改失败', {icon: 5});
+////                        window.location.href = "/admin_list";
+//                        layer.close(layer.index);
+//                    }
                 }
             });
             return false;
