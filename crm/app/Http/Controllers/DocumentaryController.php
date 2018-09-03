@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class DocumentaryController extends CommonController
 {
+
+    //
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -26,7 +29,7 @@ class DocumentaryController extends CommonController
             $where[] = ['d_time','<',$end_time];
         }
 
-        $documentary_data = DB::table('documentary') -> where($where) -> orderBy('d_time','desc') -> paginate(10);
+        $documentary_data = DB::table('documentary') -> where($where)->where('admin_id',session()->get('a_id')) -> orderBy('d_time','desc') -> paginate(10);
         if(!empty($username)){
             $user_data = DB::table('customer')->where('c_name','like',"%$username%")->get();
             $str = '';
@@ -368,5 +371,6 @@ class DocumentaryController extends CommonController
             return 1;
         }
     }
+
 
 }

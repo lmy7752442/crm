@@ -26,6 +26,9 @@ Route::get('/login_out','LoginController@login_out');
 //登录日志
 Route::get('login_log','UserController@login_log');
 //删除
+
+Route::get('admin_del','Index@admin_del');
+
 Route::get('login_log_del','UserController@login_log_del');
 
 //个人信息
@@ -150,6 +153,7 @@ Route::get('documentary_dprogress_save','DocumentaryController@documentary_dprog
 Route::get('documentary_dprogress_save_do','DocumentaryController@documentary_dprogress_save_do');
 
 ########## Order控制器 ##########
+
 //订单列表
 Route::get('order_list','OrderController@order_list');
 //查询用户信息

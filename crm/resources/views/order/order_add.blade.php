@@ -178,7 +178,7 @@
                 <span class="x-red">*</span>订单状态
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <select id="order_type" name="user" class="valid" lay-filter="username">
+                <select id="order_type" name="user" class="valid" lay-filter="">
                     <option value="">请选择</option>
                     @foreach($order_type as $v)
                         <option value="{{$v->id}}">{{$v->name}}</option>

@@ -17,7 +17,7 @@
 <body>
 <div class="x-body layui-anim layui-anim-up">
     <blockquote class="layui-elem-quote">欢迎管理员：
-        <span class="x-red">{{$admin_data->a_name}}</span>！当前时间:<?php echo date('Y-m-d H:i:s',$time);?></blockquote>
+        <span class="x-red">{{$admin_data->a_account}}</span>！当前时间:<?php echo date('Y-m-d H:i:s',$time);?></blockquote>
     <fieldset class="layui-elem-field">
         <legend>数据统计</legend>
         <div class="layui-field-box">
