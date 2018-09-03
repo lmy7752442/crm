@@ -336,7 +336,7 @@ class UserController extends CommonController
     }
     //合同类型列表
     public function contype_list(){
-        $data = DB::table('contype')->where(['status'=>1])->paginate(3);
+        $data = DB::table('contype')->where(['status'=>1])->paginate(10);
         return view('user.contype_list')->with('data',$data);
     }
     //合同类型添加
@@ -382,122 +382,122 @@ class UserController extends CommonController
             echo 2;
         }
     }
-//共享页面  展示管理员id
-    public function share_add(Request $request){
+////共享页面  展示管理员id
+//    public function share_add(Request $request){
+////        $c_id = $_GET['c_id'];
+//        $a_id = $request->session()->get('a_id');
+//        //客户id
+//        $c_id = $request->get('c_id');
+//        //根据客户id 查关联表    这个客户都分享给哪些管理员
+//        $arr = json_decode(DB::table('admin_share') -> where('c_id',$c_id) -> get(),true);//根据要分享的客户的id查数据
+//        $data = [];
+//        foreach($arr as $k => $v){
+//            //把管理员id 放入  data  数组里
+//            $data[] = $v['admin_id'];
+//        }
+//        //把当前管理员  状态  改为3   在退出时状态改为1
+//        DB::table('admin')->where(['a_id'=>$a_id])->update(['a_status'=>3]);
+//        //取出所有没有分享过该用户的管理员的id
+//       $res = DB::table('admin') -> whereNotIn('a_id',$data) ->where(['a_status'=>1])-> get();//查询条件  管理员的id 不在$data中 即为不在已经分享的管理员的id中
+//        return view('user.share_add')->with('c_id',$c_id)->with('data',$res);
+//    }
+///*复选框   点击获取管理员的id  便利的时候给状态  where a_id = luo u_id = zhang*/
+//    /** 执行添加  共享 */
+//    public function share_add_do(Request $request)
+//    {
 //        $c_id = $_GET['c_id'];
-        $a_id = $request->session()->get('a_id');
-        //客户id
-        $c_id = $request->get('c_id');
-        //根据客户id 查关联表    这个客户都分享给哪些管理员
-        $arr = json_decode(DB::table('admin_share') -> where('c_id',$c_id) -> get(),true);//根据要分享的客户的id查数据
-        $data = [];
-        foreach($arr as $k => $v){
-            //把管理员id 放入  data  数组里
-            $data[] = $v['admin_id'];
-        }
-        //把当前管理员  状态  改为3   在退出时状态改为1
-        DB::table('admin')->where(['a_id'=>$a_id])->update(['a_status'=>3]);
-        //取出所有没有分享过该用户的管理员的id
-       $res = DB::table('admin') -> whereNotIn('a_id',$data) ->where(['a_status'=>1])-> get();//查询条件  管理员的id 不在$data中 即为不在已经分享的管理员的id中
-        return view('user.share_add')->with('c_id',$c_id)->with('data',$res);
-    }
-/*复选框   点击获取管理员的id  便利的时候给状态  where a_id = luo u_id = zhang*/
-    /** 执行添加  共享 */
-    public function share_add_do(Request $request)
-    {
-        $c_id = $_GET['c_id'];
-        //选中的管理员 id  字符串
-        $admin_data = $_GET['admin_arr'];
-        $admin_data = rtrim($admin_data,',');
-        $admin_data = explode(',',$admin_data);
-        //获取当前管理员id
-        $a_id = $request->session()->get('a_id');
-            //这个管理员把这个客户都共享给哪些管理员
-            $data1 = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->first();
-            if (!empty($data1)) {
-                $data = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->get();
-                foreach ($data as $k => $v) {
-                    $arr[] = $v->receive_a_id;
-                }
-                foreach($admin_data as $k=>$v){
-                    if (in_array($v, $arr)) {
-                        echo '该客户已经共享给管理员';
-                        exit;
-                    } else {
-                        $insert_data = [
-                            'open_a_id' => $a_id,
-                            'receive_a_id' => $v,
-                            'c_id' => $c_id
-                        ];
-                        $array = [
-                            'admin_id'=>$v,
-                            'c_id'=>$c_id
-                        ];
-                        DB::table('admin_share')->insert($array);
-                        DB::table('admin')->where(['a_id'=>$a_id])->update(['a_status'=>1]);
-                        $res = DB::table('share')->insert($insert_data);
-                    }
-                }
-            } else {
-                foreach($admin_data as $k=>$v){
-                    $insert_data = [
-                    'open_a_id' => $a_id,
-                    'receive_a_id' => $v,
-                    'c_id' => $c_id
-                ];
-                    $array = [
-                        'admin_id'=>$v,
-                        'c_id'=>$c_id
-                    ];
-                    DB::table('admin_share')->insert($array);
-                    $res = DB::table('share')->insert($insert_data);
-                }
-            }
-            if ($res) {
-                return 1;
-            } else {
-                return 2;
-            }
-    }
-    //共享展示  我的共享
-    public function share_list(Request $request){
-        $a_id = $request->session()->get('a_id');
-        //当前管理员 分享的所有数据
-        $data = DB::table('share')
-            ->where(['open_a_id'=>$a_id])
-            ->join('customer','customer.c_id','=','share.c_id')
-            ->paginate(10);
-        foreach($data as $k=>$v){
-            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
-            $v->ctype_id = $ctype->ctype_name;
-            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id,'status'=>1])->first();
-            $v->clevel_id = $clevel->clevel_name;
-            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
-            $v->csource_id = $csource->csource_name;
-            $id = DB::table('admin')->where(['a_id'=>$v->receive_a_id])->first();
-            $v->receive_a_id = $id->a_name;
-        }
-            return view('share.share_list',['data'=>$data]);
-    }
-    //共享给我
-    public function share_list_do(Request $request){
-        $a_id = $request->session()->get('a_id');
-        $data = DB::table('share')
-            ->where(['receive_a_id'=>$a_id])
-            ->join('customer','customer.c_id','=','share.c_id')
-            ->paginate(10);
-        foreach($data as $k=>$v){
-            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
-            $v->ctype_id = $ctype->ctype_name;
-            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id,'status'=>1])->first();
-            $v->clevel_id = $clevel->clevel_name;
-            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
-            $v->csource_id = $csource->csource_name;
-            $id = DB::table('admin')->where(['a_id'=>$v->open_a_id])->first();
-            $v->open_a_id = $id->a_name;
-        }
-        return view('share.share_list_do',['data'=>$data]);
-    }
+//        //选中的管理员 id  字符串
+//        $admin_data = $_GET['admin_arr'];
+//        $admin_data = rtrim($admin_data,',');
+//        $admin_data = explode(',',$admin_data);
+//        //获取当前管理员id
+//        $a_id = $request->session()->get('a_id');
+//            //这个管理员把这个客户都共享给哪些管理员
+//            $data1 = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->first();
+//            if (!empty($data1)) {
+//                $data = DB::table('share')->where(['open_a_id' => $a_id, 'c_id' => $c_id])->get();
+//                foreach ($data as $k => $v) {
+//                    $arr[] = $v->receive_a_id;
+//                }
+//                foreach($admin_data as $k=>$v){
+//                    if (in_array($v, $arr)) {
+//                        echo '该客户已经共享给管理员';
+//                        exit;
+//                    } else {
+//                        $insert_data = [
+//                            'open_a_id' => $a_id,
+//                            'receive_a_id' => $v,
+//                            'c_id' => $c_id
+//                        ];
+//                        $array = [
+//                            'admin_id'=>$v,
+//                            'c_id'=>$c_id
+//                        ];
+//                        DB::table('admin_share')->insert($array);
+//                        DB::table('admin')->where(['a_id'=>$a_id])->update(['a_status'=>1]);
+//                        $res = DB::table('share')->insert($insert_data);
+//                    }
+//                }
+//            } else {
+//                foreach($admin_data as $k=>$v){
+//                    $insert_data = [
+//                    'open_a_id' => $a_id,
+//                    'receive_a_id' => $v,
+//                    'c_id' => $c_id
+//                ];
+//                    $array = [
+//                        'admin_id'=>$v,
+//                        'c_id'=>$c_id
+//                    ];
+//                    DB::table('admin_share')->insert($array);
+//                    $res = DB::table('share')->insert($insert_data);
+//                }
+//            }
+//            if ($res) {
+//                return 1;
+//            } else {
+//                return 2;
+//            }
+//    }
+//    //共享展示  我的共享
+//    public function share_list(Request $request){
+//        $a_id = $request->session()->get('a_id');
+//        //当前管理员 分享的所有数据
+//        $data = DB::table('share')
+//            ->where(['open_a_id'=>$a_id])
+//            ->join('customer','customer.c_id','=','share.c_id')
+//            ->paginate(10);
+//        foreach($data as $k=>$v){
+//            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
+//            $v->ctype_id = $ctype->ctype_name;
+//            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id,'status'=>1])->first();
+//            $v->clevel_id = $clevel->clevel_name;
+//            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
+//            $v->csource_id = $csource->csource_name;
+//            $id = DB::table('admin')->where(['a_id'=>$v->receive_a_id])->first();
+//            $v->receive_a_id = $id->a_name;
+//        }
+//            return view('share.share_list',['data'=>$data]);
+//    }
+//    //共享给我
+//    public function share_list_do(Request $request){
+//        $a_id = $request->session()->get('a_id');
+//        $data = DB::table('share')
+//            ->where(['receive_a_id'=>$a_id])
+//            ->join('customer','customer.c_id','=','share.c_id')
+//            ->paginate(10);
+//        foreach($data as $k=>$v){
+//            $ctype = DB::table('ctype')->where(['ctype_id'=>$v->ctype_id,'status'=>1])->first();
+//            $v->ctype_id = $ctype->ctype_name;
+//            $clevel = DB::table('clevel')->where(['clevel_id'=>$v->clevel_id,'status'=>1])->first();
+//            $v->clevel_id = $clevel->clevel_name;
+//            $csource = DB::table('csource')->where(['csource_id'=>$v->csource_id,'status'=>1])->first();
+//            $v->csource_id = $csource->csource_name;
+//            $id = DB::table('admin')->where(['a_id'=>$v->open_a_id])->first();
+//            $v->open_a_id = $id->a_name;
+//        }
+//        return view('share.share_list_do',['data'=>$data]);
+//    }
     //产品展示
     public function product_list(){
         $data = DB::table('product')->where(['status'=>1])->orderByRaw('ctime DESC')->paginate(10);
