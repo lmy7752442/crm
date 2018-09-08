@@ -71,6 +71,7 @@
             </th>
             <th>编号</th>
             <th>客户名称</th>
+            <th>地址</th>
             <th>跟单类型</th>
             <th>跟单进度</th>
             <th>下次联系</th>
@@ -88,6 +89,9 @@
             </td>
             <td><?php echo $num=$num+1;?></td>
             <td>{{$v->c_id}}</td>
+             <td >
+                       <!--  -->
+                           </td>
             <td>{{$v->dtype_id}}</td>
             <td>{{$v->dprogress_id}}</td>
             <td>{{$v->d_nexttime}}</td>

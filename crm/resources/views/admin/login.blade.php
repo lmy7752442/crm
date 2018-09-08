@@ -53,6 +53,7 @@
                 //data:data.field,
                 success:function(res){
                     console.log(res);
+                    // return false;
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
                         layer.msg('登录成功');

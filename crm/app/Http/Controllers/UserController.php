@@ -10,6 +10,7 @@ class UserController extends CommonController
     //客户展示
     public  function user_list(Request $request){
         $a_id = $request->session()->get('a_id');//管理员id
+        
         $start = input::get('start');//时间
         $end = input::get('end');
         $c_name = input::get('name');//客户名称
@@ -35,7 +36,9 @@ class UserController extends CommonController
             $v->csource_id = $csource->csource_name;
         }
 //        print_r($data);exit;
-        return view('user.user_list',['data'=>$data]);
+        $data1=(array)DB::table('admin')->where(['a_id'=>$a_id])->first();
+       $name=$data1['a_name'];
+        return view('user.user_list',['data'=>$data])->with('name',$name);
     }
 
     public function user_add(){

@@ -40,6 +40,7 @@ class DocumentaryController extends CommonController
             $str_arr = explode(',',$str);
             $documentary_data = DB::table('documentary') -> where($where) ->whereIn('c_id',$str_arr) -> orderBy('d_time','desc') -> paginate(10);
         }
+        
         foreach ($documentary_data as $v){
             $user_data = DB::table('customer')->where('c_id',$v->c_id)->first();
             $v->c_id = $user_data->c_name;
