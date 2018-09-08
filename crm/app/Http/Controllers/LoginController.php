@@ -26,7 +26,7 @@ class LoginController extends BaseController
             'a_status' => 1
         ];
 //        print_r($find_data);exit;
-        $res = DB::table('admin')->where($find_data)->get();
+        $res = DB::table('admin')->where($find_data)->first();
 //        print_r($res);exit;
         $old = json_encode($res,true);
         $new = json_decode($old,true);
