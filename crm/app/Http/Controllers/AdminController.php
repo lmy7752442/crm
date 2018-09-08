@@ -146,7 +146,7 @@ class AdminController extends CommonController
         $a_id = $request->session()->get('a_id');
         $a_account = $request->session()->get('a_account');
         $res = DB::table('advince')->leftJoin('customer', 'advince.c_id', '=', 'customer.c_id')->where(['a_status'=>1,'advince.a_id'=>$a_id])->paginate(5);
-//        print_r($res);exit;
+//       print_r($res);exit;
         //查询总共条数
         $count = DB::table('advince')->where(['a_status'=>1,'a_id'=>$a_id])->count();
 //        print_r($count);exit;
