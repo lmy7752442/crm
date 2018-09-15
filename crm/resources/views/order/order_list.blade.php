@@ -88,9 +88,10 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            <th>编号</th>
+            {{--<th>--}}
+                {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</th>--}}
             <th>订单编号</th>
             <th>收货人</th>
             <th>订单金额</th>
@@ -109,11 +110,13 @@
         </tr>
         </thead>
         <tbody>
+        <?php $num=0;?>
         @foreach($order_data as $v)
         <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
+            <td><?php echo $num=$num+1;?></td>
+            {{--<td>--}}
+                {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</td>--}}
             <td>{{$v->o_number}}</td>
             <td>{{$v->c_id}}</td>
             <td>{{$v->order_money}}</td>

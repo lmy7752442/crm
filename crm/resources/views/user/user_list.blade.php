@@ -52,6 +52,7 @@
             {{--<th>--}}
                 {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
             {{--</th>--}}
+            <th>编号</th>
              <th>录入时间</th>
             <th>客户名称</th>
            
@@ -71,12 +72,14 @@
         </tr>
         </thead>
         <tbody>
+        <?php $num=0;?>
         @foreach($data as $v)
         <tr style="width:500px;">
             {{--<td>--}}
                 {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
             {{--</td>--}}
             {{--<td><a  title="共享"onclick="x_admin_show('客户共享','/share_add?c_id={{$v->c_id}}')" style="color:blue;" href="javascript:;">{{$v->c_name}}</a></td>--}}
+            <td><?php echo $num=$num+1;?></td>
              <td ><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
             <td >{{$v->c_name}}</td>
                <td >

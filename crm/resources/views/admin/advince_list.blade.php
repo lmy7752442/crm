@@ -41,9 +41,10 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            {{--<th>--}}
+                {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</th>--}}
+            <th>编号</th>
             <th>客户</th>
             <th>省份</th>
             <th>地区</th>
@@ -54,11 +55,13 @@
             <th>管理</th>
         </thead>
         <tbody>
+        <?php $num=0;?>
         @foreach($new as $v)
             <tr>
-                <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                </td>
+                {{--<td>--}}
+                    {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
+                {{--</td>--}}
+                <td><?php echo $num=$num+1;?></td>
                 <td>{{$v->c_name}}</td>
                 <td>{{$v->c_province}}</td>
                 <td>{{$v->c_city}}</td>

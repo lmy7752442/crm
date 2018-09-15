@@ -44,6 +44,7 @@ class DocumentaryController extends CommonController
         foreach ($documentary_data as $v){
             $user_data = DB::table('customer')->where('c_id',$v->c_id)->first();
             $v->c_id = $user_data->c_name;
+            $v->address=$user_data->c_province.'  '.$user_data->c_city.'  '.$user_data->c_area;
             $admin_data = DB::table('admin')->where('a_id',$v->admin_id)->first();
             $v->admin_id = $admin_data->a_account;
             $dtype_data = DB::table('dtype')->where('dtype_id',$v->dtype_id)->first();
