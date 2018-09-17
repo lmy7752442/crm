@@ -97,6 +97,10 @@ class OrderController extends CommonController
 				$num[]=$v;
 			}
 		}
+
+		if($data){
+			return 2;
+		}
       
         $arr['c_id'] = $request->get('username');
         $arr['instead_money'] = $request->get('instead_money');

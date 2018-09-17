@@ -123,7 +123,7 @@
             <td>{{$v->order_money}}</td>
             <!-- <td>{{$v->discounts_money}}</td> -->
             <!-- <td>{{$v->discounts_type}}</td> -->
-            <td>{{$v->get_money}}</td>
+            <!-- <td>{{$v->get_money}}</td> -->
                  <td>{{$v->order_type}}</td>
             <td>{{$v->order_mode}}</td>
        

@@ -112,8 +112,10 @@ class CommonController extends BaseController
                 '/personal',
                 '/personal_update',
                 '/personal_update_do',
+				##产品分类添加
 				'/category',
 				'/category_add',
+				##订单
 				'/sel_cat',
 				'/seo_cat',
 				'/add_goods',
