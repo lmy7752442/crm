@@ -336,3 +336,23 @@ Route::get('/publicnotice_save_do','adt@publicnotice_save_do');
 //公告删除
 Route::get('/publicnotice_del','adt@publicnotice_del');
 
+//swz产品分类添加
+Route::get('/category','UserController@category');
+//swz产品分类添加执行
+Route::get('/category_add','UserController@category_add');
+//根据分类查商品
+Route::get('/sel_cat','UserController@sel_cat');
+Route::get('/seo_cat','UserController@seo_cat');
+Route::get('/add_goods','UserController@add_goods');
+
+//查商品
+Route::get('/seo_goods','UserController@seo_goods');
+
+//swz订单详情
+Route::get('/order_view','OrderController@order_view');
+
+//swz出货单
+Route::get("/order_product",'OrderController@order_product');
+
+//swz删除订单详情
+Route::get("/del_opro",'OrderController@del_opro');

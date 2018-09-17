@@ -31,8 +31,23 @@
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
-<div class="x-body">
+<div class="x-body"> <form class="layui-form">
     <div class="layui-row">
+		 <div class="layui-form-item">
+            <label  class="layui-form-label">
+                <span class="x-red">*</span>分类
+            </label>  
+			
+            <div class="layui-input-inline" >
+                  <select id="username" name="cat_id" class="valid" lay-filter="username" style="height:35px;">
+                    <option value="">请选择</option>
+                    @foreach($cat as $v)
+                        <option value="{{$v->cat_id}}">{{$v->cat_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+			
+        </div></form>
     </div>
     <xblock>
         {{--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--}}
@@ -52,13 +67,14 @@
             <th >操作</th>
         </tr>
         </thead>
-        <tbody>
+		
+        <tbody id="tb">
         @foreach($data as $v)
             <tr>
                 {{--<td>--}}
                     {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
                 {{--</td>--}}
-                <td>{{$v->p_name}}</td>
+                <td><a class="jump_order">{{$v->p_name}}</a></td>
                 <td>{{$v->p_unit}}</td>
                 <td>{{$v->p_price}}</td>
                 <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
@@ -74,15 +90,14 @@
         @endforeach
         </tbody>
     </table>
-    <div class="page">
+    <div id="page">
         {{$data->links()}}
     </div>
-
 </div>
 <script>
-    layui.use('laydate', function(){
+    layui.use(['form','code','laydate'], function(){  
         var laydate = layui.laydate;
-
+		var form = layui.form;
         //执行一个laydate实例
         laydate.render({
             elem: '#start' //指定元素
@@ -92,6 +107,17 @@
         laydate.render({
             elem: '#end' //指定元素
         });
+
+		  form.on('select(username)', function(data){
+			var cat=$("#username").val();
+			$.get("sel_cat",{cat:cat},function(datas){
+				$("#tb").html(datas);
+				
+				form.render();
+				//alert(datas);
+			});
+        });
+
     });
 
     /*用户-停用*/

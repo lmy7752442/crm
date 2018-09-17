@@ -26,38 +26,32 @@
     <form class="layui-form">
 		<input type="hidden" id=""/>
         <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>订单编号
-            </label>
-            <div class="layui-input-inline" style="width: 150px">
-                <input type="text" id="o_number" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" value="{{$order_number}}" class="layui-input">
-            </div>
             <label for="username" class="layui-form-label" >
                 <span class="x-red">*</span>客户姓名
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <select id="username" name="user" class="valid" lay-filter="username">
-                    <option value="">请选择</option>
-                    @foreach($user_data as $v)
-                        <option value="{{$v->c_id}}">{{$v->c_name}}</option>
-                    @endforeach
-                </select>
+                <input type="text" id="other_phone" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" value="{{$res['c_name']}}">
             </div>
 
             <label for="username" class="layui-form-label">
-               手机号
+               电话
             </label>
             <div class="layui-input-inline" style="width: 100px">
                 <input type="text" id="c_phone" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+                       autocomplete="off" class="layui-input" value="{{$res['c_phone']}}">
+			   
             </div>
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>备用手机号
+			<div class="layui-input-inline" style="width: 100px">
+				 <input type="text" id="c_phone" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" value="{{$res['other_phone']}}">
+			</div>
+			<label for="username" class="layui-form-label" >
+                <span class="x-red">*</span>代收金额
             </label>
             <div class="layui-input-inline" style="width: 100px">
                 <input type="text" id="other_phone" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+                       autocomplete="off" class="layui-input" value="{{$res['instead_money']}}">
             </div>
         </div>
         <div class="layui-form-item" id="x-city">
@@ -65,193 +59,121 @@
                 <span class="x-red">*</span>地址
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <select  name="province" lay-filter="province">
-                    <option value="" id="sheng">请选择省</option>
-                </select>
+                <?php echo $res['c_province'].$res['c_city'].$res['c_area']?>
             </div>
-            <div class="layui-input-inline" style="width: 100px">
-                <select name="city" lay-filter="city">
-                    <option value="" id="shi">请选择市</option>
-                </select>
-            </div>
-            <div class="layui-input-inline" style="width: 100px">
-                <select name="area" lay-filter="area">
-                    <option value="" id="xian">请选择县/区</option>
-                </select>
-            </div>
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>详细地址
-            </label>
-            <div class="layui-input-inline" style="width: 300px">
-                <input type="text" id="address" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>业务员
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="admin" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>代收
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="number" id="instead_money" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>订单金额
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="number" id="order_money" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>优惠金额
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="number" id="discounts_money" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>优惠方式
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="discounts_type" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>实收金额
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="number" id="get_money" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>打款金额
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="number" id="put_money" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>打款方式
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="order_mode" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-		
-        <div class="layui-form-item">
-
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>交货方式
-            </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <input type="text" id="delivery_type" name="next_time" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <label for="username" class="layui-form-label">
+			 <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>运费
             </label>
             <div class="layui-input-inline" style="width: 100px">
-                <select  name="user" id="send_type" class="valid" lay-filter="username">
-                    <option value="已付">已付</option>
-                    <option value="到付">到付</option>
-                </select>
+			<input type="text" id="c_phone" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" value="{{$res['send_type']}}">
             </div>
-            <label for="username" class="layui-form-label" >
-                <span class="x-red">*</span>订单状态
+			 <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>订单编号
             </label>
-            <div class="layui-input-inline" style="width: 100px">
-                <select id="order_type" name="user" class="valid" lay-filter="">
-                    <option value="">请选择</option>
-                    @foreach($order_type as $v)
-                        <option value="{{$v->id}}">{{$v->name}}</option>
-                    @endforeach
-                </select>
-
+            <div class="layui-input-inline" style="width: 150px">
+                <input type="text" id="o_number" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" value="{{$res['o_number']}}" class="layui-input">
             </div>
-
         </div>
 		<div class="layui-form-item layui-form-text">
               <label for="desc" class="layui-form-label">
-                  <span class="x-red">*</span>商品增加
+                  <span class="x-red">*</span>商品
               </label>
               <div class="layui-input-block">
 			  
                   <table class="layui-table" id="test">
 				  <tr>
+				    <td>序号</td>
 					<td>商品名</td>
+					<td>单位</td>
 					<td>数量</td>
 					<td>单价</td>
 					
 					<td>金额</td>
 				  </tr>
                     <tbody>
+					@foreach($product as $k=>$v)
                       <tr>
+					  <td>{{$v['xulie']}}</td>
                         <td>
-							<div class="layui-form-item" id="x-city">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>商品名
-            </label>
-            <div class="layui-input-inline" style="width: 120px" id="xxxx">
-                <select  name="province" lay-filter="cat" class="cat">
-					<option value="">商品分类</option>	
-					@foreach($cat as $k=>$v)
-                    <option  value="{{$v->cat_id}}">{{$v->cat_name}}</option>	
-					@endforeach
-                </select>
-
-
-               
-            </div>
-			<div class="layui-input-inline ass" style="width: 120px" class="ass">
-			<select name="pname[]" lay-filter="goods">
-					
-                    <option id="p_name">商品名</option>
-					
-               </select>
-           	</div>
-        </div>
-						</div></td>
+						{{$v['p_name']}}
+							</td>
 						
 							<td>
-								<!-- <input type="button" value="-" class="jian" style="backgrount-color:green;width:20px;height:20px;">
-								<em >0</em>
-								
-								<input type="button" value="+" class="jia" style="backgrount-color:green;width:20px;height:20px;"> -->
-								<input type="number" style="width:60px;height:20px;" name="num[]" class="num" onclick="tomtt()"/>
-								<input type="text" style="width:30px;height:20px;" name="unit[]" placeholder="单位" class="unit" />
+							{{$v['p_unit']}}
 							</td>
-							<td><input type="text" style="width:60px;height:20px;" name="price[]" class="price"/></td>
+							<td>{{$v['num']}}</td>
 							
-							<td><input type="text" style="width:60px;height:20px;" name="money[]" class="money"/></td> 
-						
+							<td>{{$v['p_price']}}</td> 
+							<td><?php echo($v['num']*$v['p_price'])?></td>
                       </tr>
-                     
+                    @endforeach 
                     </tbody>
                   </table>
 				
-				<div class="layui-btn layui-btn-radius layui-btn-warm" id="addgoods"><i class="layui-icon"></i>添加商品</div>
+				
 				
               </div>
           </div>
+		  <div class="layui-form-item">
+            <label for="username" class="layui-form-label" >
+                <span class="x-red">*</span>订单金额
+            </label>
+            <div class="layui-input-inline" style="width: 100px">
+                <input type="text" id="other_phone" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" value="{{$res['order_money']}}">
+            </div>
 
-<div class="layui-form-item">
-    <label for="L_repass" class="layui-form-label">
-    </label>
-    <button  class="layui-btn" lay-filter="add" lay-submit="">
-        增加
-    </button>
-</div>
+            <label for="username" class="layui-form-label">
+               优惠金额
+            </label>
+            <div class="layui-input-inline" style="width: 100px">
+                <input type="text" id="c_phone" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" value="{{$res['discounts_money']}}">
+			   
+            </div>
+			<label for="username" class="layui-form-label">
+               优惠方式
+            </label>
+            <div class="layui-input-inline" style="width: 100px">
+                <input type="text" id="c_phone" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" value="{{$res['discounts_type']}}">
+			   
+            </div>
+			<label for="username" class="layui-form-label">
+               实收金额
+            </label>
+            <div class="layui-input-inline" style="width: 100px">
+                <input type="text" id="c_phone" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" value="{{$res['get_money']}}">
+			   
+            </div>
+        </div>
+        <div class="layui-form-item" id="x-city">
+			 <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>打款金额
+            </label>
+            <div class="layui-input-inline" style="width: 100px">
+			<input type="text" id="c_phone" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input" value="{{$res['put_money']}}">
+            </div>
+			 <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>支付方式
+            </label>
+            <div class="layui-input-inline" style="width: 100px">
+                <input type="text" id="o_number" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" value="{{$res['order_mode']}}" class="layui-input">
+            </div>
+			 <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>业务
+            </label>
+            <div class="layui-input-inline" style="width: 100px">
+                <input type="text" id="o_number" name="next_time" required="" lay-verify="required"
+                       autocomplete="off" value="<?php echo $admin[$res['a_id']];?>" class="layui-input">
+            </div>
+        </div>
+
 </form>
 </div>
 <script type="text/javascript" src="crm/js/xcity.js"></script>
@@ -402,6 +324,16 @@
 			
         });
 
+	//统计价格
+
+			
+		
+
+	  
+
+
+
+
 	  $("#addgoods").on("click",function(){
 			$.get("/add_goods",{},function(data){
 				//修改class
@@ -437,19 +369,6 @@
 			total=num*price;
 			//alert(total);
 			$(".money").val(total);
-
-			var order_money=0;
-
-			$(".mm").each(function(){
-				order_money+=parseFloat($(this).val());
-			})
-				if(order_money==0){
-				$("#order_money").val(total);
-			}else{
-				order_money=order_money+total;
-				$("#order_money").val(order_money);
-			}
-			
 			
 			
 			

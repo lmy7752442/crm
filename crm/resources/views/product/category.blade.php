@@ -26,7 +26,7 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>产品名称
+                <span class="x-red">*</span>分类名称
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="p_name" name="c_name" required="" lay-verify="required"
@@ -36,50 +36,6 @@
                 <span class="x-red">*</span>
             </div>
         </div>
-		 <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>分类
-            </label>
-            <div class="layui-input-inline">
-                <select id="cat_id" name="cat_id" class="valid" lay-filter="username">
-                    <option value="">请选择</option>
-                    @foreach($cat as $v)
-                        <option value="{{$v->cat_id}}">{{$v->cat_name}}</option>
-                    @endforeach
-                </select>
-				 <button class="layui-btn layui-btn-xs" onclick="x_admin_show('增加分类','category')">
-							<i class="layui-icon"></i>增加分类
-							</button>
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>单位
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="p_unit" name="c_name" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="L_pass" class="layui-form-label">
-                <span class="x-red">*</span>价格
-            </label>
-            <div class="layui-input-inline">
-                <input type="number" id="p_price" name="content" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>
-            </div>
-        </div>
-
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
             </label>
@@ -118,15 +74,11 @@
         // //监听提交
         form.on('submit(add)', function(data){
             var p_name = $('#p_name').val();
-            var p_unit = $('#p_unit').val();
-            var p_price = $('#p_price').val();
-			var cat_id=$("#cat_id").val();
-            $.get('/product_add_do',
+
+            $.get('/category_add',
                 {
                     p_name:p_name,
-                    p_unit:p_unit,
-                    p_price:p_price,
-					cat_id:cat_id
+               
                 },function(data){
                     if(data==1){
                         //发异步，把数据提交给php

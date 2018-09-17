@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-
+use Illuminate\Support\Facades\Input;
 class OrderController extends CommonController
 {
     /**
@@ -50,11 +50,13 @@ class OrderController extends CommonController
      * 订单添加
      */
     public function order_add(){
+		$cat=DB::table("cat")->get();
         $user_data = DB::table('customer')->where('status',1)->get();
         $order_number = time().rand(1000,9999);
         $product = DB::table('product')->where('status',1)->get();
         $order_type = DB::table('ordertype')->where('status',1)->get();
-        return view('order.order_add',['user_data'=>$user_data,'order_number'=>$order_number,'product'=>$product,'order_type'=>$order_type]);
+		$rand=time();
+        return view('order.order_add',['user_data'=>$user_data,'order_number'=>$order_number,'product'=>$product,'order_type'=>$order_type,"cat"=>$cat,"rand"=>$rand]);
     }
 
     /**
@@ -64,10 +66,18 @@ class OrderController extends CommonController
      */
     public function order_add_do(Request $request){
         $arr['o_number'] = $request->get('o_number');
-        $data = DB::table('order')->where('o_number',$arr['o_number'])->first();
-        if(!empty($data)){
-            return 2;
-        }
+        $data = (array)DB::table('order')->where('o_number',$arr['o_number'])->first();
+		$info=$_GET['info'];
+		foreach($info as $k=>$v){
+			if(substr($k,0,5)=="pname"){
+				$name[]=$v;
+			}
+
+			if(substr($k,0,3)=="num"){
+				$num[]=$v;
+			}
+		}
+      
         $arr['c_id'] = $request->get('username');
         $arr['instead_money'] = $request->get('instead_money');
         $arr['order_money'] = $request->get('order_money');
@@ -79,19 +89,15 @@ class OrderController extends CommonController
         $arr['delivery_type'] = $request->get('delivery_type');
         $arr['send_type'] = $request->get('send_type');
         $arr['order_type'] = $request->get('order_type');
-        $product_id = substr($request->get('product_id'),0,-1);
+        //$product_id = substr($request->get('product_id'),0,-1);
         $arr['time']=time();
         $arr['a_id']=session()->get('a_id');
         $res = DB::table('order') -> insert($arr);
         DB::table('record')->insert(['c_id'=>$arr['c_id'],'action'=>'添加订单','data_table'=>'订单表','a_id'=>$arr['a_id'],'time'=>$arr['time']]);
-        $product_arr = explode(',',$product_id);
-        foreach ($product_arr as $v){
-            $res2 = DB::table('order_product')->insert(['product_id'=>$v,'order_number'=>$arr['o_number']]);
-        }
-        if($res>0 && $res2>0){
-
-            return 1;
-        }
+      for ($i=0;$i<count($name);$i++){
+           DB::table('order_product')->insert(['product_id'=>$name[$i],'order_number'=>$arr['o_number'],'num'=>$num[$i]]);
+      }
+       return 1;
     }
 
     /**
@@ -379,4 +385,55 @@ class OrderController extends CommonController
             return 1;
         }
     }
+
+	//商品
+	public function goods_add(){
+		$rand=time();
+		print_r($rand);exit;
+		return view("order.goods_add",["rand"=>$rand]);
+	}
+
+	//订单详情
+	public function order_view(){
+		$id=input::get("id");
+		
+		$res=DB::table("order_product")->where(['order_number'=>$id])->join("product as a","a.product_id","=","order_product.product_id")->paginate(6);
+
+		//print_r($res); exit;
+
+		return view("order/order_view",["res"=>$res]);
+	}
+
+	//chuhuodan
+	public function order_product(){
+		$order_number=input::get("order_number");
+		//$p_id=input::get("id");
+		//echo $order_number.$p_id;
+		$where=["o_number"=>$order_number];
+		$res=(array)DB::table("order")
+			->where($where)
+			->join("customer","order.c_id","=","customer.c_id")
+			->first();
+
+		$product=json_decode(DB::table("order_product")->where(['order_number'=>$order_number])->join("product as a","a.product_id","=","order_product.product_id")->get(),true);
+		foreach($product as $k=>$v){
+			$product[$k]['xulie']=$k+1;
+		}
+		//print_r($product);exit;
+
+		$admin=json_decode(DB::table("admin")->get(),true);
+		foreach($admin as $k=>$v){
+			$new[$v['a_id']]=$v['a_account'];
+		}
+		return view("order.order_product",["res"=>$res,"product"=>$product,"admin"=>$new]);
+	}
+
+	public function del_opro(){
+		$id=input::get("id");
+		$order_number=input::get("order_number");
+		$res=DB::table("order_product")->where(["product_id"=>$id,"order_number"=>$order_number])->delete();
+		if($res){
+			return 1;
+		}
+	}
 }

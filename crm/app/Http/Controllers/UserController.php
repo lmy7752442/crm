@@ -500,22 +500,50 @@ class UserController extends CommonController
     }
     //产品展示
     public function product_list(){
+		$cat=DB::table("cat")->get();
         $data = DB::table('product')->where(['status'=>1])->orderByRaw('ctime DESC')->paginate(10);
-        return view('product.product_list')->with('data',$data);
+        return view('product.product_list',["data"=>$data,"cat"=>$cat]);
     }
     //产品添加
     public function product_add(){
-        return view('product.product_add');
+		$cat=DB::table("cat")->get();
+        return view('product.product_add',["cat"=>$cat]);
     }
+
+	//产品分类添加
+	public function category(){
+        return view('product.category');
+    }
+	//产品分类添加执行
+
+	public function category_add(){
+		$cat_name = input::get('p_name');
+		$cate=json_decode(DB::table("cat")->where(['cat_name'=>$cat_name])->get(),true);
+		//print_r($cate);
+		if($cate){
+			return 4;
+		}
+
+		$res=DB::table("cat")->insert(["cat_name"=>$cat_name]);
+		if($res==1){
+
+		return 1;
+
+	}else{
+		return 2;
+	}
+	}
     public function product_add_do(){
         $p_name = input::get('p_name');
         $p_unit = input::get('p_unit');
         $p_price = input::get('p_price');
+		$cat_id=input::get("cat_id");
         $arr = [
             'p_name'=>$p_name,
             'p_unit'=>$p_unit,
             'p_price'=>$p_price,
             'ctime'=>time(),
+			"cate"=>$cat_id,
             'status'=>1
         ];
         $arr1 = [
@@ -742,6 +770,34 @@ class UserController extends CommonController
             return 2;
         }
     }
+//swz查商品
+	public function sel_cat(){
+		$sel_cat=$_GET['cat'];
+		
+        $data = DB::table('product')->where(['cate'=>$sel_cat])->orderByRaw('ctime DESC')->get();
+        return view('product.product_seo',["data"=>$data]);
+	}
+//swz查商品
+	 public function seo_cat(){
+		$sel_cat=$_GET['cat'];
+		
+        $data = DB::table('product')->where(['cate'=>$sel_cat])->orderByRaw('ctime DESC')->get();
+        return view('product.product_sel',["data"=>$data]);
+	}
+//swa增加商品
+	public function add_goods(){
+		$cat=DB::table("cat")->get();
+		return view("product.add_goods",["cat"=>$cat]);
+	}
+
+//swz查商品
+	public function seo_goods(){
+		$goods=$_GET['goods'];
+		$info=(array)DB::table('product')->where(["product_id"=>$goods])->first();
+		return $info;
+	}
+
 }
+
 
 

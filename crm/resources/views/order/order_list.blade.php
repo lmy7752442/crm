@@ -112,7 +112,7 @@
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>{{$v->o_number}}</td>
+            <td><a title="查看详情" href="/order_view?id={{$v->o_number}}">{{$v->o_number}}</td>
             <td>{{$v->c_id}}</td>
             <td>{{$v->order_money}}</td>
             <td>{{$v->discounts_money}}</td>
@@ -131,6 +131,10 @@
                 <a title="删除" onclick="member_del(this,'{{$v->order_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
+
+				<a title="出货"  onclick="x_admin_show('出货单','/order_product?order_number={{$v->o_number}}')" href="javascript:;">
+                <i class="layui-icon">&#xe63c;</i>
+              </a>
             </td>
         </tr>
         @endforeach
