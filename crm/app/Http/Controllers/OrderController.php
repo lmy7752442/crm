@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Input;
 
 class OrderController extends CommonController
 {
@@ -42,6 +43,25 @@ class OrderController extends CommonController
         }
         $order_type = DB::table('ordertype')->where('status',1)->get();
         return view('order.order_list',['order_data'=>$order_data,'order_type'=>$order_type,'order_type2'=>$order_type2,'order_number'=>$order_number,'end_time'=>$end_time,'start_time'=>$start_time]);
+
+    }
+
+    public function user_order(){
+        $user_id = Input::post('user_id');
+        $order_data = DB::table('order')->where('status',1)->where('status','!=',3)->where('c_id' , $user_id)->orderBy('time','desc')-> paginate(10);
+        $str = "<tr><td>订单编号</td><td>订单金额</td><td>实收金额</td><td>订单状态</td><td>订货方式</td><td>业务</td><td>管理</td></tr>";
+        foreach($order_data as $v){
+            $user_data = DB::table('customer')->where('c_id',$v->c_id)->first();
+            $v->c_id = $user_data->c_name;
+            $order_type = DB::table('ordertype')->where('id',$v->order_type)->first();
+            $v->order_type =  $order_type->name;
+            $v->a_id = session()->get('a_account');
+            $str .= "<tr><td>".$v->o_number."</td><td>".$v->order_money."</td><td>".$v->instead_money."</td><td>".$v->send_type."</td><td></td><td>".$v->c_id."</td><td><a href=''>删除</a> | <a href=''>修改</a></td></tr>";
+        }
+        return $str;
+        // dd($order_data);
+        // $order_type = DB::table('ordertype')->where('status',1)->get();
+        // return view('order.order_list',['order_data'=>$order_data,'order_type'=>$order_type,'order_type2'=>$order_type2,'order_number'=>$order_number,'end_time'=>$end_time,'start_time'=>$start_time]);
 
     }
 

@@ -41,6 +41,63 @@ class UserController extends CommonController
         return view('user.user_list',['data'=>$data])->with('name',$name);
     }
 
+    public function user_info(){
+        // print_r(Input::get());
+        $user_id = Input::get('c_id');
+        $user_info = DB::table('customer')->where('c_id' , $user_id)->first();
+
+        // dd($user_info);
+        
+        $ctype = DB::table("ctype")->where('ctype_id' , $user_info->ctype_id)->first();
+        $clevel = DB::table("clevel")->where('clevel_id' , $user_info->clevel_id)->first();
+        $csource = DB::table("csource")->where('csource_id' , $user_info->csource_id)->first();
+        $user_info->ctime = date("Y-m-d H:i:s" , $user_info->ctime);
+        $user_info->ctype_id = $ctype->ctype_name;
+        $user_info->clevel_id = $clevel->clevel_name;
+        $user_info->csource_id = $csource->csource_name;
+        return view('user.user_info' , ['user_info'=>$user_info]);
+        // dd($user_info);
+
+    }
+
+    public function user_archives(){
+        $user_id = Input::post('user_id');
+        $user_info = DB::table('customer')->where('c_id' , $user_id)->first();
+
+        $ctype = DB::table("ctype")->where('ctype_id' , $user_info->ctype_id)->first();
+        $clevel = DB::table("clevel")->where('clevel_id' , $user_info->clevel_id)->first();
+        $csource = DB::table("csource")->where('csource_id' , $user_info->csource_id)->first();
+        $user_info->ctime = date("Y-m-d H:i:s" , $user_info->ctime);
+        $user_info->ctype_id = $ctype->ctype_name;
+        $user_info->clevel_id = $clevel->clevel_name;
+        $user_info->csource_id = $csource->csource_name;
+
+        // dd($user_info);
+        $str = "<tr><td align='left'>基本资料</td><td align='right'>最后更新时间：".$user_info->ctime."</td></tr>";
+        $str .= "<tr><td>客户姓名：".$user_info->c_name."</td><td>联系电话：".$user_info->c_phone."</td></tr>";
+        $str .= "<tr><td colspan='2'>详细地址：".$user_info->c_province.$user_info->c_city.$user_info->c_area.$user_info->address."</td></tr>";
+        $str .="<tr>
+                <td>备用电话：".$user_info->other_phone."</td>
+                <td>网络：</td>
+            </tr>
+            <tr>
+                <td>客户类型：".$user_info->ctype_id."</td>
+                <td>客户等级：".$user_info->clevel_id."</td>
+            </tr>
+            <tr>
+                <td>客户来源：".$user_info->csource_id."</td>
+                <td>客户等级：".$user_info->c_other_connect."</td>
+            </tr>
+            <tr>
+                <td colspan='2'>主营项目：</td>
+            </tr>
+            <tr>
+                <td colspan='2'>备注：".$user_info->c_notes."</td>
+            </tr>";
+        // dd($user_info);
+        return $str;
+    }
+
     public function user_add(){
         $ctype = DB::table('ctype')->where(['status'=>1])->get();
         $clevel = DB::table('clevel')->where(['status'=>1])->get();
@@ -688,6 +745,23 @@ class UserController extends CommonController
         }
         return view('operation.operation_list',['data'=>$data]);
     }
+    
+    public function user_operation(){
+        //dump($_SERVER);exit;
+        $user_id = Input::post('user_id');
+        $data = DB::table('record')->where(['status'=>1 , 'c_id'=>$user_id])->orderByRaw('time DESC')->paginate(10);
+        $str = "<tr><th>管理员名称</th><th>客户名称</th><th>操作记录</th><th>操作表名</th><th>操作时间</th></tr>";
+        foreach($data as $k=>$v){
+            $a_id = DB::table('admin')->where(['a_id'=>$v->a_id])->first();
+            $v->a_id = $a_id->a_name;
+            $c_id = DB::table('customer')->where(['c_id'=>$v->c_id])->first();
+            $v->c_id = $c_id->c_name;
+            $str .= "<tr><td>".$v->a_id."</td><td>".$v->c_id."</td><td>".$v->action."</td><td>".$v->data_table."</td><td>".date('Y-m-d H:i:s',$v->time)."</td></tr>";
+        }
+        return $str;
+        // dd($data);
+        //  return view('operation.operation_list',['data'=>$data]);
+     }
     //登录日志展示
     public function login_log(){
         $data = DB::table('login_log')->orderByRaw('time DESC')->where(['status'=>1])->paginate(10);

@@ -49,7 +49,7 @@
             $.ajax({
                 method:'get',
                 url:"/login_do",
-                data:{ip:returnCitySN['cip'],a_account:a_account,a_pwd:a_pwd},
+                data:{ip:"127.0.0.1",a_account:a_account,a_pwd:a_pwd},
                 //data:data.field,
                 success:function(res){
                     console.log(res);

@@ -146,6 +146,11 @@
                 if(data.status == 1){
                     layer.alert("增加成功", {icon: 6},function () {
                         // 获得frame索引
+
+                        if(parent.document.getElementById('aaabbb').value == 1){
+                            window.history.go(-1);
+                            return false;
+                        }
                         var index = parent.layer.getFrameIndex(window.name);
                         //关闭当前frame
                         parent.layer.close(index);

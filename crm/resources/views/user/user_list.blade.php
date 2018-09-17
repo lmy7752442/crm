@@ -59,12 +59,12 @@
             <th>地区</th>
             <td>详细地址</td>
             <th>手机号</th>
-             <!-- <th>其他联系方式</th> -->
-            <!-- <th>备用手机号</th> -->
+            <th>其他联系方式</th>
+            <th>备用手机号</th>
             <th>客户类型</th>
             <th>客户等级</th>
-            <!-- <th>客户来源</th> -->
-           
+            <th>客户来源</th>
+
             <th>业务员</th>
             
            
@@ -80,24 +80,35 @@
             {{--</td>--}}
             {{--<td><a  title="共享"onclick="x_admin_show('客户共享','/share_add?c_id={{$v->c_id}}')" style="color:blue;" href="javascript:;">{{$v->c_name}}</a></td>--}}
             <td><?php echo $num=$num+1;?></td>
-             <td ><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
-            <td >{{$v->c_name}}</td>
-               <td >
+
+            <td><?php echo date('Y-m-d H:i:s',$v->ctime); ?></td>
+            <td><a onclick="x_admin_show('客户信息','/user_info?c_id={{$v->c_id}}')" style="color:blue;" href="javascript:;">{{$v->c_name}}</a></td>
+            <td >
                 {{$v->c_province}}
                 {{$v->c_city}}
-                    {{$v->c_area}}
-                   </td>
+                {{$v->c_area}}
+            </td>
             <td > {{$v->address}}</td>
-            <td >{{$v->c_phone}}</td>
-            <td >{{$v->ctype_id}}</td>
-            <td >{{$v->clevel_id}}</td>
+            <td>{{$v->c_phone}}</td>
+            <td>{{$v->c_other_connect}}</td>
+            <td>{{$v->other_phone}}</td>
+            <td>{{$v->ctype_id}}</td>
+            <td>{{$v->clevel_id}}</td>
+            <td>{{$v->csource_id}}</td>
+
+            {{--<td>{{$v->c_notes}}</td>--}}
+
+            {{--<td >{{$v->c_phone}}</td>--}}
+            {{--<td >{{$v->ctype_id}}</td>--}}
+            {{--<td >{{$v->clevel_id}}</td>--}}
             <!-- <td >{{$v->csource_id}}</td> -->
             <td>{{$name}}</td>
            <!--  <td >{{$v->c_other_connect}}</td>
             <td >{{$v->c_notes}}</td>
          -->
          
-           
+
+
             <td class="td-manage">
                 <a title="编辑"  onclick="x_admin_show('编辑','user_update?id={{$v->c_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
@@ -250,5 +261,5 @@
     })();</script>
 
 </body>
-
+<input type="hidden" id="aaabbb" value="1">
 </html>
