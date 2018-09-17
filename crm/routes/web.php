@@ -216,6 +216,20 @@ Route::get('wuliu_type_add_do','OrderController@wuliu_type_add_do');
 
 //客户管理列表
 Route::get('user_list','UserController@user_list');
+//客户详情--查看当前客户下所有的订单以及跟单
+Route::get('user_info' , 'UserController@user_info');
+//客户档案
+Route::post('user_archives' , 'UserController@user_archives');
+//某个客户的跟单记录
+Route::post('user_documentary' , 'DocumentaryController@user_documentary');
+//某个客户的订单记录
+Route::post('user_order' , 'OrderController@user_order');
+//某个客户的合同记录
+Route::post('user_contract' , 'ContractController@user_contract');
+//操作记录
+Route::post('user_operation' , 'UserController@user_operation');
+//客户建议--单个
+Route::post('user_advince' , 'AdminController@user_advince');
 //客户搜索
 Route::get('user_seek','UserController@user_seek');
 //添加客户

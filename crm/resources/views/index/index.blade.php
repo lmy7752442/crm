@@ -38,6 +38,7 @@
             <a href="javascript:;">{{$data}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','personal')">个人信息</a></dd>
+              {{--<dd><a onclick="x_admin_show('切换帐号','login_out')">切换帐号</a></dd>--}}
               <dd><a id="qie">切换帐号</a></dd>
               <dd><a href="javascript:;" id="out">退出</a></dd>
             </dl>
@@ -211,12 +212,12 @@
                             <cite>客户列表</cite>
                         </a>
                     </li >
-                    <li>
-                        <a _href="share_list">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>共享客户列表</cite>
-                        </a>
-                    </li >
+                    {{--<li>--}}
+                        {{--<a _href="share_list">--}}
+                            {{--<i class="iconfont">&#xe6a7;</i>--}}
+                            {{--<cite>共享客户列表</cite>--}}
+                        {{--</a>--}}
+                    {{--</li >--}}
                     <li>
                         <a _href="ctype_list">
                             <i class="iconfont">&#xe6a7;</i>

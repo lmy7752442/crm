@@ -57,6 +57,21 @@
             }
         })
     </script>
+    <style>
+        .demo {display: inline-block;*display: inline;*zoom: 1;width: 140px;height: 20px;line-height: 20px;font-size: 12px;overflow: hidden;-ms-text-overflow: ellipsis;text-overflow: ellipsis;white-space: nowrap;}
+        .demo:hover {height: auto;white-space: normal;}
+    </style>
+    <script>
+        function MouseOver(obj)
+        {
+            obj.style.backgroundColor = "red";
+        }
+
+        function MouseOut(obj)
+        {
+            obj.style.backgroundColor = "green";
+        }
+    </script>
     <xblock>
         {{--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--}}
         <button class="layui-btn" onclick="x_admin_show('添加客户','documentary_add')"><i class="layui-icon"></i>添加</button>
@@ -66,13 +81,14 @@
     <table class="layui-table">
         <thead id="aaa">
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            {{--<th>--}}
+                {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</th>--}}
             <th>编号</th>
             <th>客户名称</th>
+            <th>地址</th>
             <th>跟单类型</th>
-            <th>跟单进度</th>
+            <th>联系进度</th>
             <th>下次联系</th>
             <th>详细内容</th>
             <th>业务员</th>
@@ -83,15 +99,27 @@
         <?php $num=0;?>
         @foreach($documentary_data as $v)
         <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
+            {{--<td>--}}
+                {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</td>--}}
             <td><?php echo $num=$num+1;?></td>
             <td>{{$v->c_id}}</td>
+             <td>
+                 <a href="javascript:;" target="_blank" class="demo">{{$v->address}}</a>
+             </td>
             <td>{{$v->dtype_id}}</td>
             <td>{{$v->dprogress_id}}</td>
             <td>{{$v->d_nexttime}}</td>
-            <td>{{$v->d_detailed}}</td>
+            <td>
+<!--                --><?php
+//                    if(mb_strlen($v->d_detailed)>8){
+//                        echo mb_substr($v->d_detailed,0,8).'...';
+//                    }else{
+//                        echo $v->d_detailed;
+//                    }
+//                ?>
+                <a href="javascript:;" target="_blank" class="demo">{{$v->d_detailed}}</a>
+            </td>
             <td>{{$v->admin_id}}</td>
             <td>{{$v->d_time}}</td>
             {{--<td class="td-status">--}}
@@ -190,5 +218,5 @@
         s.parentNode.insertBefore(hm, s);
     })();</script>
 </body>
-
+<input type="hidden" id="aaabbb" value="0">
 </html>

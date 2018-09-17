@@ -88,42 +88,50 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            <th>编号</th>
+            {{--<th>--}}
+                {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
+            {{--</th>--}}
             <th>订单编号</th>
             <th>收货人</th>
             <th>订单金额</th>
-            <th>优惠金额</th>
-            <th>优惠方式</th>
+            <!-- <th>优惠金额</th> -->
+            <!-- <th>优惠方式</th> -->
             <th>实收金额</th>
-            <th>打款方式</th>
             <th>订单状态</th>
-            <th>业务员</th>
+            <th>打款方式</th>
+            
+           
             <th>物流</th>
-            <th>运费</th>
+            <!-- <th>运费</th> -->
             <th>下单时间</th>
+             <th>业务员</th>
             <th >操作</th>
         </tr>
         </thead>
         <tbody>
+        <?php $num=0;?>
         @foreach($order_data as $v)
         <tr>
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
+			<td><?php echo $num=$num+1;?></td>
             <td><a title="查看详情" href="/order_view?id={{$v->o_number}}">{{$v->o_number}}</td>
+            
             <td>{{$v->c_id}}</td>
             <td>{{$v->order_money}}</td>
-            <td>{{$v->discounts_money}}</td>
-            <td>{{$v->discounts_type}}</td>
+            <!-- <td>{{$v->discounts_money}}</td> -->
+            <!-- <td>{{$v->discounts_type}}</td> -->
             <td>{{$v->get_money}}</td>
+                 <td>{{$v->order_type}}</td>
             <td>{{$v->order_mode}}</td>
-            <td>{{$v->order_type}}</td>
-            <td>{{$v->a_id}}</td>
+       
+           
             <td>申通物流</td>
-            <td>{{$v->send_type}}</td>
+            <!-- <td>{{$v->send_type}}</td> --> 
             <td><?php echo date('Y-m-d H:i:s',$v->time)?></td>
+             <td>{{$v->a_id}}</td>
             <td class="td-manage">
                 <a title="查看"  onclick="x_admin_show('编辑','order_save?id={{$v->order_id}}')" href="javascript:;">
                     <i class="layui-icon">&#xe63c;</i>

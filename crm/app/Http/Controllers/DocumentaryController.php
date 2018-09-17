@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class DocumentaryController extends CommonController
 {
@@ -40,9 +41,11 @@ class DocumentaryController extends CommonController
             $str_arr = explode(',',$str);
             $documentary_data = DB::table('documentary') -> where($where) ->whereIn('c_id',$str_arr) -> orderBy('d_time','desc') -> paginate(10);
         }
+        
         foreach ($documentary_data as $v){
             $user_data = DB::table('customer')->where('c_id',$v->c_id)->first();
             $v->c_id = $user_data->c_name;
+            $v->address=$user_data->c_province.'  '.$user_data->c_city.'  '.$user_data->c_area;
             $admin_data = DB::table('admin')->where('a_id',$v->admin_id)->first();
             $v->admin_id = $admin_data->a_account;
             $dtype_data = DB::table('dtype')->where('dtype_id',$v->dtype_id)->first();
@@ -59,12 +62,45 @@ class DocumentaryController extends CommonController
         }
     }
 
+    public function user_documentary(){
+        $user_id = Input::post('user_id');
+        $documentary_data = DB::table('documentary')
+            -> where('c_id' , $user_id)
+            -> where('status' , 1)
+            -> orderBy('d_time','desc')
+            -> paginate(10);
+        
+        $str = "<tr><td>跟单类型</td><td>联系进度</td><td>下次联系</td><td>详细内容</td><td>业务员</td><td>录入时间</td><td>管理</td></tr>";
+        foreach ($documentary_data as $v){
+            $user_data = DB::table('customer')->where('c_id',$v->c_id)->first();
+            $v->c_id = $user_data->c_name;
+            $admin_data = DB::table('admin')->where('a_id',$v->admin_id)->first();
+            $v->admin_id = $admin_data->a_account;
+            $dtype_data = DB::table('dtype')->where('dtype_id',$v->dtype_id)->first();
+            $v->dtype_id = $dtype_data->dtype_name;
+            $dprogress_data = DB::table('dprogress')->where('dprogress_id',$v->dprogress_id)->first();
+            $v->dprogress_id = $dprogress_data->dprogress_name;
+            $v->d_nexttime = date('Y-m-d H:i:s',$v->d_nexttime);
+            $v->d_time = date('Y-m-d H:i:s',$v->d_time);
+            $str .= "<tr><td>".$v->dtype_id."</td><td>".$v->dprogress_id."</td><td>".$v->d_nexttime."</td><td>".$v->d_detailed."</td><td>".$v->c_id."</td><td>".$v->d_time."</td><td><a href='javascript:;' onclick='gendan_del(this,".$v -> documentary_id.")'>删除</a></td></tr>";
+        }
+        return $str;
+        // dd($documentary_data);
+        
+        // if($where == ['status'=>1] && empty($username)){
+        //     return view('documentary.documentary_list',['documentary_data'=>$documentary_data]);
+        // }else{
+        //     return view('documentary.documentary_list_where',['documentary_data'=>$documentary_data,'username'=>$username,'end_time'=>$end_time,'start_time'=>$start_time]);
+        // }
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * 跟单添加
      */
     public function documentary_add(){
-        $admin_data = DB::table('customer')->where('status',1)->get();
+        $u_id = session('a_id');
+        $admin_data = DB::table('customer')->where('status',1) -> where('a_id',$u_id)->get();
         $dtype_data = DB::table('dtype')->where('status',1)->get();
         $dprogress_data = DB::table('dprogress')->where('status',1)->get();
         return view('documentary.documentary_add',['admin_data'=>$admin_data,'dtype_data'=>$dtype_data,'dprogress_data'=>$dprogress_data]);

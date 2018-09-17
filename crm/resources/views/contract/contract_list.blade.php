@@ -55,6 +55,7 @@
                 {{--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--}}
             {{--</th>--}}
             {{--<th>合同id</th>--}}
+            <th>编号</th>
             <th>客户名称</th>
             <th>合同类型</th>
             <th>业务员</th>
@@ -66,12 +67,14 @@
         </tr>
         </thead>
         <tbody>
+        <?php $num=0;?>
         @foreach($data as $v)
             <tr>
                 {{--<td>--}}
                     {{--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--}}
                 {{--</td>--}}
                {{--// <td>{{$v->contract_id}}</td>--}}
+                <td><?php echo $num=$num+1;?></td>
                 <td>{{$v->customer_id}}</td>
                 <td>{{$v->contype_id}}</td>
                 <td>{{$v->a_id}}</td>

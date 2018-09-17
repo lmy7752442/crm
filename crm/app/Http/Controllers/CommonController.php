@@ -116,17 +116,17 @@ class CommonController extends BaseController
             foreach($power_data as $k=>$v){
                 $default[]=$v -> p_rule;
             }
-//            print_r($default);
-//            echo $url;exit;
-//
-            if(!in_arra<!-- y($url,$default)){
-            //                exit('没有权限'.$url) ;
-                return redirect('/notpower');
+         //print_r($default);
+         //  echo $url;exit;
+
+            if(!in_array($url,$default)){
+                exit('没有权限'.$url) ;
+               return redirect('/notpower');
             }
             //print_r($default);
-            // -->
+
             return $next($request);
         });
-    } 
-
+    }
+ 
 }

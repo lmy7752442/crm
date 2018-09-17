@@ -21,6 +21,27 @@ class ContractController extends CommonController
         }
         return view('contract.contract_list')->with('data',$data);
     }
+
+        //合同展示
+    public function user_contract(){
+        $user_id = Input::post('user_id');
+        $data = DB::table('contract')->where(['status'=>1,'customer_id'=>$user_id])->orderByRaw('ctime DESC')->paginate(10);
+        $str = "<tr><td>客户</td><td>定金</td><td>返利</td><td>合同类型</td><td>起始时间</td><td>到期时间</td><td>业务</td></tr>";
+        foreach($data as $k=>$v){
+            $customer = DB::table('customer')->where(['c_id'=>$v->customer_id,'status'=>1])->first();
+            $v->customer_id = $customer->c_name;
+            $contype = DB::table('contype')->where(['contype_id'=>$v->contype_id,'status'=>1])->first();
+            $v->contype_id = $contype->contype_name;
+            $a_id = DB::table('admin')->where(['a_id'=>$v->a_id])->first();
+            $v->a_id = $a_id->a_name;
+            $str .= "<tr><td>".$v->customer_id."</td><td>".$v->c_deposit."</td><td>".$v->c_rebate."</td><td>".$v->contype_id."</td><td>".$v->c_ctime."</td><td>".$v->c_utime."</td><td>".$v->a_id."</td></tr>";
+        }
+
+        return $str;
+        // dd($data);
+        // return view('contract.contract_list')->with('data',$data);
+    }
+
     //合同添加
     public function contract_add(){
         $data = DB::table('customer')->where(['status'=>1])->get();
@@ -124,21 +145,4 @@ class ContractController extends CommonController
             echo 2;
         }
     }
-//    //搜索
-//    public function contract_seek(){
-//        $start = input::get('start');
-//        $end = input::get('end');
-//        $name = input::get('name');
-//        if($start=='' || $end ==''){
-//            $where = [
-//                'c_name'=>$name
-//            ];
-//            $arr = DB::table('customer')->where($where)->get();
-//            $data = DB::table('contract')->where(['customer_id'=>$arr->c_id])->get();
-//        }else if($name == ''){
-//            $data = DB::table('contract')->where('c_ctime','>=',$start)->where('c_utime','<=',$end)->get();
-//        }
-//        print_r($data);exit;
-//        echo json_encode($data);
-//    }
 }

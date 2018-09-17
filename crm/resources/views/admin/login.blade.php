@@ -24,19 +24,13 @@
     <div class="message">x-admin2.0-管理登录</div>
     <div id="darkbannerwrap"></div>
     <div class="layui-form">
-        {{--<form method="post" class="layui-form layui-form-pane" action="">--}}
-            <input name="a_account" id="a_account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
-            <hr class="hr15">
-            <input name="a_pwd" lay-verify="required" placeholder="密码" id="a_pwd" type="password" class="layui-input">
-            <input type="hidden" value="returnCitySN['cip']" name="ip">
-            <hr class="hr15">
-            {{--<input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">--}}
-            <button class="layui-btn" lay-submit="" lay-filter="login">登录</button>
-            <hr class="hr20" >
-            {{--<div class="layui-form-item">--}}
-
-            {{--</div>--}}
-        {{--</form>--}}
+        <input name="a_account" id="a_account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <hr class="hr15">
+        <input name="a_pwd" lay-verify="required" placeholder="密码" id="a_pwd" type="password" class="layui-input">
+        <input type="hidden" value="returnCitySN['cip']" name="ip">
+        <hr class="hr15">
+        <button class="layui-btn" lay-submit="" lay-filter="login">登录</button>
+        <hr class="hr20" >
     </div>
 </div>
 
@@ -55,10 +49,11 @@
             $.ajax({
                 method:'get',
                 url:"/login_do",
-                data:{ip:returnCitySN['cip'],a_account:a_account,a_pwd:a_pwd},
+                data:{ip:"127.0.0.1",a_account:a_account,a_pwd:a_pwd},
                 //data:data.field,
                 success:function(res){
-                    //console.log(res);
+                    console.log(res);
+                    // return false;
 //                    layer.msg(res.msg,{icon:res.code});
                     if(res == 1) {
                         layer.msg('登录成功');
