@@ -111,7 +111,16 @@ class CommonController extends BaseController
                 ## 个人中心 156,157,158
                 '/personal',
                 '/personal_update',
-                '/personal_update_do'
+                '/personal_update_do',
+				'/category',
+				'/category_add',
+				'/sel_cat',
+				'/seo_cat',
+				'/add_goods',
+				'/seo_goods',
+				'/order_view',
+				'/order_product',
+				'/del_opro',
             ];
             foreach($power_data as $k=>$v){
                 $default[]=$v -> p_rule;
