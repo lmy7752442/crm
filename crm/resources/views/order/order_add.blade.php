@@ -195,8 +195,8 @@
 					
 					<td>金额</td>
 				  </tr>
-                    <tbody>
-                      <tr>
+                    <tbody id="aaaaa">
+                      <tr disabled>
                         <td>
 							<div class="layui-form-item" id="x-city">
             <label for="username" class="layui-form-label">
@@ -228,7 +228,7 @@
 								<em >0</em>
 								
 								<input type="button" value="+" class="jia" style="backgrount-color:green;width:20px;height:20px;"> -->
-								<input type="number" style="width:60px;height:20px;" name="num[]" class="num" onclick="tomtt()"/>
+								<input type="number" style="width:60px;height:20px;" name="num[]" class="num" onpropertychange="tomtt()"/>
 								<input type="text" style="width:30px;height:20px;" name="unit[]" placeholder="单位" class="unit" />
 							</td>
 							<td><input type="text" style="width:60px;height:20px;" name="price[]" class="price"/></td>
@@ -411,12 +411,16 @@
 			$(".money").addClass("mm").removeClass("money");
 			$(".cat").addClass("bb").removeClass("cat");
 			$(".ass").addClass("cc").removeClass("ass");
-				$(".layui-table").append(data);
+				$("#aaaaa").append(data);
 				form.render();
 			})
 			
 			
 		})
+    });
+
+    $('.num').on('keyup',function(){
+        tomtt();
     });
 </script>
 <script>var _hmt = _hmt || []; (function() {
@@ -449,9 +453,6 @@
 				order_money=order_money+total;
 				$("#order_money").val(order_money);
 			}
-			
-			
-			
-			
+
 		}
 </script>
