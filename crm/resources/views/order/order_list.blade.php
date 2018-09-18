@@ -97,7 +97,6 @@
             <th>订单金额</th>
             <!-- <th>优惠金额</th> -->
             <!-- <th>优惠方式</th> -->
-            <th>实收金额</th>
             <th>订单状态</th>
             <th>打款方式</th>
             
@@ -113,11 +112,11 @@
         <?php $num=0;?>
         @foreach($order_data as $v)
         <tr>
-            <td>
+            <!-- <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
+            </td> -->
 			<td><?php echo $num=$num+1;?></td>
-            <td><a title="查看详情" href="/order_view?id={{$v->o_number}}">{{$v->o_number}}</td>
+            <td><a title="查看详情" href="/order_view?id={{$v->o_number}}" style="color:blue;">{{$v->o_number}}</a></td>
             
             <td>{{$v->c_id}}</td>
             <td>{{$v->order_money}}</td>
@@ -141,7 +140,7 @@
                 </a>
 
 				<a title="出货"  onclick="x_admin_show('出货单','/order_product?order_number={{$v->o_number}}')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
+                <i class="layui-icon">&#xe609;</i>
               </a>
             </td>
         </tr>

@@ -202,7 +202,7 @@
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>商品名
             </label>
-            <div class="layui-input-inline" style="width: 120px" id="xxxx">
+            <div class="layui-input-inline cathtml" style="width: 120px">
                 <select  name="province" lay-filter="cat" class="cat">
 					<option value="">商品分类</option>	
 					@foreach($cat as $k=>$v)
@@ -404,6 +404,7 @@
 
 	  $("#addgoods").on("click",function(){
 			$.get("/add_goods",{},function(data){
+
 				//修改class
 				$(".num").addClass("nn").removeClass("num");
 			$(".unit").addClass("uu").removeClass("unit");
